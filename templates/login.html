@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} Login {% endblock %} 
+{% block title %} Login {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -35,13 +35,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <span>
-                            Enter your credentials
-                        </span>
+                        <span>Enter your credentials</span>
                     </div>
                 </div>
 
-                <form method="post" action="#">
+                <form method="post" action="{{ url_for('login') }}">
 
                     <div class="card-body">
                         <div class="row">
@@ -54,7 +52,7 @@
                                                 <i class="icon-user"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Username">
+                                        <input type="text" class="form-control" name="email" placeholder="Username" required>
                                     </div>
                                 </div>
 
@@ -65,7 +63,7 @@
                                                 <i class="icon-lock"></i>
                                             </span>
                                         </div>
-                                        <input type="password" class="form-control" placeholder="Password">
+                                        <input type="password" class="form-control" name="password" placeholder="Password" required>
                                     </div>
                                 </div>
 
@@ -74,12 +72,20 @@
                     </div>
                     <div class="card-action">
                         <button type="submit" class="btn btn-success">Submit</button>
-                        &nbsp; &nbsp;
-                        </a>
                     </div>
 
                 </form>
-
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                            <ul>
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endwith %}
             </div>
         </div>
     </div>

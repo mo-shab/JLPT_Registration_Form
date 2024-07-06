@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, flash, url_for, redirect
-from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
-import json
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from config import *
 import os
 import csv
 
@@ -10,58 +10,15 @@ app.secret_key = 'your_secret_key_here'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = 'login'
 
-users = {
-    'shab': {'password': 'shab'}
-}
 
 @login_manager.user_loader
 def load_user(user_id):
-    if user_id in users:
-        user = User()
-        user.id = user_id
-        return user
-    return None
+    if user_id not in users:
+        return None
+    return User(user_id)
 
-temp_data = {}
-
-
-def get_jlpt_confirmed_counter():
-    jlpt_confirmed_counter = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0}
-    for level in ['1', '2', '3', '4', '5']:
-        file_path = f"confirmed_data_N{level}.csv"
-        if os.path.exists(file_path):
-            with open(file_path, 'r') as f:
-                reader = csv.reader(f)
-                last_row = None
-                for row in reader:
-                    last_row = row
-                if last_row is not None:
-                    jlpt_confirmed_counter[level] = int(last_row[4])
-                else:
-                    jlpt_confirmed_counter[level] = 0
-    
-    return jlpt_confirmed_counter
-
-
-def get_jlpt_counter():
-    jlpt_counters = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0}
-    for level in ['1', '2', '3', '4', '5']:
-        file_path = f"registered_data_N{level}.csv"
-        print(file_path)
-        if os.path.exists(file_path):
-            print("file exist")
-            with open(file_path, 'r') as f:
-                reader = csv.reader(f)
-                last_row = None
-                for row in reader:
-                    last_row = row
-                if last_row is not None:
-                    jlpt_counters[level] = int(last_row[4])
-        else:
-            jlpt_counters[level] = 0
-        
-    return jlpt_counters
 
 @app.route('/')
 def index():
@@ -172,10 +129,10 @@ def confirm():
 
     # Process and store data as needed (e.g., write to files, send email)
 
-    with open(f"registered_data_N{jlpt_level}.csv", 'a') as f:
+    with open(f"files/registered_data_N{jlpt_level}.csv", 'a') as f:
         f.write(f"\"{jlpt_level.strip()}\",\"24B\",\"8210101\",\"{jlpt_level.strip()}\",\"{str(jlpt_counters[jlpt_level]).zfill(4)}\",\"{full_name.strip()}\",\"{gender.strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{pass_code.strip()}\",\"{native_language.strip()}\",\"{place_learn_jp.strip()}\",\"{reason_jlpt.strip()}\",\"{occupation.strip()}\",\"{occupation_details.strip()}\",\"{media}\",\"{teacher}\",\"{friends}\",\"{family}\",\"{supervisor}\",\"{colleagues}\",\"{customers}\",\"{jlpt_n1}\",\"{jlpt_n2}\",\"{jlpt_n3}\",\"{jlpt_n4}\",\"{jlpt_n5}\",\"{n1_result}\",\"{n2_result}\",\"{n3_result}\",\"{n4_result}\",\"{n5_result}\"\n")
 
-    with open(f"registered_infos_N{jlpt_level}.csv", 'a') as f:
+    with open(f"files/registered_infos_N{jlpt_level}.csv", 'a') as f:
         f.write(f"\"{jlpt_counters[jlpt_level]}\",\"{jlpt_level}\",\"{test_center}\",\"{full_name}\",\"{gender}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{pass_code}\",\"{native_language}\",\"{nationality}\",\"{adress}\",\"{country}\",\"{zip_code}\",\"{phone_number}\",\"{email}\"\n")
 
     # Function to send Email to the JLPT candidate
@@ -196,35 +153,28 @@ def dashboard():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = None
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
-        if username in users and users[username]['password'] == password:
-            user = User()
-            user.id = username
+        if email in users and users[email]['password'] == password:
+            user = User(email)
             login_user(user)
-            session['logged_in'] = True
-            session['username'] = username
-            return redirect(url_for('jlpt'))  # Redirect to 'jlpt' endpoint
+            return redirect(url_for('dashboard'))
         else:
-            error = 'Invalid username/password combination'
-    return render_template('login.html', error=error)
+            flash('Invalid username or password')
+    return render_template('login.html')
 
-@app.route('/logout', methods=['POST'])
+@app.route('/logout')
+@login_required
 def logout():
-    if not current_user.is_authenticated:
-        return redirect(url_for('login'))
-    else:
-        logout_user()
-        session.pop('logged_in', None)
-        session.pop('username', None)
-        return redirect(url_for('login'))
+    logout_user()
+    return redirect(url_for('login'))
 
 @app.route('/jlpt_data/N<level>', methods=['GET'])
+@login_required
 def getJlptByLevel(level):
-    data_file = f"registered_data_N{level}.csv"
-    infor_file = f"registered_infos_N{level}.csv"
+    data_file = f"files/registered_data_N{level}.csv"
+    infor_file = f"files/registered_infos_N{level}.csv"
     data = []
     infor = []
     if os.path.exists(data_file):
@@ -241,12 +191,13 @@ def getJlptByLevel(level):
 
 
 @app.route('/jlpt_data/all', strict_slashes=False)
+@login_required
 def get_all_data():
     data = []
     infor = []
     for level in ['1', '2', '3', '4', '5']:
-        data_file = f"registered_data_N{level}.csv"
-        infor_file = f"registered_infos_N{level}.csv"
+        data_file = f"files/registered_data_N{level}.csv"
+        infor_file = f"files/registered_infos_N{level}.csv"
         if os.path.exists(data_file):
             with open(data_file, 'r') as f:
                 reader = csv.reader(f)
@@ -260,9 +211,10 @@ def get_all_data():
     return render_template('jlpt_data.html', infor=infor, data=data, level='all')
 
 @app.route('/jlpt_confirmed_data/N<level>', methods=['GET'])
+@login_required
 def get_confirmed_JlptByLevel(level):
     full_data = []
-    full_data_file = f"full_confirmed_data_N{level}.csv"
+    full_data_file = f"files/full_confirmed_data_N{level}.csv"
 
     if os.path.exists(full_data_file):
         with open(full_data_file, 'r') as f:
@@ -274,10 +226,11 @@ def get_confirmed_JlptByLevel(level):
 
 
 @app.route('/jlpt_confirmed_data/all', strict_slashes=False)
+@login_required
 def get_confirmed_all_data():
     full_data = []
     for level in ['1', '2', '3', '4', '5']:
-        full_data_file = f"full_confirmed_data_N{level}.csv"
+        full_data_file = f"files/full_confirmed_data_N{level}.csv"
         if os.path.exists(full_data_file):
 
             
@@ -288,24 +241,13 @@ def get_confirmed_all_data():
 
     return render_template('jlpt_confirm_data.html', data=full_data, level='all')
 
-def read_csv(file_path):
-    with open(file_path, 'r') as f:
-        return list(csv.reader(f))
-
-def write_csv(file_path, rows):
-    with open(file_path, 'w', newline='') as f:
-        writer = csv.writer(f)
-        writer.writerows(rows)
-
-def write_deleted_log(file_path, row):
-    with open(file_path, 'a') as f:
-        f.write(','.join(row) + '\n')
 
 @app.route('/delete/<level>/<int:row_number>', methods=['POST', 'GET'], strict_slashes=False)
+@login_required
 def delete_row(level, row_number):
-    data_file = f"registered_data_N{level}.csv"
-    data_file_2 = f"registered_infos_N{level}.csv"
-    deleted_info = f"deleted_info_N{level}.csv"
+    data_file = f"files/registered_data_N{level}.csv"
+    data_file_2 = f"files/registered_infos_N{level}.csv"
+    deleted_info = f"files/deleted_info_N{level}.csv"
 
     if os.path.exists(data_file) and os.path.exists(data_file_2):
 
@@ -350,14 +292,15 @@ def delete_row(level, row_number):
 
 
 @app.route('/confirm/<level>/<int:row_number>', methods=['POST', 'GET'], strict_slashes=False)
+@login_required
 def confirm_candidate(level, row_number):
     """Route to confirme candidate
     This route read all the data from the registred data file
     copy the data into a new file, delete the data from temp file"""
     data_file = f"registered_data_N{level}.csv"
-    full_data_info = f"full_confirmed_data_N{level}.csv"
-    confirmed_data_file = f"confirmed_data_N{level}.csv"
-    registred_data_file = f"registered_infos_N{level}.csv"
+    full_data_info = f"files/full_confirmed_data_N{level}.csv"
+    confirmed_data_file = f"files/Confirmed/confirmed_data_N{level}.csv"
+    registred_data_file = f"files/registered_infos_N{level}.csv"
     jlpt_confirmed_counter = get_jlpt_confirmed_counter()
 
     if os.path.exists(data_file):
@@ -393,13 +336,6 @@ def confirm_candidate(level, row_number):
 @app.route('/tables')
 def table():
     return render_template('tables.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter())
-
-
-
-@app.route('/chart', methods=['GET', 'POST'])
-def chat():
-    data_json = json.dumps(get_jlpt_counter())
-    return render_template('chart.html', data=data_json)
 
 
 @app.errorhandler(500)
