@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JLPT Registration Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/regisration_asserts/styles.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>JLPT Registration Form</h2><br>
+        <form id="jlptForm" action="registration" method="post">
+           
+        <!-- Step 1 (JLPT Level, Test Site)--> 
+       <div class="step active">
+            <label for="jlpt_level">JLPT Level:</label>
+            <div class="btn-group btn-check-outlined-1" id="jlptLevelButtons">
+                    <button type="button" class="btn btn-primary btn-md" onclick="selectJlptLevel(5)">N5</button>
+                    <button type="button" class="btn btn-primary btn-md" onclick="selectJlptLevel(4)">N4</button>
+                    <button type="button" class="btn btn-primary btn-md" onclick="selectJlptLevel(3)">N3</button>
+                    <button type="button" class="btn btn-primary btn-md" onclick="selectJlptLevel(2)">N2</button>
+                    <button type="button" class="btn btn-primary btn-md" onclick="selectJlptLevel(1)">N1</button>
+
+                </div><br>
+                <input type="hidden" id="jlpt_level" name="jlpt_level" required>
+
+                <label for="test_center">Test Site:</label>
+                <select class="form-select" id="test_center" name="test_center" required>
+                    <option value="Rabat">Rabat</option>
+                </select><br><br>
+            </div>
+            
+        <!-- Step 2 (Personal Information)-->
+    
+        <div class="step">
+                <label for="full_name">Given Name (Full Name):</label>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" id="full_name" name="full_name" pattern="[A-Za-z ]+" title="Given Name can only contain letters and spaces." required><br>
+
+                <label for="gender">Gender:</label><br>
+                <select id="gender" name="gender" class="form-select form-select-lg mb-3" aria-label=".form-select-lg" required>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select><br><br>
+            </div>
+
+
+        <!-- Step 3 (Date of birth, Pass Code)-->
+            <div class="step">
+                <label>Date of Birth:</label><br>
+                <input type="text" id="datepicker" name="dob"/><br><br>
+                <script type="text/javascript">
+                    $('#datepicker').datepicker({ format: 'dd-mm-yyyy' });
+                </script>
+
+                <label for="pass_code">8-Digit Pass Code:</label><br>
+                <input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"  type="text" id="pass_code" name="pass_code" pattern="\d{8}" title="Please enter 8 digits." required><br>
+                <label for="confim_code">Confirmation of your 8-Digit Pass Code:</label><br>
+                <input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"  type="text" id="confim_code" name="confim_code" pattern="\d{8}" title="Please Confirm YOur 8 Digit Passcode" required><br>
+            </div>
+
+        <!-- Step 4 (Native Language, Nationality)-->
+        <div class="step">
+                <label for="native_language">Native Language:</label><br>
+                <select id="native_language" name="native_language" class="form-select">
+                    <option value="701">Arabic</option>
+                    <option value="606">Berber</option>
+                    <option value="408">English</option>
+                    <option value="411">French</option>
+                    <option value="430">Spanish</option>
+                    <option value="112">Japanese</option>
+                    <option value="000">Other</option>
+                </select><br><br><br>
+
+                <label for="nationality">Nationality:</label>
+                <select id="nationality" name="nationality" class="form-control" required oninput="filterNationality(event)">
+                            <option value="" selected disabled>-- select one --</option>
+                            <option value="moroccan">Moroccan</option>
+                            <option value="afghan">Afghan</option>
+                            <option value="albanian">Albanian</option>
+                            <option value="algerian">Algerian</option>
+                            <option value="american">American</option>
+                            <option value="andorran">Andorran</option>
+                            <option value="angolan">Angolan</option>
+                            <option value="antiguans">Antiguans</option>
+                            <option value="argentinean">Argentinean</option>
+                            <option value="armenian">Armenian</option>
+                            <option value="australian">Australian</option>
+                            <option value="austrian">Austrian</option>
+                            <option value="azerbaijani">Azerbaijani</option>
+                            <option value="bahamian">Bahamian</option>
+                            <option value="bahraini">Bahraini</option>
+                            <option value="bangladeshi">Bangladeshi</option>
+                            <option value="barbadian">Barbadian</option>
+                            <option value="barbudans">Barbudans</option>
+                            <option value="batswana">Batswana</option>
+                            <option value="belarusian">Belarusian</option>
+                            <option value="belgian">Belgian</option>
+                            <option value="belizean">Belizean</option>
+                            <option value="beninese">Beninese</option>
+                            <option value="bhutanese">Bhutanese</option>
+                            <option value="bolivian">Bolivian</option>
+                            <option value="bosnian">Bosnian</option>
+                            <option value="brazilian">Brazilian</option>
+                            <option value="british">British</option>
+                            <option value="bruneian">Bruneian</option>
+                            <option value="bulgarian">Bulgarian</option>
+                            <option value="burkinabe">Burkinabe</option>
+                            <option value="burmese">Burmese</option>
+                            <option value="burundian">Burundian</option>
+                            <option value="cambodian">Cambodian</option>
+                            <option value="cameroonian">Cameroonian</option>
+                            <option value="canadian">Canadian</option>
+                            <option value="cape verdean">Cape Verdean</option>
+                            <option value="central african">Central African</option>
+                            <option value="chadian">Chadian</option>
+                            <option value="chilean">Chilean</option>
+                            <option value="chinese">Chinese</option>
+                            <option value="colombian">Colombian</option>
+                            <option value="comoran">Comoran</option>
+                            <option value="congolese">Congolese</option>
+                            <option value="costa rican">Costa Rican</option>
+                            <option value="croatian">Croatian</option>
+                            <option value="cuban">Cuban</option>
+                            <option value="cypriot">Cypriot</option>
+                            <option value="czech">Czech</option>
+                            <option value="danish">Danish</option>
+                            <option value="djibouti">Djibouti</option>
+                            <option value="dominican">Dominican</option>
+                            <option value="dutch">Dutch</option>
+                            <option value="east timorese">East Timorese</option>
+                            <option value="ecuadorean">Ecuadorean</option>
+                            <option value="egyptian">Egyptian</option>
+                            <option value="emirian">Emirian</option>
+                            <option value="equatorial guinean">Equatorial Guinean</option>
+                            <option value="eritrean">Eritrean</option>
+                            <option value="estonian">Estonian</option>
+                            <option value="ethiopian">Ethiopian</option>
+                            <option value="fijian">Fijian</option>
+                            <option value="filipino">Filipino</option>
+                            <option value="finnish">Finnish</option>
+                            <option value="french">French</option>
+                            <option value="gabonese">Gabonese</option>
+                            <option value="gambian">Gambian</option>
+                            <option value="georgian">Georgian</option>
+                            <option value="german">German</option>
+                            <option value="ghanaian">Ghanaian</option>
+                            <option value="greek">Greek</option>
+                            <option value="grenadian">Grenadian</option>
+                            <option value="guatemalan">Guatemalan</option>
+                            <option value="guinea-bissauan">Guinea-Bissauan</option>
+                            <option value="guinean">Guinean</option>
+                            <option value="guyanese">Guyanese</option>
+                            <option value="haitian">Haitian</option>
+                            <option value="herzegovinian">Herzegovinian</option>
+                            <option value="honduran">Honduran</option>
+                            <option value="hungarian">Hungarian</option>
+                            <option value="icelander">Icelander</option>
+                            <option value="indian">Indian</option>
+                            <option value="indonesian">Indonesian</option>
+                            <option value="iranian">Iranian</option>
+                            <option value="iraqi">Iraqi</option>
+                            <option value="irish">Irish</option>
+                            <option value="italian">Italian</option>
+                            <option value="ivorian">Ivorian</option>
+                            <option value="jamaican">Jamaican</option>
+                            <option value="japanese">Japanese</option>
+                            <option value="jordanian">Jordanian</option>
+                            <option value="kazakhstani">Kazakhstani</option>
+                            <option value="kenyan">Kenyan</option>
+                            <option value="kittian and nevisian">Kittian and Nevisian</option>
+                            <option value="kuwaiti">Kuwaiti</option>
+                            <option value="kyrgyz">Kyrgyz</option>
+                            <option value="laotian">Laotian</option>
+                            <option value="latvian">Latvian</option>
+                            <option value="lebanese">Lebanese</option>
+                            <option value="liberian">Liberian</option>
+                            <option value="libyan">Libyan</option>
+                            <option value="liechtensteiner">Liechtensteiner</option>
+                            <option value="lithuanian">Lithuanian</option>
+                            <option value="luxembourger">Luxembourger</option>
+                            <option value="macedonian">Macedonian</option>
+                            <option value="malagasy">Malagasy</option>
+                            <option value="malawian">Malawian</option>
+                            <option value="malaysian">Malaysian</option>
+                            <option value="maldivan">Maldivan</option>
+                            <option value="malian">Malian</option>
+                            <option value="maltese">Maltese</option>
+                            <option value="marshallese">Marshallese</option>
+                            <option value="mauritanian">Mauritanian</option>
+                            <option value="mauritian">Mauritian</option>
+                            <option value="mexican">Mexican</option>
+                            <option value="micronesian">Micronesian</option>
+                            <option value="moldovan">Moldovan</option>
+                            <option value="monacan">Monacan</option>
+                            <option value="mongolian">Mongolian</option>
+                            <option value="mosotho">Mosotho</option>
+                            <option value="motswana">Motswana</option>
+                            <option value="mozambican">Mozambican</option>
+                            <option value="namibian">Namibian</option>
+                            <option value="nauruan">Nauruan</option>
+                            <option value="nepalese">Nepalese</option>
+                            <option value="new zealander">New Zealander</option>
+                            <option value="ni-vanuatu">Ni-Vanuatu</option>
+                            <option value="nicaraguan">Nicaraguan</option>
+                            <option value="nigerien">Nigerien</option>
+                            <option value="north korean">North Korean</option>
+                            <option value="northern irish">Northern Irish</option>
+                            <option value="norwegian">Norwegian</option>
+                            <option value="omani">Omani</option>
+                            <option value="pakistani">Pakistani</option>
+                            <option value="palauan">Palauan</option>
+                            <option value="panamanian">Panamanian</option>
+                            <option value="papua new guinean">Papua New Guinean</option>
+                            <option value="paraguayan">Paraguayan</option>
+                            <option value="peruvian">Peruvian</option>
+                            <option value="polish">Polish</option>
+                            <option value="portuguese">Portuguese</option>
+                            <option value="qatari">Qatari</option>
+                            <option value="romanian">Romanian</option>
+                            <option value="russian">Russian</option>
+                            <option value="rwandan">Rwandan</option>
+                            <option value="saint lucian">Saint Lucian</option>
+                            <option value="salvadoran">Salvadoran</option>
+                            <option value="samoan">Samoan</option>
+                            <option value="san marinese">San Marinese</option>
+                            <option value="sao tomean">Sao Tomean</option>
+                            <option value="saudi">Saudi</option>
+                            <option value="scottish">Scottish</option>
+                            <option value="senegalese">Senegalese</option>
+                            <option value="serbian">Serbian</option>
+                            <option value="seychellois">Seychellois</option>
+                            <option value="sierra leonean">Sierra Leonean</option>
+                            <option value="singaporean">Singaporean</option>
+                            <option value="slovakian">Slovakian</option>
+                            <option value="slovenian">Slovenian</option>
+                            <option value="solomon islander">Solomon Islander</option>
+                            <option value="somali">Somali</option>
+                            <option value="south african">South African</option>
+                            <option value="south korean">South Korean</option>
+                            <option value="spanish">Spanish</option>
+                            <option value="sri lankan">Sri Lankan</option>
+                            <option value="sudanese">Sudanese</option>
+                            <option value="surinamer">Surinamer</option>
+                            <option value="swazi">Swazi</option>
+                            <option value="swedish">Swedish</option>
+                            <option value="swiss">Swiss</option>
+                            <option value="syrian">Syrian</option>
+                            <option value="taiwanese">Taiwanese</option>
+                            <option value="tajik">Tajik</option>
+                            <option value="tanzanian">Tanzanian</option>
+                            <option value="thai">Thai</option>
+                            <option value="togolese">Togolese</option>
+                            <option value="tongan">Tongan</option>
+                            <option value="trinidadian or tobagonian">Trinidadian or Tobagonian</option>
+                            <option value="tunisian">Tunisian</option>
+                            <option value="turkish">Turkish</option>
+                            <option value="tuvaluan">Tuvaluan</option>
+                            <option value="ugandan">Ugandan</option>
+                            <option value="ukrainian">Ukrainian</option>
+                            <option value="uruguayan">Uruguayan</option>
+                            <option value="uzbekistani">Uzbekistani</option>
+                            <option value="venezuelan">Venezuelan</option>
+                            <option value="vietnamese">Vietnamese</option>
+                            <option value="welsh">Welsh</option>
+                            <option value="yemenite">Yemenite</option>
+                            <option value="zambian">Zambian</option>
+                            <option value="zimbabwean">Zimbabwean</option>
+                        </select><br><br>
+            </div> 
+
+        <!--Step 5 (Adress)-->   
+       <div class="step">
+            <label for="adress">Address:</label><br>
+            <input type="text" id="adress" name="adress" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"><br>
+        
+            <label for="country">Country:</label><br>
+            <select id="countrySelect" name="country" class="form-select">
+                <option value="Morocco">Morocco</option>
+                <option value="other">Others</option>
+            </select><br>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" id="otherCountry" name="otherCountry" style="display:none;"><br>
+        
+            <label for="useNewAddress">Do you want to use a new address to recive the JLPT certificate?</label>
+            <select id="useNewAddress" name="useNewAddress" class="form-select">
+                <option value="NO">NO</option>
+                <option value="yes">YES</option>
+            </select><br>
+        
+            <div id="newAddressDiv" style="display:none;">
+                <label for="newAdress">New Address:</label><br>
+                <input type="text" id="newAdress" name="newAdress" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"><br>
+            </div>
+        
+            <script>
+                document.getElementById("countrySelect").addEventListener("change", function() {
+                    var selectBox = document.getElementById("countrySelect");
+                    var userInput = document.getElementById("otherCountry");
+        
+                    if (selectBox.value === "other") {
+                        userInput.style.display = "inline-block";
+                        userInput.required = true;
+                    } else {
+                        userInput.style.display = "none";
+                        userInput.required = false;
+                    }
+                });
+        
+                document.getElementById("useNewAddress").addEventListener("change", function() {
+                    var useNewAddress = document.getElementById("useNewAddress");
+                    var newAddressDiv = document.getElementById("newAddressDiv");
+                    
+                    if (useNewAddress.value === "yes") {
+                        newAddressDiv.style.display = "block";
+                    } else {
+                        newAddressDiv.style.display = "none";
+                    }
+                });
+            </script>
+        </div>
+           
+        <!-- Step 6 ( ZIP Code, Phone Number, Email)-->
+          <div class="step">
+                <lable for="zip_code"><strong>Zip Code:</strong></lable><br>
+                <input type="text" id="zip_code" name="zip_code" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"><br>
+
+                <label for="phone_number">Phone Number:</label>
+                <input type="text" id="phone_number" name="phone_number" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"><br>
+
+                <label for="email">Email Adress:</label>
+                <input type="email" id="email" name="email" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"><br>
+
+                <label for="confirm_email"> Confim Your Email</label>
+                <input type="confirm_email" id="confirm_email" name="confirm_email" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"><br>
+            </div>
+
+        <!-- Step 7 (institute)-->
+            <div class="step">
+                <label for="institute">Institution where you study/studied Japanese Language:</label>
+                <select id="institute" name="institute" class="form-select">
+                    <option value="Speak Asian">Speak Asian.</option>
+                    <option value="Faculté Hassan II Mohammedia">Faculté Hassan II Mohammedia.</option>
+                    <option value="Faculté Rabat">Faculté Rabat.</option>
+                    <option value="French">French</option>
+                    <option value="430">Selfmade</option>
+                    <option value="112">Japanese</option>
+                    <option value="000">Other</option>
+                </select><br>
+    
+                <label for="place_learn_jp">Place of learning Japanese:</label><br>
+                <select id="place_learn_jp" name="place_learn_jp" class="form-select">
+                    <option value="1">Elementary school (primary education)</option>
+                    <option value="2">Middle school or high school (secondary education)</option>
+                    <option value="3">University or graduate school (higher education) as a MAJOR</option>
+                    <option value="4">University or graduate school (higher education) NOT as a major</option>
+                    <option value="5">Other educational institution/ Autre établissement d'enseignement</option>
+                    <option value="6">None of the above/ Aucune de ces réponses</option>
+                </select><br><br>
+             </div>
+
+        <!-- Step 8 (Reason FOR JLPT, Occupation)-->
+           <div class="step">
+                <label for="reason_jlpt">Reason for taking this JLPT exam:</label><br>
+                <select id="reason_jlpt" name="reason_jlpt" required class="form-select">
+                    <option value="1">Necessary for ADMISSION into university or graduate school in my OWN COUNTRY</option>
+                    <option value="2">Necessary for ADMISSION into university or graduate school in JAPAN</option>
+                    <option value="3">Necessary for admission or as PROOF OF PROFICIENCY for other educational institution in my OWN COUNTRY</option>
+                    <option value="4">Necessary for admission or as PROOF OF PROFICIENCY for other educational institution in JAPAN</option>
+                    <option value="5">Useful for work /attain employment, secure salary increase, or promotion in my OWN COUNTRY</option>
+                    <option value="6">Useful for work/attain employment, secure salary increase or promotion in JAPAN</option>
+                    <option value="7">None of the above; to measure my own level of proficiency</option>
+                    <option value="8">None of the above</option>
+                </select><br>
+
+                <label for="occupation">Occupation:</label><br>
+                <select id="occupation" name="occupation" required class="form-select">
+                    <option value="1">Elementary school student (primary education).</option>
+                    <option value="2">Middle school or high school student (secondary education).</option>
+                    <option value="3">University or graduate school student (higher education).</option>
+                    <option value="4">Student of other educational institution (e.g. foreign language school).</option>
+                    <option value="5">Employed (company employee, public servant, educator, self-employed, etc.).</option>
+                    <option value="6">Other.</option>
+                </select><br>
+
+                <label for="occupation_details">Occupation details:</label><br>
+                <select id="occupation_details" name="occupation_details" required class="form-select">
+                    <option value="1">Use Japanese to teach Japanese-language as a TEACHER</option>
+                    <option value="2">Use Japanese while working as a PUBLIC SERVANT</option>
+                    <option value="3">Use Japanese while working as a company employee in the MANUFACTURING, CONSTRUCTION, or IT INDUSTRY</option>
+                    <option value="4">Use Japanese while working as an employee in the SERVICE, TOURISM, or HOSPITALITY INDUSTRIES</option>
+                    <option value="5">Use Japanese at a job other than 1 through 4 above</option>
+                    <option value="6">Do not use Japanese while working</option>
+                </select><br>
+            </div><br>
+
+        <!-- Step 9 (media) -->
+            <div class="step">
+                <label for="media_jp">Media via which you come into contact with Japanese Language:</label><br>
+                <div id="media_jp" class="btn-group-vertical w-100">
+                    <input type="checkbox" name="media_jp" value="1" class="btn-check" id="btn-check-outlined-1" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-1">TV news program and documentaries</label>
+
+                    <input type="checkbox" name="media_jp" value="2" class="btn-check" id="btn-check-outlined-2" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-2">Drama (excluding anime)</label>
+
+                    <input type="checkbox" name="media_jp" value="3"  class="btn-check" id="btn-check-outlined-3" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-3"> Anime</label>
+                    
+                    <input type="checkbox" name="media_jp" value="4"  class="btn-check" id="btn-check-outlined-4" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-4">Newspapers and magazines (excluding manga)</label>
+                    
+                    <input type="checkbox" name="media_jp" value="5"  class="btn-check" id="btn-check-outlined-5" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-5">Books (excluding textbooks)</label>
+                    
+                    <input type="checkbox" name="media_jp" value="6"  class="btn-check" id="btn-check-outlined-6" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-6">Manga</label>
+                    
+                    <input type="checkbox" name="media_jp" value="7"  class="btn-check" id="btn-check-outlined-7" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-7">Articles on websites</label>
+                    
+                    <input type="checkbox" name="media_jp" value="8"  class="btn-check" id="btn-check-outlined-8" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-8">Other</label>
+                    
+                    <input type="checkbox" name="media_jp" value="9"  class="btn-check" id="btn-check-outlined-9" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-9">Only come into contact with Japanese language inside the class</label>
+                </div><br><br>
+                
+                <label for="communicate_teacher">How do you usually communicate in Japanese with your TEACHER?</label><br>
+                <div id="communicate_teacher" class="btn-group-vertical w-100">
+                    <input type="checkbox" name="communicate_teacher" value="1" class="btn-check" id="btn-check-outlined-10" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-10">Talk with the teacher</label>
+                    
+                    <input type="checkbox" name="communicate_teacher" value="2" class="btn-check" id="btn-check-outlined-11" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-11">Listen to what the teacher.</label>
+
+                    <input type="checkbox" name="communicate_teacher" value="3" class="btn-check" id="btn-check-outlined-12" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-12">Read what the teacher writes</label>
+
+                    <input type="checkbox" name="communicate_teacher" value="4" class="btn-check" id="btn-check-outlined-13" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-13">Write to the teacher</label>
+                </div><br><br>
+
+                <label for="communicate_friends">How do you usually communicate in Japanese with your friends?</label><br>
+                <div id="communicate_friends" class="btn-group-vertical w-100">
+                    <input type="checkbox" name="communicate_friends" value="1" class="btn-check" id="btn-check-outlined-14" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-14">Talk with friends</label>
+                    
+                    <input type="checkbox" name="communicate_friends" value="2" class="btn-check" id="btn-check-outlined-15" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-15">Listen to what friends says</label>
+
+                    <input type="checkbox" name="communicate_friends" value="3" class="btn-check" id="btn-check-outlined-16" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-16">Read what friends writes</label>
+
+                    <input type="checkbox" name="communicate_friends" value="4" class="btn-check" id="btn-check-outlined-17" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-17">Write to friends</label>
+                </div><br><br>
+
+                <label for="communicate_family">How do you usually communicate in Japanese with your family?</label><br>
+                <div id="communicate_family" class="btn-group-vertical w-100">
+                    <input type="checkbox" name="communicate_family" value="1" class="btn-check" id="btn-check-outlined-18" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-18">Talk with family</label>
+                    
+                    <input type="checkbox" name="communicate_family" value="2" class="btn-check" id="btn-check-outlined-19" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-19">Listen to what family says</label>
+
+                    <input type="checkbox" name="communicate_family" value="3" class="btn-check" id="btn-check-outlined-20" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-20">Read what family writes</label>
+
+                    <input type="checkbox" name="communicate_family" value="4" class="btn-check" id="btn-check-outlined-21" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-21">Write to family</label>
+                </div><br><br>
+
+
+                <label for="communicate_supervisor">How do you usually communicate in Japanese with your supervisor?</label><br>
+                <div id="communicate_supervisor" class="btn-group-vertical w-100">
+                    <input type="checkbox" name="communicate_supervisor" value="1" class="btn-check" id="btn-check-outlined-22" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-22">Talk with your supervisor</label>
+                    
+                    <input type="checkbox" name="communicate_supervisor" value="2" class="btn-check" id="btn-check-outlined-23" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-23">Listen to what your supervisor says</label>
+
+                    <input type="checkbox" name="communicate_supervisor" value="3" class="btn-check" id="btn-check-outlined-24" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-24">Read what your supervisor writes</label>
+
+                    <input type="checkbox" name="communicate_supervisor" value="4" class="btn-check" id="btn-check-outlined-25" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-25">Write to your supervisor</label>
+                </div><br><br>
+
+
+                <label for="communicate_colleagues">How do you usually communicate in Japanese with your COLLEAGUES?</label><br>
+                <div id="communicate_colleagues" class="btn-group-vertical w-100">
+                    <input type="checkbox" name="communicate_colleagues" value="1" class="btn-check" id="btn-check-outlined-26" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-26">Talk with your colleagues</label>
+                    
+                    <input type="checkbox" name="communicate_colleagues" value="2" class="btn-check" id="btn-check-outlined-24" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-27">Listen to what your colleagues says</label>
+
+                    <input type="checkbox" name="communicate_colleagues" value="3" class="btn-check" id="btn-check-outlined-28" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-28">Read what your colleagues writes</label>
+
+                    <input type="checkbox" name="communicate_colleagues" value="4" class="btn-check" id="btn-check-outlined-29" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-29">Write to your colleagues</label>
+                </div><br><br>
+
+                <label for="communicate_CUSTOMERS">How do you usually communicate in Japanese with CUSTOMERS?</label><br>
+                <div id="communicate_CUSTOMERS" class="btn-group-vertical w-100">
+                    <input type="checkbox" name="communicate_CUSTOMERS" value="1" class="btn-check" id="btn-check-outlined-30" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-30">Talk with your CUSTOMERS</label>
+                    
+                    <input type="checkbox" name="communicate_CUSTOMERS" value="2" class="btn-check" id="btn-check-outlined-31" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-31">Listen to what your CUSTOMERS says</label>
+
+                    <input type="checkbox" name="communicate_CUSTOMERS" value="3" class="btn-check" id="btn-check-outlined-32" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-32">Read what your CUSTOMERS writes</label>
+
+                    <input type="checkbox" name="communicate_CUSTOMERS" value="4" class="btn-check" id="btn-check-outlined-33" autocomplete="off">
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-33">Write to your CUSTOMERS</label>
+                </div><br><br>
+            </div>
+
+             <!-- Step 10 -->
+           <div class="step">
+                <label for="jlpt_taken">How many times have you taken JLPT?</label><br>
+                
+                <label for="jlpt_n1">JLPT N1:</label>
+                    <input type="radio" name="jlpt_n1" value=" " class="btn-check" id="btn-check-outlined-34" checked>
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-34">0</label>
+                    <input type="radio" name="jlpt_n1" value="1" class="btn-check" id="btn-check-outlined-35" >
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-35">1</label>
+                    <input type="radio" name="jlpt_n1" value="2" class="btn-check" id="btn-check-outlined-36">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-36">2</label>
+                    <input type="radio" name="jlpt_n1" value="3" class="btn-check" id="btn-check-outlined-37">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-37">3</label>
+                    <input type="radio" name="jlpt_n1" value="4" class="btn-check" id="btn-check-outlined-38">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-38">4</label>
+                    <input type="radio" name="jlpt_n1" value="5" class="btn-check" id="btn-check-outlined-39">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-39">5</label>
+                    <input type="radio" name="jlpt_n1" value="6" class="btn-check" id="btn-check-outlined-40">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-40">6</label>
+                    <input type="radio" name="jlpt_n1" value="7" class="btn-check" id="btn-check-outlined-41">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-41">7</label>
+                    <input type="radio" name="jlpt_n1" value="8" class="btn-check" id="btn-check-outlined-42">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-42">8</label>
+                    <input type="radio" name="jlpt_n1" value="9" class="btn-check" id="btn-check-outlined-43">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-43">9 or more</label><br>
+                
+               
+                <label for="jlpt_n1">JLPT N2:</label>
+                <input type="radio" name="jlpt_n2" value=" " class="btn-check" id="btn-check-outlined-44" checked>
+                <label class="btn btn-outline-primary" for="btn-check-outlined-44">0</label>
+                <input type="radio" name="jlpt_n2" value="1" class="btn-check" id="btn-check-outlined-45">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-45">1</label>
+                <input type="radio" name="jlpt_n2" value="2" class="btn-check" id="btn-check-outlined-46">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-46">2</label>
+                <input type="radio" name="jlpt_n2" value="3" class="btn-check" id="btn-check-outlined-47">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-47">3</label>
+                <input type="radio" name="jlpt_n2" value="4" class="btn-check" id="btn-check-outlined-48">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-48">4</label>
+                <input type="radio" name="jlpt_n2" value="5" class="btn-check" id="btn-check-outlined-49">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-49">5</label>
+                <input type="radio" name="jlpt_n2" value="6" class="btn-check" id="btn-check-outlined-50">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-50">6</label>
+                <input type="radio" name="jlpt_n2" value="7" class="btn-check" id="btn-check-outlined-51">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-51">7</label>
+                <input type="radio" name="jlpt_n2" value="8" class="btn-check" id="btn-check-outlined-52">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-52">8</label>
+                <input type="radio" name="jlpt_n2" value="9" class="btn-check" id="btn-check-outlined-53">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-53">9 or more</label><br>
+
+                
+                <label for="jlpt_n1">JLPT N3:</label>
+                <input type="radio" name="jlpt_n3" value=" " class="btn-check" id="btn-check-outlined-54" checked>
+                <label class="btn btn-outline-primary" for="btn-check-outlined-54">0</label>
+                <input type="radio" name="jlpt_n3" value="1" class="btn-check" id="btn-check-outlined-55">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-55">1</label>
+                <input type="radio" name="jlpt_n3" value="2" class="btn-check" id="btn-check-outlined-56">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-56">2</label>
+                <input type="radio" name="jlpt_n3" value="3" class="btn-check" id="btn-check-outlined-57">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-57">3</label>
+                <input type="radio" name="jlpt_n3" value="4" class="btn-check" id="btn-check-outlined-58">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-58">4</label>
+                <input type="radio" name="jlpt_n3" value="5" class="btn-check" id="btn-check-outlined-59">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-59">5</label>
+                <input type="radio" name="jlpt_n3" value="6" class="btn-check" id="btn-check-outlined-60">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-60">6</label>
+                <input type="radio" name="jlpt_n3" value="7" class="btn-check" id="btn-check-outlined-61">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-61">7</label>
+                <input type="radio" name="jlpt_n3" value="8" class="btn-check" id="btn-check-outlined-62">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-62">8</label>
+                <input type="radio" name="jlpt_n3" value="9" class="btn-check" id="btn-check-outlined-63">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-63">9 or more</label><br>
+
+               
+                <label for="jlpt_n4">JLPT N4:</label>
+                <input type="radio" name="jlpt_n4" value=" " class="btn-check" id="btn-check-outlined-64" checked>
+                <label class="btn btn-outline-primary" for="btn-check-outlined-64">0</label>
+                <input type="radio" name="jlpt_n4" value="1" class="btn-check" id="btn-check-outlined-65">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-65">1</label>
+                <input type="radio" name="jlpt_n4" value="2" class="btn-check" id="btn-check-outlined-66">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-66">2</label>
+                <input type="radio" name="jlpt_n4" value="3" class="btn-check" id="btn-check-outlined-67">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-67">3</label>
+                <input type="radio" name="jlpt_n4" value="4" class="btn-check" id="btn-check-outlined-68">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-68">4</label>
+                <input type="radio" name="jlpt_n4" value="5" class="btn-check" id="btn-check-outlined-69">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-69">5</label>
+                <input type="radio" name="jlpt_n4" value="6" class="btn-check" id="btn-check-outlined-70">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-70">6</label>
+                <input type="radio" name="jlpt_n4" value="7" class="btn-check" id="btn-check-outlined-71">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-71">7</label>
+                <input type="radio" name="jlpt_n4" value="8" class="btn-check" id="btn-check-outlined-72">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-72">8</label>
+                <input type="radio" name="jlpt_n4" value="9" class="btn-check" id="btn-check-outlined-73">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-73">9 or more</label><br>
+
+               
+                <label for="jlpt_n5">JLPT N5:</label>
+                <input type="radio" name="jlpt_n5" value=" " class="btn-check" id="btn-check-outlined-74" checked>
+                <label class="btn btn-outline-primary" for="btn-check-outlined-74">0</label>
+                <input type="radio" name="jlpt_n5" value="1" class="btn-check" id="btn-check-outlined-75">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-75">1</label>
+                <input type="radio" name="jlpt_n5" value="2" class="btn-check" id="btn-check-outlined-76">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-76">2</label>
+                <input type="radio" name="jlpt_n5" value="3" class="btn-check" id="btn-check-outlined-77">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-77">3</label>
+                <input type="radio" name="jlpt_n5" value="4" class="btn-check" id="btn-check-outlined-78">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-78">4</label>
+                <input type="radio" name="jlpt_n5" value="5" class="btn-check" id="btn-check-outlined-79">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-79">5</label>
+                <input type="radio" name="jlpt_n5" value="6" class="btn-check" id="btn-check-outlined-80">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-80">6</label>
+                <input type="radio" name="jlpt_n5" value="7" class="btn-check" id="btn-check-outlined-81">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-81">7</label>
+                <input type="radio" name="jlpt_n5" value="8" class="btn-check" id="btn-check-outlined-82">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-82">8</label>
+                <input type="radio" name="jlpt_n5" value="9" class="btn-check" id="btn-check-outlined-83">
+                <label class="btn btn-outline-primary" for="btn-check-outlined-83">9 or more</label><br>
+                </select><br>
+            </div>
+            <!-- Step 11 -->
+           <div class="step">
+                <label for="jlpt_past_result">Result of the last exam taken.</label>
+                
+                <label for="n1_result">N1/Ex Level 1:</label>
+                <div class="btn-group w-100">
+                    <input type="radio" name="n1_result" value="1" class="btn-check" id="btn-check-outlined-84">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-84">Pass</label>
+                    <input type="radio" name="n1_result" value="2" class="btn-check" id="btn-check-outlined-85">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-85">Fail</label><br>
+                    <input type="radio" name="n1_result" value="" class="btn-check" id="btn-check-outlined-86" checked>
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-86">None</label><br>
+                </div>
+
+                <label for="n2_result">N2/Ex Level 2:</label>
+                <div class="btn-group w-100">
+                    <input type="radio" name="n2_result" value="1" class="btn-check" id="btn-check-outlined-87">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-87">Pass</label>
+                    <input type="radio" name="n2_result" value="2" class="btn-check" id="btn-check-outlined-88">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-88">Fail</label><br>
+                    <input type="radio" name="n2_result" value="" class="btn-check" id="btn-check-outlined-89" checked>
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-89">None</label><br>
+                </div>
+
+                <label for="n3_result">N3:</label>
+                <div class="btn-group w-100">
+                    <input type="radio" name="n3_result" value="1" class="btn-check" id="btn-check-outlined-90">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-90">Pass</label>
+                    <input type="radio" name="n3_result" value="2" class="btn-check" id="btn-check-outlined-91">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-91">Fail</label><br>
+                    <input type="radio" name="n3_result" value="" class="btn-check" id="btn-check-outlined-92" checked>
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-92">None</label><br>
+                </div>
+
+                <label for="n4_result">N4/Ex Level 3:</label>
+                <div class="btn-group w-100">
+                    <input type="radio" name="n4_result" value="1" class="btn-check" id="btn-check-outlined-93">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-93">Pass</label>
+                    <input type="radio" name="n4_result" value="2" class="btn-check" id="btn-check-outlined-94">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-94">Fail</label><br>
+                    <input type="radio" name="n4_result" value="" class="btn-check" id="btn-check-outlined-95" checked>
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-95">None</label><br>
+                </div>
+
+                <label for="n5_result">N5/Ex Level 4:</label>
+                <div class="btn-group w-100">
+                    <input type="radio" name="n5_result" value="1" class="btn-check" id="btn-check-outlined-96">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-96">Pass</label>
+                    <input type="radio" name="n5_result" value="2" class="btn-check" id="btn-check-outlined-97">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-97">Fail</label><br>
+                    <input type="radio" name="n5_result" value="" class="btn-check" id="btn-check-outlined-98" checked>
+                    <label class="btn btn-outline-primary" for="btn-check-outlined-98">None</label><br>
+                </div>
+            </div><br>
+
+             <!--Step Handcapé-->
+        <div class="step">
+            <label for="needAssistance">Do you need assistance in taking the JLPT?</label>
+            <select id="needAssistance" name="needAssistance" class="form-select">
+                <option value="NO">NO</option>
+                <option value="yes">YES</option>
+            </select><br>
+        
+            <div id="assistanceTypeDiv" style="display:none;">
+                <label for="assistanceType">Select the type of assistance you need:</label><br>
+                <select id="assistanceType" name="assistanceType" class="form-select">
+                    <option value="physicalAid">Physical aid</option>
+                    <option value="visualAid">Visual aid</option>
+                    <option value="hearingAid">Hearing aid</option>
+                </select><br>
+            </div>
+            <script>
+                document.getElementById("needAssistance").addEventListener("change", function() {
+            var needAssistance = document.getElementById("needAssistance");
+            var assistanceTypeDiv = document.getElementById("assistanceTypeDiv");
+            
+            if (needAssistance.value === "yes") {
+                assistanceTypeDiv.style.display = "block";
+            } else {
+                assistanceTypeDiv.style.display = "none";
+            }
+        });
+            </script>
+        </div>
+            <!-- Step Accpet the user agrrement -->
+             <div class="step">
+                <input type="checkbox" required> Please accpet our terms, You can find them at <a href="https://www.google.com" target="_blank"><span>Terms and services.</a><br><br>
+             </div>
+            <!-- Navigation buttons -->
+            <div class="navigation-buttons">
+                <button class="btn btn-primary" type="button" id="prevBtn" onclick="prevStep()" style="display: none;">Previous</button>
+                <button class="btn btn-primary" type="button" id="nextBtn" onclick="nextStep()">Next</button>
+                <button class="btn btn-primary" type="submit" id="submitBtn" style="display: none;">Submit</button>
+                <img src="/static/index_assets/img/logo.png" alt="logo" class="logo" style="float: right;">
+            </div>
+            
+        </form>
+    </div>
+    <script src="/static/regisration_asserts/script.js"></script> 
+</body>
+</html>

@@ -1,0 +1,110 @@
+		<!-- Sidebar -->
+		<div class="sidebar sidebar-style-2" data-background-color="dark2">			
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+					
+					<ul class="nav nav-primary">
+						<li class="nav-item {% if 'index' in segment %} active {% endif %}">
+							<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+								<i class="fas fa-home"></i>
+								<p>Dashboard</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse {% if 'index' in segment %} show {% endif %}" id="dashboard">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="{{ '/dashboard'}}">
+											<span class="sub-item">Dashboard</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item {% if 'ui-' in segment %} active {% endif %}">
+							<a data-toggle="collapse" href="#base">
+								<i class="fas fa-layer-group"></i>
+								<p>Registred Condidat</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse {% if 'ui-' in segment %} show {% endif %}" id="base">
+								<ul class="nav nav-collapse">
+									<li class="{% if 'ui-avatars' in segment %} active {% endif %}">
+										<a href="{{ '/jlpt_data/all' }}">
+											<span class="sub-item">All Registred</span>
+										</a>
+									</li>
+									
+									<li class="{% if 'ui-avatars' in segment %} active {% endif %}">
+										<a href=" {{ '/jlpt_data/N1' }}">
+											<span class="sub-item">JLPT N1</span>
+										</a>
+									</li>
+									<li class="{% if 'ui-buttons' in segment %} active {% endif %}">
+										<a href="{{ '/jlpt_data/N2' }}">
+											<span class="sub-item">JLPT N2</span>
+										</a>
+									</li>
+									<li class="{% if 'ui-gridsystem' in segment %} active {% endif %}">
+										<a href="{{ '/jlpt_data/N3' }}">
+											<span class="sub-item">JLPT N3</span>
+										</a>
+									</li>
+									<li class="{% if 'ui-panels' in segment %} active {% endif %}">
+										<a href="{{ '/jlpt_data/N4' }}">
+											<span class="sub-item">JLPT N4</span>
+										</a>
+									</li>
+									<li class="{% if 'ui-notifications' in segment %} active {% endif %}">
+										<a href="{{ '/jlpt_data/N5' }}">
+											<span class="sub-item">JLPT N5</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item {% if 'layout' in segment %} active {% endif %}">
+							<a data-toggle="collapse" href="#sidebarLayouts">
+								<i class="fas fa-th-list"></i>
+								<p>Confirmed Condidat</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="sidebarLayouts">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="{{ '/jlpt_confirmed_data/all'}}">
+											<span class="sub-item">All Confirmed</span>
+										</a>
+									</li>
+									<li>
+										<a href="{{ '/jlpt_confirmed_data/N1'}}">
+											<span class="sub-item">JLPT N1</span>
+										</a>
+									</li>
+									<li>
+										<a href="{{ '/jlpt_confirmed_data/N2'}}">
+											<span class="sub-item">JLPT N2</span>
+										</a>
+									</li>
+									<li>
+										<a href="{{ '/jlpt_confirmed_data/N3'}}">
+											<span class="sub-item">JLPT N3</span>
+										</a>
+									</li>
+									<li>
+										<a href="{{ '/jlpt_confirmed_data/N4'}}">
+											<span class="sub-item">JLPT N4</span>
+										</a>
+									</li>
+									<li>
+										<a href="{{ '/jlpt_confirmed_data/N5'}}">
+											<span class="sub-item">JLPT N5</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+		</div>
+			</div>
+		</div>
+        <!-- End Sidebar -->
+        

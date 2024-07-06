@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %} Tables {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Tables</h4>
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Tables</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Basic Tables</a>
+					</li>
+				</ul>
+			</div>
+			
+				<div class="col-md-9">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Table</div>
+						</div>
+						<div class="card-body">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">N1</th>
+										<th scope="col">N2</th>
+										<th scope="col">N3</th>
+                                        <th scope="col">N4</th>
+                                        <th scope="col">N5</th>
+									</tr>
+								</thead>
+								<tbody>
+                                    <td>Registred Candidtae</td>
+                                    <td><a href="{{ '/jlpt_data/N1' }}">{{ data['1'] }}</a></td>
+                                    <td><a href="{{ '/jlpt_data/N2' }}">{{ data['2'] }}</a></td>
+                                    <td><a href="{{ '/jlpt_data/N3' }}">{{ data['3'] }}</a></td>
+                                    <td><a href="{{ '/jlpt_data/N4' }}">{{ data['4'] }}</a></td>
+                                    <td><a href="{{ '/jlpt_data/N5' }}">{{ data['5'] }}</a></td>
+								</tbody>
+                                <tbody>
+                                    <td>Confirmed Candidtae</td>
+                                    <td><a href="{{ '/jlpt_confirmed_data/N1'}}">{{ data_2['1'] }}</a></td>
+                                    <td><a href="{{ '/jlpt_confirmed_data/N2'}}">{{ data_2['2'] }}</a></td>
+                                    <td><a href="{{ '/jlpt_confirmed_data/N3'}}">{{ data_2['3'] }}</a></td>
+                                    <td><a href="{{ '/jlpt_confirmed_data/N4'}}">{{ data_2['4'] }}</a></td>
+                                    <td><a href="{{ '/jlpt_confirmed_data/N5'}}">{{ data_2['5'] }}</a></td>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script>
+		$('#displayNotif').on('click', function(){
+			var placementFrom = $('#notify_placement_from option:selected').val();
+			var placementAlign = $('#notify_placement_align option:selected').val();
+			var state = $('#notify_state option:selected').val();
+			var style = $('#notify_style option:selected').val();
+			var content = {};
+
+			content.message = 'Turning standard Bootstrap alerts into "notify" like notifications';
+			content.title = 'Bootstrap notify';
+			if (style == "withicon") {
+				content.icon = 'fa fa-bell';
+			} else {
+				content.icon = 'none';
+			}
+			content.url = 'index.html';
+			content.target = '_blank';
+
+			$.notify(content,{
+				type: state,
+				placement: {
+					from: placementFrom,
+					align: placementAlign
+				},
+				time: 1000,
+			});
+		});
+	</script>
+	
+{% endblock javascripts %}

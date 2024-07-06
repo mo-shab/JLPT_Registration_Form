@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %} UI Datatables {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<style>
+	.delete-link {
+color: black;
+}
+
+.confirm-link {
+color: black;
+}
+</style>{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">JLPT Level {{ level }}</h4>
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="{{ url_for('dashboard')}}">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="{{ '/tables'}}">Tables</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Datatables</a>
+					</li>
+				</ul>
+			</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table id="basic-datatables" class="display table table-striped table-hover" >
+                            <thead>
+                                <tr>
+                                    <th>JLPT Level</th>
+                                    <th>Full Name</th>
+                                    <th>Gender</th>
+                                    <th>Year of Birth</th>
+                                    <th>Month of Birth</th>
+                                    <th>Day of Birth</th>
+                                    <th>Pass Code</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                {% for row in infor %}
+                                <tr>
+                                    <td>JLPT{{ row[1] }}</td>
+                                    <td>{{ row[3] }}</td>
+                                    <td>{{ row[4] }}</td>
+                                    <td>{{ row[5] }}</td>
+                                    <td>{{ row[6] }}</td>
+                                    <td>{{ row[7] }}</td>
+                                    <td>{{ row[8] }}</td>
+                                    <td>{{ row[15] }}</td>
+                                    <td>{{ row[14] }}</td>
+									<td>
+										<div class="btn-group" role="group" aria-label="Basic example">
+											<button class="btn btn-danger btn-outline-primary">
+												<a href="{{ url_for('delete_row', level=row[1], row_number=row[0]) }}"  class="delete-link" onclick="return confirm('Are you sure you want to delete {{ row[3]}}?');">Delete</a>
+											</button>
+											<button class="btn btn-success btn-outline-primary">
+												<a href="{{ url_for('confirm_candidate', level=row[1], row_number=row[0]) }}" class="confirm-link" onclick="return confirm('Are you sure you want to confirm {{ row[3]}}?');">Confirm</a>
+											</button>
+										</div>
+									</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script >
+		$(document).ready(function() {
+			$('#basic-datatables').DataTable({
+			});
+
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+		});
+	</script>
+
+{% endblock javascripts %}

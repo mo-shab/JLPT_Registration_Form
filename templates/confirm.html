@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Your Information</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Bundle (JS + Popper.js) for dropdowns and modals -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Optional: Font Awesome for icons (if needed) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Additional custom styles */
+        body {
+    font-family: Arial, sans-serif;
+    background-color: gainsboro;
+    margin: 0;
+    padding: auto;
+    background-image: url(/static/regisration_asserts/background.jpg);
+}
+        .container {
+            width: 50%; /* Adjust as needed */
+            margin: 50px auto;
+        }
+        .table {
+            margin-bottom: 20px; /* Adjust as needed */
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .text-center {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Confirm Your Information</h1>
+        <form id="confirmationForm" action="/confirm" method="post">
+            <table class="table table-bordered">
+                <tr>
+                    <th></th>
+                    <th>Information</th>
+                </tr>
+                <tr>
+                    <td>JLPT Level</td>
+                    <td>{{ form_data['jlpt_level'] }}</td>
+                </tr>
+                <tr>
+                    <td>Test Center</td>
+                    <td>{{ form_data['test_center'] }}</td>
+                </tr>
+                <tr>
+                    <td>Full Name</td>
+                    <td>{{ form_data['full_name'] }}</td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>{{ form_data['gender'] }}</td>
+                </tr>
+                <tr>
+                    <td>Date of Birth</td>
+                    <td>{{ form_data['dob_year'] }}-{{ form_data['dob_month'] }}-{{ form_data['dob_day'] }}</td>
+                </tr>
+                <tr>
+                    <td>8 Digit Passcode</td>
+                    <td>{{ form_data['pass_code'] }}</td>
+                </tr>
+                <tr>
+                    <td>Nationality</td>
+                    <td>{{ form_data['nationality'] }}</td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>{{ form_data['adress'] }}</td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td>{{ form_data['country'] }}</td>
+                </tr>
+                <tr>
+                    <td>ZIP Code</td>
+                    <td>{{ form_data['zip_code'] }}</td>
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td>{{ form_data['phone_number'] }}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{ form_data['email'] }}</td>
+                </tr>
+            </table>
+            
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Confirm</button>
+                <button type="button" class="btn btn-secondary" onclick="window.history.back()">Edit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

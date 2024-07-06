@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<div class="content">
+    <div class="page-inner">
+        <h4 class="page-title">Statistiques</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Registred Condidats</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="myPieChart" style ="width: 100%; height: 100%"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Confirmed Condidats</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="myPieChart1" style="width: 100%; height: 100%"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Candidate Table</div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">N1</th>
+                                <th scope="col">N2</th>
+                                <th scope="col">N3</th>
+                                <th scope="col">N4</th>
+                                <th scope="col">N5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Registred Candidates</td>
+                                <td><a href="{{ '/jlpt_data/N1' }}">{{ data['1'] }}</a></td>
+                                <td><a href="{{ '/jlpt_data/N2' }}">{{ data['2'] }}</a></td>
+                                <td><a href="{{ '/jlpt_data/N3' }}">{{ data['3'] }}</a></td>
+                                <td><a href="{{ '/jlpt_data/N4' }}">{{ data['4'] }}</a></td>
+                                <td><a href="{{ '/jlpt_data/N5' }}">{{ data['5'] }}</a></td>
+                            </tr>
+                            <tr>
+                                <td>Confirmed Candidtae</td>
+                                <td><a href="{{ '/jlpt_confirmed_data/N1'}}">{{ data_2['1'] }}</a></td>
+                                <td><a href="{{ '/jlpt_confirmed_data/N2'}}">{{ data_2['2'] }}</a></td>
+                                <td><a href="{{ '/jlpt_confirmed_data/N3'}}">{{ data_2['3'] }}</a></td>
+                                <td><a href="{{ '/jlpt_confirmed_data/N4'}}">{{ data_2['4'] }}</a></td>
+                                <td><a href="{{ '/jlpt_confirmed_data/N5'}}">{{ data_2['5'] }}</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Registred vs Confirmed Candidats</div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="multipleLineChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        try {
+            // Parse the data from Flask context
+            const data = JSON.parse('{{ data|tojson }}');
+            const confirmedData = JSON.parse('{{ data_2|tojson }}');
+            const all_data = {}
+            Object.keys(data).forEach(function(a){
+                all_data[a] = data[a] + confirmedData[a]
+            })
+            console.log('Parsed data:', data);
+            console.log('Parsed confirmed data:', confirmedData);
+            console.log('All data', all_data)
+
+            // Render the first pie chart for Registered Candidates
+            const ctx = document.getElementById('myPieChart').getContext('2d');
+            const myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['N1', 'N2', 'N3', 'N4', 'N5'],
+                    datasets: [{
+                        label: 'Registered Candidates',
+                        data: Object.values(all_data),
+                        backgroundColor: [
+                            '#1d7af3',
+                            '#f3545d',
+                            '#fdaf4b',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'rgb(154, 154, 154)',
+                            fontSize: 11,
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    },
+                    pieceLabel: {
+                        render: 'percentage',
+                        fontColor: 'white',
+                        fontSize: 14
+                    },
+                    tooltips: false,
+                    layout: {
+                        padding: {
+                            left: 20,
+                            right: 20,
+                            top: 20,
+                            bottom: 20
+                        }
+                    }
+                }
+            });
+
+            // Render the second pie chart for Confirmed Candidates
+            const ctx1 = document.getElementById('myPieChart1').getContext('2d');
+            const myPieChart1 = new Chart(ctx1, {
+                type: 'pie',
+                data: {
+                    labels: ['N1', 'N2', 'N3', 'N4', 'N5'],
+                    datasets: [{
+                        label: 'Confirmed Candidates',
+                        data: Object.values(confirmedData),
+                        backgroundColor: [
+                            '#1d7af3',
+                            '#f3545d',
+                            '#fdaf4b',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'rgb(154, 154, 154)',
+                            fontSize: 11,
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    },
+                    pieceLabel: {
+                        render: 'percentage',
+                        fontColor: 'white',
+                        fontSize: 14
+                    },
+                    tooltips: false,
+                    layout: {
+                        padding: {
+                            left: 20,
+                            right: 20,
+                            top: 20,
+                            bottom: 20
+                        }
+                    }
+                }
+            });
+
+        } catch (error) {
+            console.error('Error parsing data or rendering chart:', error);
+        }
+
+    multipleLineChart = document.getElementById('multipleLineChart').getContext('2d');
+    const data = JSON.parse('{{ data|tojson }}');
+    const confirmedData = JSON.parse('{{ data_2|tojson }}');
+    const registeredDataValues = Object.values(data);
+    const confirmedDataValues = Object.values(confirmedData);
+    
+    var myMultipleLineChart = new Chart(multipleLineChart, {
+        
+			type: 'bar',
+			data: {
+				labels: ["N1", "N2", "N3", "N4", "N5"],
+				datasets: [{
+					label: "Registred",
+					borderColor: "#1d7af3",
+					pointBorderColor: "#FFF",
+					pointBackgroundColor: "#1d7af3",
+					pointBorderWidth: 2,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 1,
+					pointRadius: 4,
+					backgroundColor: 'transparent',
+					fill: true,
+					borderWidth: 2,
+					data: registeredDataValues
+				},{
+					label: "Confirmed",
+					borderColor: "#59d05d",
+					pointBorderColor: "#FFF",
+					pointBackgroundColor: "#59d05d",
+					pointBorderWidth: 2,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 1,
+					pointRadius: 4,
+					backgroundColor: 'transparent',
+					fill: true,
+					borderWidth: 2,
+					data: confirmedDataValues
+				}]
+			},
+			options : {
+				responsive: true, 
+				maintainAspectRatio: false,
+				legend: {
+					position: 'top',
+				},
+				tooltips: {
+					bodySpacing: 4,
+					mode:"nearest",
+					intersect: 0,
+					position:"nearest",
+					xPadding:10,
+					yPadding:10,
+					caretPadding:10
+				},
+				layout:{
+					padding:{left:15,right:15,top:15,bottom:15}
+				}
+			}
+		});
+
+    });
+</script>
+
+{% endblock javascripts %}

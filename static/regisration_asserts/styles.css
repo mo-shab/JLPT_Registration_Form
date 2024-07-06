@@ -1,0 +1,67 @@
+/* Custom CSS to hide checkbox and style checked state */
+.btn input[type="checkbox"] {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    pointer-events: none;
+}
+
+.btn-primary.active {
+    background-color: #286090; /* Change to your desired active button color */
+    border-color: #204d74; /* Adjust border color accordingly */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: gainsboro;
+    margin: 0;
+    padding: auto;
+    background-image: url(/static/regisration_asserts/background.jpg);
+}
+
+
+.container {
+    margin-top: 100px;
+    max-width: 40%; /* Set to 50% for all screen sizes */
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border-style: solid;
+    box-shadow: 0 10 20px 5px rgba(19, 19, 19, 0.418);
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 50%; /* Keep it at 50% for smaller screens too */
+        padding: 20px; /* Adjust padding if needed */
+    }
+}
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+#jlptLevelButtons {
+    display: flex;
+}
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#jlptLevelButtons {
+    width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+.btn {
+    margin: 5px;
+        }
+        /* Full-width select */
+        .form-select {
+            width: 100%;
+            padding: 8px; /* Optional: Adjust padding to fit your design */
+            font-size: 16px; /* Optional: Adjust font size for better readability */
+            border-radius: 4px; /* Optional: Add border radius for rounded corners */
+        }
