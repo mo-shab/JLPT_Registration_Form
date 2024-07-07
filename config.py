@@ -49,6 +49,43 @@ def get_jlpt_counter():
         
     return jlpt_counters
 
+def get_jlpt_special_need_count():
+    jlpt_special_need_count = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0}
+    for level in ['1', '2', '3', '4', '5']:
+        file_path = f"files/need_assistance/registered_data_N{level}.csv"
+        if os.path.exists(file_path):
+            print("Path exist")
+            with open(file_path, 'r') as f:
+                reader = csv.reader(f)
+                last_row = None
+                for row in reader:
+                    last_row = row
+                if last_row is not None:
+                    jlpt_special_need_count[level] = int(last_row[4])
+                else:
+                    jlpt_special_need_count[level] = 0
+        else:
+            print("Don't exist", level)
+    
+    return jlpt_special_need_count
+
+def get_jlpt_special_need_confirmed_count():
+    jlpt_special_need_confirmed_count = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0}
+    for level in ['1', '2', '3', '4', '5']:
+        file_path = f"files/need_assistance/confirmed_data_N{level}.csv"
+        if os.path.exists(file_path):
+            with open(file_path, 'r') as f:
+                reader = csv.reader(f)
+                last_row = None
+                for row in reader:
+                    last_row = row
+                if last_row is not None:
+                    jlpt_special_need_confirmed_count[level] = int(last_row[4])
+                else:
+                    jlpt_special_need_confirmed_count[level] = 0
+    
+    return jlpt_special_need_confirmed_count
+
 
 def read_csv(file_path):
     with open(file_path, 'r') as f:

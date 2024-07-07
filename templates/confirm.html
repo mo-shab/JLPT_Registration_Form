@@ -95,6 +95,16 @@
                     <td>Email</td>
                     <td>{{ form_data['email'] }}</td>
                 </tr>
+                {% if form_data['needAssistance'] == 'yes' %}
+                <tr>
+                    <td>Special Assistance</td>
+                    <td>{{ form_data['needAssistance'] }}</td>
+                </tr>
+                <tr>
+                    <td>Assistance Description</td>
+                    <td>{{ form_data['assistanceType'] }}</td>
+                </tr>
+                {% endif %}
             </table>
             
             <div class="button-container">

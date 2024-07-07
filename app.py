@@ -20,9 +20,31 @@ def load_user(user_id):
     return User(user_id)
 
 
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def index():
     return render_template('index.html')
+
+
+@app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        if email in users and users[email]['password'] == password:
+            user = User(email)
+            login_user(user)
+            return redirect(url_for('dashboard'))
+        else:
+            flash('Invalid username or password')
+    return render_template('login.html')
+
+
+@app.route('/logout', strict_slashes=False)
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
 
 @app.route('/registration', methods=['GET', 'POST'], strict_slashes=False)
 def registration():
@@ -77,13 +99,16 @@ def registration():
         temp_data['n3_result'] = request.form.get('n3_result', ' ')
         temp_data['n4_result'] = request.form.get('n4_result', ' ')
         temp_data['n5_result'] = request.form.get('n5_result', ' ')
+        if request.form.get('needAssistance'):
+            temp_data['needAssistance'] = request.form['needAssistance']
+            temp_data['assistanceType'] = request.form['assistanceType']
 
         return render_template('confirm.html', form_data=temp_data)
 
     return render_template('registration.html')
 
 
-@app.route('/confirm', methods=['POST'])
+@app.route('/confirm', methods=['POST'], strict_slashes=False)
 def confirm():
     jlpt_level = temp_data['jlpt_level']
     test_center = temp_data['test_center']
@@ -124,53 +149,44 @@ def confirm():
     n5_result = temp_data['n5_result']
 
     # Increment JLPT counter for the level
-    jlpt_counters = get_jlpt_counter()
-    jlpt_counters[jlpt_level] += 1
+
 
     # Process and store data as needed (e.g., write to files, send email)
+    # If Candidate need assistance, All the data will be stored in a different file
+    if temp_data['needAssistance'] == 'yes':
+        jlpt_counters = get_jlpt_special_need_count()
+        jlpt_counters[jlpt_level] += 1
+        with open(f"files/need_assistance/registered_data_N{jlpt_level}.csv", 'a') as f:
+            f.write(f"\"{jlpt_level.strip()}\",\"24B\",\"8210101\",\"{jlpt_level.strip()}\",\"{str(jlpt_counters[jlpt_level]).zfill(4)}\",\"{full_name.strip()}\",\"{gender.strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{pass_code.strip()}\",\"{native_language.strip()}\",\"{place_learn_jp.strip()}\",\"{reason_jlpt.strip()}\",\"{occupation.strip()}\",\"{occupation_details.strip()}\",\"{media}\",\"{teacher}\",\"{friends}\",\"{family}\",\"{supervisor}\",\"{colleagues}\",\"{customers}\",\"{jlpt_n1}\",\"{jlpt_n2}\",\"{jlpt_n3}\",\"{jlpt_n4}\",\"{jlpt_n5}\",\"{n1_result}\",\"{n2_result}\",\"{n3_result}\",\"{n4_result}\",\"{n5_result}\"\n")
 
-    with open(f"files/registered_data_N{jlpt_level}.csv", 'a') as f:
-        f.write(f"\"{jlpt_level.strip()}\",\"24B\",\"8210101\",\"{jlpt_level.strip()}\",\"{str(jlpt_counters[jlpt_level]).zfill(4)}\",\"{full_name.strip()}\",\"{gender.strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{pass_code.strip()}\",\"{native_language.strip()}\",\"{place_learn_jp.strip()}\",\"{reason_jlpt.strip()}\",\"{occupation.strip()}\",\"{occupation_details.strip()}\",\"{media}\",\"{teacher}\",\"{friends}\",\"{family}\",\"{supervisor}\",\"{colleagues}\",\"{customers}\",\"{jlpt_n1}\",\"{jlpt_n2}\",\"{jlpt_n3}\",\"{jlpt_n4}\",\"{jlpt_n5}\",\"{n1_result}\",\"{n2_result}\",\"{n3_result}\",\"{n4_result}\",\"{n5_result}\"\n")
+        with open(f"files/need_assistance/registered_infos_N{jlpt_level}.csv", 'a') as f:
+            f.write(f"\"{jlpt_counters[jlpt_level]}\",\"{jlpt_level}\",\"{test_center}\",\"{full_name}\",\"{gender}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{pass_code}\",\"{native_language}\",\"{nationality}\",\"{adress}\",\"{country}\",\"{zip_code}\",\"{phone_number}\",\"{email}\",\"{temp_data['assistanceType']}\"\n")
+    else:    
+        jlpt_counters = get_jlpt_counter()
+        jlpt_counters[jlpt_level] += 1
 
-    with open(f"files/registered_infos_N{jlpt_level}.csv", 'a') as f:
-        f.write(f"\"{jlpt_counters[jlpt_level]}\",\"{jlpt_level}\",\"{test_center}\",\"{full_name}\",\"{gender}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{pass_code}\",\"{native_language}\",\"{nationality}\",\"{adress}\",\"{country}\",\"{zip_code}\",\"{phone_number}\",\"{email}\"\n")
+        with open(f"files/registered_data_N{jlpt_level}.csv", 'a') as f:
+            f.write(f"\"{jlpt_level.strip()}\",\"24B\",\"8210101\",\"{jlpt_level.strip()}\",\"{str(jlpt_counters[jlpt_level]).zfill(4)}\",\"{full_name.strip()}\",\"{gender.strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{pass_code.strip()}\",\"{native_language.strip()}\",\"{place_learn_jp.strip()}\",\"{reason_jlpt.strip()}\",\"{occupation.strip()}\",\"{occupation_details.strip()}\",\"{media}\",\"{teacher}\",\"{friends}\",\"{family}\",\"{supervisor}\",\"{colleagues}\",\"{customers}\",\"{jlpt_n1}\",\"{jlpt_n2}\",\"{jlpt_n3}\",\"{jlpt_n4}\",\"{jlpt_n5}\",\"{n1_result}\",\"{n2_result}\",\"{n3_result}\",\"{n4_result}\",\"{n5_result}\"\n")
 
+        with open(f"files/registered_infos_N{jlpt_level}.csv", 'a') as f:
+            f.write(f"\"{jlpt_counters[jlpt_level]}\",\"{jlpt_level}\",\"{test_center}\",\"{full_name}\",\"{gender}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{pass_code}\",\"{native_language}\",\"{nationality}\",\"{adress}\",\"{country}\",\"{zip_code}\",\"{phone_number}\",\"{email}\"\n")
+    
     # Function to send Email to the JLPT candidate
     # send_email(full_name, email)
     # Clear temporary data after processing
     temp_data.clear()
 
-    # Render success page after confirmation
     return render_template('success.html')
 
-@app.route('/dashboard', methods=['GET'])
+
+@app.route('/dashboard', methods=['GET'], strict_slashes=False)
 @login_required
 def dashboard():
-    print("JLPT Counter :", get_jlpt_counter())
-    print("JLPT Counter Confirmed :", get_jlpt_confirmed_counter())
-    return render_template('dashboard.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter())
+    return render_template('dashboard.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter(), data_3=get_jlpt_special_need_confirmed_count(), data_4=get_jlpt_special_need_count())
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        if email in users and users[email]['password'] == password:
-            user = User(email)
-            login_user(user)
-            return redirect(url_for('dashboard'))
-        else:
-            flash('Invalid username or password')
-    return render_template('login.html')
-
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('login'))
-
-@app.route('/jlpt_data/N<level>', methods=['GET'])
+# route to get JLPT data by level
+@app.route('/jlpt_data/N<level>', methods=['GET'], strict_slashes=False)
 @login_required
 def getJlptByLevel(level):
     data_file = f"files/registered_data_N{level}.csv"
@@ -210,7 +226,48 @@ def get_all_data():
                     infor.append(row)
     return render_template('jlpt_data.html', infor=infor, data=data, level='all')
 
-@app.route('/jlpt_confirmed_data/N<level>', methods=['GET'])
+# route to get JLPT data by level for special need
+@app.route('/jlpt_data_special_need/N<level>', methods=['GET'], strict_slashes=False)
+@login_required
+def getJlptSpecialNeedByLevel(level):
+    data_file = f"files/need_assistance/registered_data_N{level}.csv"
+    infor_file = f"files/need_assistance/registered_infos_N{level}.csv"
+    data = []
+    infor = []
+    if os.path.exists(data_file):
+        with open(data_file, 'r') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                data.append(row)
+    if os.path.exists(infor_file):
+        with open(infor_file, 'r') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                infor.append(row)
+    return render_template('jlpt_special_need_data.html', infor=infor, data=data, level=level)
+
+@app.route('/jlpt_data_special_need/all', strict_slashes=False)
+@login_required
+def getJlptSpecialNeedAll():
+    data = []
+    infor = []
+    for level in ['1', '2', '3', '4', '5']:
+        data_file = f"files/need_assistance/registered_data_N{level}.csv"
+        infor_file = f"files/need_assistance/registered_infos_N{level}.csv"
+        if os.path.exists(data_file):
+            with open(data_file, 'r') as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    data.append(row)
+        if os.path.exists(infor_file):
+            with open(infor_file, 'r') as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    infor.append(row)
+    return render_template('jlpt_special_need_data.html', infor=infor, data=data, level='all')
+
+
+@app.route('/jlpt_confirmed_data/N<level>', methods=['GET'], strict_slashes=False)
 @login_required
 def get_confirmed_JlptByLevel(level):
     full_data = []
@@ -232,14 +289,29 @@ def get_confirmed_all_data():
     for level in ['1', '2', '3', '4', '5']:
         full_data_file = f"files/full_confirmed_data_N{level}.csv"
         if os.path.exists(full_data_file):
-
-            
             with open(full_data_file, 'r') as f:
                 reader = csv.reader(f)
                 for row in reader:
                     full_data.append(row)
 
     return render_template('jlpt_confirm_data.html', data=full_data, level='all')
+
+
+@app.route('/jlpt_confirmed_special_need_data/N<level>', methods=['GET'], strict_slashes=False)
+@login_required
+def get_confirmed_JlptByLevel_special_need(level):
+    full_data = []
+    full_data_file = f"files/confirmed/full_special_need_confirmed_data_N{level}.csv"
+
+    if os.path.exists(full_data_file):
+        with open(full_data_file, 'r') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                full_data.append(row)
+
+    return render_template('jlpt_confirm_data.html', data=full_data, level=level)
+
+
 
 
 @app.route('/delete/<level>/<int:row_number>', methods=['POST', 'GET'], strict_slashes=False)
@@ -335,7 +407,7 @@ def confirm_candidate(level, row_number):
 
 @app.route('/tables')
 def table():
-    return render_template('tables.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter())
+    return render_template('tables.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter(), data_3=get_jlpt_special_need_count())
 
 
 @app.errorhandler(500)
