@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Downloads{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-inner">
+        <h4 class="page-title">Download CSV Files</h4><br>
+        <h2 class="h2"> Download Confirmed CSV</h2>
+        <div class="row">
+            <div class="col-md-2 mb-2">
+                <button class="btn btn-primary btn-block" onclick="location.href='{{ url_for('download_csv', level=1) }}'">Download N1</button>
+            </div>
+            <div class="col-md-2 mb-2">
+                <button class="btn btn-primary btn-block" onclick="location.href='{{ url_for('download_csv', level=2) }}'">Download N2</button>
+            </div>
+            <div class="col-md-2 mb-2">
+                <button class="btn btn-primary btn-block" onclick="location.href='{{ url_for('download_csv', level=3) }}'">Download N3</button>
+            </div>
+            <div class="col-md-2 mb-2">
+                <button class="btn btn-primary btn-block" onclick="location.href='{{ url_for('download_csv', level=4) }}'">Download N4</button>
+            </div>
+            <div class="col-md-2 mb-2">
+                <button class="btn btn-primary btn-block" onclick="location.href='{{ url_for('download_csv', level=5) }}'">Download N5</button>
+            </div>
+        </div>
+
+        <h2 class="h2"> Download Special Need Confirmed CSV</h2>
+        <div class="row">
+            <div class="col-md-2 mb-2">
+                <button class="btn btn-primary btn-block" onclick="location.href='{{ url_for('download_special_need_csv', level=1) }}'">Download N1</button>
+            </div>
+            <div class="col-md-2 mb-2">
+                <button class="btn btn-primary btn-block" onclick="location.href='{{ url_for('download_special_need_csv', level=2) }}'">Download N2</button>
+            </div>
+            <div class="col-md-2 mb-2">
+                <button class="btn btn-primary btn-block" onclick="location.href='{{ url_for('download_special_need_csv', level=3) }}'">Download N3</button>
+            </div>
+            <div class="col-md-2 mb-2">
+                <button class="btn btn-primary btn-block" onclick="location.href='{{ url_for('download_special_need_csv', level=4) }}'">Download N4</button>
+            </div>
+            <div class="col-md-2 mb-2">
+                <button class="btn btn-primary btn-block" onclick="location.href='{{ url_for('download_special_need_csv', level=5) }}'">Download N5</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

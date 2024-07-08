@@ -76,10 +76,10 @@ color: black;
 									<td>
 										<div class="btn-group" role="group" aria-label="Basic example">
 											<button class="btn btn-danger btn-outline-primary">
-												<a href="{{ url_for('delete_row', level=row[1], row_number=row[0]) }}"  class="delete-link" onclick="return confirm('Are you sure you want to delete {{ row[3]}}?');">Delete</a>
+												<a href="{{ url_for('delete_special_need_row', level=row[1], row_number=row[0]) }}"  class="delete-link" onclick="return confirm('Are you sure you want to delete {{ row[3]}}?');">Delete</a>
 											</button>
 											<button class="btn btn-success btn-outline-primary">
-												<a href="{{ url_for('confirm_candidate', level=row[1], row_number=row[0]) }}" class="confirm-link" onclick="return confirm('Are you sure you want to confirm {{ row[3]}}?');">Confirm</a>
+												<a href="{{ url_for('confirm_special_need_candidate', level=row[1], row_number=row[0]) }}" class="confirm-link" onclick="return confirm('Are you sure you want to confirm {{ row[3]}}?');">Confirm</a>
 											</button>
 										</div>
 									</td>

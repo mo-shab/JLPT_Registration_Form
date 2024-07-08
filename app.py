@@ -1,12 +1,14 @@
-from flask import Flask, request, render_template, flash, url_for, redirect
+from flask import Flask, request, render_template, flash, url_for, redirect, send_file
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+import pandas as pd
+from io import BytesIO, StringIO
 from config import *
 import os
 import csv
 
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'
+app.secret_key = 'This_Is_Not_My_Secret_Key'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -185,7 +187,6 @@ def dashboard():
     return render_template('dashboard.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter(), data_3=get_jlpt_special_need_confirmed_count(), data_4=get_jlpt_special_need_count())
 
 
-# route to get JLPT data by level
 @app.route('/jlpt_data/N<level>', methods=['GET'], strict_slashes=False)
 @login_required
 def getJlptByLevel(level):
@@ -301,7 +302,7 @@ def get_confirmed_all_data():
 @login_required
 def get_confirmed_JlptByLevel_special_need(level):
     full_data = []
-    full_data_file = f"files/confirmed/full_special_need_confirmed_data_N{level}.csv"
+    full_data_file = f"files/need_assistance/confirmed/full_confirmed_data_N{level}.csv"
 
     if os.path.exists(full_data_file):
         with open(full_data_file, 'r') as f:
@@ -311,7 +312,19 @@ def get_confirmed_JlptByLevel_special_need(level):
 
     return render_template('jlpt_confirm_data.html', data=full_data, level=level)
 
+@app.route('/jlpt_confirmed_special_need_data/all', strict_slashes=False)
+@login_required
+def get_confirmed_special_need_all_data():
+    full_data = []
+    for level in ['1', '2', '3', '4', '5']:
+        full_data_file = f"files/need_assistance//confirmed/full_confirmed_data_N{level}.csv"
+        if os.path.exists(full_data_file):
+            with open(full_data_file, 'r') as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    full_data.append(row)
 
+    return render_template('jlpt_special_need_data.html', data=full_data, level='all')
 
 
 @app.route('/delete/<level>/<int:row_number>', methods=['POST', 'GET'], strict_slashes=False)
@@ -344,7 +357,6 @@ def delete_row(level, row_number):
             new_raws = []
             for row in rows:
                 row_string = ','.join([f'"{i}"' for i in row])
-                print(row_string)
                 new_raws.append(row_string)
 
             with open(data_file, 'w', newline='') as f:
@@ -359,7 +371,7 @@ def delete_row(level, row_number):
             flash("Invalid row number!")
             return redirect(url_for('get_all_data'))
     else:
-        print("Files do not exist!")
+        flash("Files do not exist!")
         return redirect(url_for('get_all_data'))
 
 
@@ -369,7 +381,7 @@ def confirm_candidate(level, row_number):
     """Route to confirme candidate
     This route read all the data from the registred data file
     copy the data into a new file, delete the data from temp file"""
-    data_file = f"registered_data_N{level}.csv"
+    data_file = f"files/registered_data_N{level}.csv"
     full_data_info = f"files/full_confirmed_data_N{level}.csv"
     confirmed_data_file = f"files/Confirmed/confirmed_data_N{level}.csv"
     registred_data_file = f"files/registered_infos_N{level}.csv"
@@ -407,7 +419,7 @@ def confirm_candidate(level, row_number):
 
 @app.route('/tables')
 def table():
-    return render_template('tables.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter(), data_3=get_jlpt_special_need_count())
+    return render_template('tables.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter(), data_3=get_jlpt_special_need_count(), data_4=get_jlpt_special_need_confirmed_count())
 
 
 @app.errorhandler(500)
@@ -423,6 +435,119 @@ def exception_handler(e):
 def exception_handler(e):
     return render_template('405.html'), 405
 
+
+
+@app.route('/confirm_special_need/<level>/<int:row_number>', methods=['POST', 'GET'], strict_slashes=False)
+@login_required
+def confirm_special_need_candidate(level, row_number):
+    data_file = f"files/need_assistance/registered_data_N{level}.csv"
+    full_data_info = f"files/need_assistance/confirmed/full_confirmed_data_N{level}.csv"
+    confirmed_data_file = f"files/need_assistance/confirmed/confirmed_data_N{level}.csv"
+    registred_data_file = f"files/need_assistance/registered_infos_N{level}.csv"
+    jlpt_confirmed_counter = get_jlpt_special_need_confirmed_count()
+
+    if os.path.exists(data_file):
+        rows = read_csv(data_file)
+        info_rows = read_csv(registred_data_file)
+
+        if 0 < row_number <= len(rows):
+            confirmed_candidate = rows[row_number - 1]
+            confirmed_candidate_data = info_rows[row_number - 1]
+
+            jlpt_confirmed_counter[level] += 1
+            confirmed_candidate[4] = f"{jlpt_confirmed_counter[level]:04}"
+
+
+            with open(confirmed_data_file, 'a', newline='') as f:
+                writer = csv.writer(f, quoting=csv.QUOTE_ALL)
+                writer.writerow(confirmed_candidate)
+            
+            with open(full_data_info, 'a', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow(confirmed_candidate_data)
+
+            print(f"Candidate {confirmed_candidate[5]} confirmed successfully!")
+
+            return delete_special_need_row(level, row_number)
+        else:
+            print("Invalid row number!")
+            return redirect(url_for('getJlptSpecialNeedAll'))
+    else:
+        print("File does not exist!")
+        return redirect(url_for('getJlptSpecialNeedAll'))
+
+
+@app.route('/delete_special_need/<level>/<int:row_number>', methods=['POST', 'GET'], strict_slashes=False)
+@login_required
+def delete_special_need_row(level, row_number):
+    data_file = f"files/need_assistance/registered_data_N{level}.csv"
+    data_file_2 = f"files/need_assistance/registered_infos_N{level}.csv"
+    deleted_info = f"files/need_assistance/deleted_info_N{level}.csv"
+
+    if os.path.exists(data_file) and os.path.exists(data_file_2):
+        print("Path found")
+
+        jlpt_counters = get_jlpt_special_need_count()
+        rows = read_csv(data_file)
+        rows_2 = read_csv(data_file_2)
+
+        if 0 < row_number <= len(rows):
+            name = rows[row_number - 1][5]
+            deleted_row = rows_2[row_number - 1]
+
+            rows.pop(row_number - 1)
+            rows_2.pop(row_number - 1)
+
+            write_deleted_log(deleted_info, deleted_row)
+
+            for i in range(row_number - 1, len(rows)):
+                rows[i][4] = f"{int(rows[i][4]) - 1:04}"
+                rows_2[i][0] = f"{int(rows_2[i][0]) - 1:04}"
+            jlpt_counters[level] -= 1 
+
+            new_raws = []
+            for row in rows:
+                row_string = ','.join([f'"{i}"' for i in row])
+                new_raws.append(row_string)
+
+            with open(data_file, 'w', newline='') as f:
+                for row in new_raws:
+                    f.write(row + '\n')
+            
+            write_csv(data_file_2, rows_2)
+
+            flash(f"{name} deleted successfully!")
+            return redirect(url_for('getJlptSpecialNeedAll'))
+        else:
+            flash("Invalid row number!")
+            return redirect(url_for('getJlptSpecialNeedAll'))
+    else:
+        flash("Files do not exist!")
+        return redirect(url_for('getJlptSpecialNeedAll'))
+
+
+@app.route('/download/csv/N<level>', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def download_csv(level):
+    file_path = f"files/Confirmed/confirmed_data_N{level}.csv"
+    if os.path.exists(file_path):
+        return send_file(file_path, as_attachment=True)
+    else:
+        return render_template('404.html'), 404
+    
+@app.route('/download_special/csv/N<level>', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def download_special_need_csv(level):
+    file_path = f"files/need_assistance/confirmed/confirmed_data_N{level}.csv"
+    if os.path.exists(file_path):
+        return send_file(file_path, as_attachment=True)
+    else:
+        return render_template('404.html'), 404
+
+@app.route('/download', methods=['GET'], strict_slashes=False)
+@login_required
+def download():
+    return render_template('download.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
