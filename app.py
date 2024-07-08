@@ -1,7 +1,5 @@
 from flask import Flask, request, render_template, flash, url_for, redirect, send_file
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-import pandas as pd
-from io import BytesIO, StringIO
 from config import *
 import os
 import csv
@@ -442,7 +440,7 @@ def exception_handler(e):
 def confirm_special_need_candidate(level, row_number):
     data_file = f"files/need_assistance/registered_data_N{level}.csv"
     full_data_info = f"files/need_assistance/confirmed/full_confirmed_data_N{level}.csv"
-    confirmed_data_file = f"files/need_assistance/confirmed/confirmed_data_N{level}.csv"
+    confirmed_data_file = f"files/need_assistance/confirmed/confirmed_special_need_data_N{level}.csv"
     registred_data_file = f"files/need_assistance/registered_infos_N{level}.csv"
     jlpt_confirmed_counter = get_jlpt_special_need_confirmed_count()
 
@@ -538,7 +536,7 @@ def download_csv(level):
 @app.route('/download_special/csv/N<level>', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
 def download_special_need_csv(level):
-    file_path = f"files/need_assistance/confirmed/confirmed_data_N{level}.csv"
+    file_path = f"files/need_assistance/confirmed/confirmed_special_need_data_N{level}.csv"
     if os.path.exists(file_path):
         return send_file(file_path, as_attachment=True)
     else:
