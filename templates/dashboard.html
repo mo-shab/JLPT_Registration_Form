@@ -245,7 +245,11 @@
     const confirmedDataValues = Object.values(confirmedData);
     console.log(data)
     console.log(confirmedData)
-
+    const all_data = {}
+            Object.keys(data).forEach(function(a){
+                all_data[a] = data[a] + confirmedData[a]
+            })
+    const sumdata = Object.values(all_data);
     var myMultipleLineChart = new Chart(multipleLineChart, {
         
 			type: 'bar',
@@ -263,7 +267,7 @@
 					backgroundColor: 'transparent',
 					fill: true,
 					borderWidth: 2,
-					data: confirmedData
+					data: sumdata
 				},{
 					label: "Confirmed",
 					borderColor: "#59d05d",
