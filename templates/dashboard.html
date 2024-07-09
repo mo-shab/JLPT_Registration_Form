@@ -243,7 +243,12 @@
     const confirmedData = JSON.parse('{{ data_2|tojson }}');
     const registeredDataValues = Object.values(data);
     const confirmedDataValues = Object.values(confirmedData);
-    
+    console.log(data)
+    console.log(confirmedData)
+    const all_data = {}
+            Object.keys(data).forEach(function(a){
+                all_data[a] = registeredDataValues[a] + confirmedDataValues[a]
+            })
     var myMultipleLineChart = new Chart(multipleLineChart, {
         
 			type: 'bar',
@@ -261,7 +266,7 @@
 					backgroundColor: 'transparent',
 					fill: true,
 					borderWidth: 2,
-					data: registeredDataValues
+					data: confirmedData
 				},{
 					label: "Confirmed",
 					borderColor: "#59d05d",
