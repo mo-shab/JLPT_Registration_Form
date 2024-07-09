@@ -345,13 +345,13 @@
             <div class="step">
                 <label for="institute">Institution where you study/studied Japanese Language:</label>
                 <select id="institute" name="institute" class="form-select">
+                    <option value="">Select Option</option>
                     <option value="Speak Asian">Speak Asian.</option>
                     <option value="Faculté Hassan II Mohammedia">Faculté Hassan II Mohammedia.</option>
                     <option value="Faculté Rabat">Faculté Rabat.</option>
-                    <option value="French">French</option>
-                    <option value="430">Selfmade</option>
-                    <option value="112">Japanese</option>
-                    <option value="000">Other</option>
+                    <option value="Faculté Marakech">Faculté Marrakech</option>
+                    <option value="Self Study">Self Study</option>
+                    <option value="Other">Other</option>
                 </select><br>
     
                 <label for="place_learn_jp">Place of learning Japanese:</label><br>
@@ -366,39 +366,40 @@
              </div>
 
         <!-- Step 8 (Reason FOR JLPT, Occupation)-->
-           <div class="step">
-                <label for="reason_jlpt">Reason for taking this JLPT exam:</label><br>
-                <select id="reason_jlpt" name="reason_jlpt" required class="form-select">
-                    <option value="1">Necessary for ADMISSION into university or graduate school in my OWN COUNTRY</option>
-                    <option value="2">Necessary for ADMISSION into university or graduate school in JAPAN</option>
-                    <option value="3">Necessary for admission or as PROOF OF PROFICIENCY for other educational institution in my OWN COUNTRY</option>
-                    <option value="4">Necessary for admission or as PROOF OF PROFICIENCY for other educational institution in JAPAN</option>
-                    <option value="5">Useful for work /attain employment, secure salary increase, or promotion in my OWN COUNTRY</option>
-                    <option value="6">Useful for work/attain employment, secure salary increase or promotion in JAPAN</option>
-                    <option value="7">None of the above; to measure my own level of proficiency</option>
-                    <option value="8">None of the above</option>
-                </select><br>
+          
+        <div class="step">
+            <label for="reason_jlpt">Reason for taking this JLPT exam:</label><br>
+            <select id="reason_jlpt" name="reason_jlpt" required class="form-select">
+                <option value="1">Necessary for admission into university or graduate school in my own country</option>
+                <option value="2">Necessary for admission into university or graduate school in Japan</option>
+                <option value="3">Necessary for admission or as proof OF PROFICIENCY for other educational institution in my OWN COUNTRY</option>
+                <option value="4">Necessary for admission or as PROOF OF PROFICIENCY for other educational institution in JAPAN</option>
+                <option value="5">Useful for work /attain employment, secure salary increase, or promotion in my OWN COUNTRY</option>
+                <option value="6">Useful for work/attain employment, secure salary increase or promotion in JAPAN</option>
+                <option value="7">None of the above; to measure my own level of proficiency</option>
+                <option value="8">None of the above</option>
+            </select><br>
 
-                <label for="occupation">Occupation:</label><br>
-                <select id="occupation" name="occupation" required class="form-select">
-                    <option value="1">Elementary school student (primary education).</option>
-                    <option value="2">Middle school or high school student (secondary education).</option>
-                    <option value="3">University or graduate school student (higher education).</option>
-                    <option value="4">Student of other educational institution (e.g. foreign language school).</option>
-                    <option value="5">Employed (company employee, public servant, educator, self-employed, etc.).</option>
-                    <option value="6">Other.</option>
-                </select><br>
+            <label for="occupation">Occupation:</label><br>
+            <select id="occupation" name="occupation" required class="form-select">
+                <option value="1">Elementary school student (primary education).</option>
+                <option value="2">Middle school or high school student (secondary education).</option>
+                <option value="3">University or graduate school student (higher education).</option>
+                <option value="4">Student of other educational institution (e.g. foreign language school).</option>
+                <option value="5">Employed (company employee, public servant, educator, self-employed, etc.).</option>
+                <option value="6">Other.</option>
+            </select><br>
 
-                <label for="occupation_details">Occupation details:</label><br>
-                <select id="occupation_details" name="occupation_details" required class="form-select">
-                    <option value="1">Use Japanese to teach Japanese-language as a TEACHER</option>
-                    <option value="2">Use Japanese while working as a PUBLIC SERVANT</option>
-                    <option value="3">Use Japanese while working as a company employee in the MANUFACTURING, CONSTRUCTION, or IT INDUSTRY</option>
-                    <option value="4">Use Japanese while working as an employee in the SERVICE, TOURISM, or HOSPITALITY INDUSTRIES</option>
-                    <option value="5">Use Japanese at a job other than 1 through 4 above</option>
-                    <option value="6">Do not use Japanese while working</option>
-                </select><br>
-            </div><br>
+            <label for="occupation_details">Occupation details:</label><br>
+            <select id="occupation_details" name="occupation_details" required class="form-select">
+                <option value="1">Use Japanese to teach Japanese-language as a TEACHER</option>
+                <option value="2">Use Japanese while working as a PUBLIC SERVANT</option>
+                <option value="3">Use Japanese while working as a company employee in the MANUFACTURING, CONSTRUCTION, or IT INDUSTRY</option>
+                <option value="4">Use Japanese while working as an employee in the SERVICE, TOURISM, or HOSPITALITY INDUSTRIES</option>
+                <option value="5">Use Japanese at a job other than 1 through 4 above</option>
+                <option value="6">Do not use Japanese while working</option>
+            </select><br>
+        </div><br>
 
         <!-- Step 9 (media) -->
             <div class="step">
@@ -435,93 +436,93 @@
                 <label for="communicate_teacher">How do you usually communicate in Japanese with your TEACHER?</label><br>
                 <div id="communicate_teacher" class="btn-group-vertical w-100">
                     <input type="checkbox" name="communicate_teacher" value="1" class="btn-check" id="btn-check-outlined-10" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-10">Talk with the teacher</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-10">Speaking</label>
                     
                     <input type="checkbox" name="communicate_teacher" value="2" class="btn-check" id="btn-check-outlined-11" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-11">Listen to what the teacher.</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-11">Listening</label>
 
                     <input type="checkbox" name="communicate_teacher" value="3" class="btn-check" id="btn-check-outlined-12" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-12">Read what the teacher writes</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-12">Reading</label>
 
                     <input type="checkbox" name="communicate_teacher" value="4" class="btn-check" id="btn-check-outlined-13" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-13">Write to the teacher</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-13">Writing</label>
                 </div><br><br>
 
                 <label for="communicate_friends">How do you usually communicate in Japanese with your friends?</label><br>
                 <div id="communicate_friends" class="btn-group-vertical w-100">
                     <input type="checkbox" name="communicate_friends" value="1" class="btn-check" id="btn-check-outlined-14" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-14">Talk with friends</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-14">Speaking</label>
                     
                     <input type="checkbox" name="communicate_friends" value="2" class="btn-check" id="btn-check-outlined-15" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-15">Listen to what friends says</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-15">Listening</label>
 
                     <input type="checkbox" name="communicate_friends" value="3" class="btn-check" id="btn-check-outlined-16" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-16">Read what friends writes</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-16">Reading</label>
 
                     <input type="checkbox" name="communicate_friends" value="4" class="btn-check" id="btn-check-outlined-17" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-17">Write to friends</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-17">Writing</label>
                 </div><br><br>
 
                 <label for="communicate_family">How do you usually communicate in Japanese with your family?</label><br>
                 <div id="communicate_family" class="btn-group-vertical w-100">
                     <input type="checkbox" name="communicate_family" value="1" class="btn-check" id="btn-check-outlined-18" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-18">Talk with family</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-18">Speaking</label>
                     
                     <input type="checkbox" name="communicate_family" value="2" class="btn-check" id="btn-check-outlined-19" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-19">Listen to what family says</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-19">Listening</label>
 
                     <input type="checkbox" name="communicate_family" value="3" class="btn-check" id="btn-check-outlined-20" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-20">Read what family writes</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-20">Reading</label>
 
                     <input type="checkbox" name="communicate_family" value="4" class="btn-check" id="btn-check-outlined-21" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-21">Write to family</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-21">Writing</label>
                 </div><br><br>
 
 
                 <label for="communicate_supervisor">How do you usually communicate in Japanese with your supervisor?</label><br>
                 <div id="communicate_supervisor" class="btn-group-vertical w-100">
                     <input type="checkbox" name="communicate_supervisor" value="1" class="btn-check" id="btn-check-outlined-22" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-22">Talk with your supervisor</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-22">Speaking</label>
                     
                     <input type="checkbox" name="communicate_supervisor" value="2" class="btn-check" id="btn-check-outlined-23" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-23">Listen to what your supervisor says</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-23">Listening</label>
 
                     <input type="checkbox" name="communicate_supervisor" value="3" class="btn-check" id="btn-check-outlined-24" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-24">Read what your supervisor writes</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-24">Reading</label>
 
                     <input type="checkbox" name="communicate_supervisor" value="4" class="btn-check" id="btn-check-outlined-25" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-25">Write to your supervisor</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-25">Writing</label>
                 </div><br><br>
 
 
                 <label for="communicate_colleagues">How do you usually communicate in Japanese with your COLLEAGUES?</label><br>
                 <div id="communicate_colleagues" class="btn-group-vertical w-100">
                     <input type="checkbox" name="communicate_colleagues" value="1" class="btn-check" id="btn-check-outlined-26" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-26">Talk with your colleagues</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-26">Speaking</label>
                     
                     <input type="checkbox" name="communicate_colleagues" value="2" class="btn-check" id="btn-check-outlined-24" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-27">Listen to what your colleagues says</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-27">Listening</label>
 
                     <input type="checkbox" name="communicate_colleagues" value="3" class="btn-check" id="btn-check-outlined-28" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-28">Read what your colleagues writes</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-28">Reading</label>
 
                     <input type="checkbox" name="communicate_colleagues" value="4" class="btn-check" id="btn-check-outlined-29" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-29">Write to your colleagues</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-29">Writing</label>
                 </div><br><br>
 
                 <label for="communicate_CUSTOMERS">How do you usually communicate in Japanese with CUSTOMERS?</label><br>
                 <div id="communicate_CUSTOMERS" class="btn-group-vertical w-100">
                     <input type="checkbox" name="communicate_CUSTOMERS" value="1" class="btn-check" id="btn-check-outlined-30" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-30">Talk with your CUSTOMERS</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-30">Speaking</label>
                     
                     <input type="checkbox" name="communicate_CUSTOMERS" value="2" class="btn-check" id="btn-check-outlined-31" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-31">Listen to what your CUSTOMERS says</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-31">Listening</label>
 
                     <input type="checkbox" name="communicate_CUSTOMERS" value="3" class="btn-check" id="btn-check-outlined-32" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-32">Read what your CUSTOMERS writes</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-32">Reading</label>
 
                     <input type="checkbox" name="communicate_CUSTOMERS" value="4" class="btn-check" id="btn-check-outlined-33" autocomplete="off">
-                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-33">Write to your CUSTOMERS</label>
+                    <label class="btn btn-outline-primary w-100" for="btn-check-outlined-33">Writing</label>
                 </div><br><br>
             </div>
 
