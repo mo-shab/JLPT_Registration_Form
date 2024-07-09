@@ -245,10 +245,7 @@
     const confirmedDataValues = Object.values(confirmedData);
     console.log(data)
     console.log(confirmedData)
-    const all_data = {}
-            Object.keys(data).forEach(function(a){
-                all_data[a] = registeredDataValues[a] + confirmedDataValues[a]
-            })
+
     var myMultipleLineChart = new Chart(multipleLineChart, {
         
 			type: 'bar',
