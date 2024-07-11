@@ -13,6 +13,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/regisration_asserts/styles.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Center the datepicker dropdown */
+        .datepicker-dropdown {
+            left: 50% !important; /* Move dropdown to center horizontally */
+            transform: translateX(-50%); /* Adjust position */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -20,26 +27,25 @@
         <form id="jlptForm" action="registration" method="post">
 
             <div class="step">
-                <div class="row">
-                    <label for="datepicker">Date of Birth:</label><br>
-                    <input type="text" id="datepicker" name="dob" class="form-control"><br>
+                <label for="datepicker">Date of Birth:</label>
+                <div class="container1">
+                    <div class="row">
+                        <div class="col-md-12">
+                           
+                            <input type="text" id="datepicker" name="dob" class="form-control">
+                        </div>
+                    </div>
                 </div>
-                <script type="text/javascript">
+                <script>
                     $(document).ready(function(){
-                            $('#datepicker').datepicker({
-                                format: 'dd-mm-yyyy',
-                                autoclose: true,
-                                orientation: 'auto',
-                                container: '.container',
-                            });
+                        $('#datepicker').datepicker({
+                            format: 'dd-mm-yyyy',
+                            autoclose: true,
+                            orientation: 'auto',
+                            container: '.container1',
                         });
+                    });
                 </script>
-                <style>
-                    .datepicker-dropdown {
-                        z-index: 9999; /* Ensure datepicker appears on top of other elements */
-                        max-width: 100%; /* Ensure datepicker width is responsive */
-                    }
-                </style>
 
                 <label for="pass_code"><br>8-Digit Pass Code:</label><br>
                 <input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"  type="text" id="pass_code" name="pass_code" pattern="\d{8}" title="Please enter 8 digits." required><br>
