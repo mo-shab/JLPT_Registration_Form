@@ -22,7 +22,7 @@ body {
 
 .container {
     margin-top: 100px;
-    max-width: 40%; /* Set to 50% for all screen sizes */
+    max-width: 50%; /* Set to 50% for all screen sizes */
     padding: 40px;
     background-color: #ffffff;
     border-radius: 10px;
@@ -32,7 +32,7 @@ body {
 
 @media (max-width: 768px) {
     .container {
-        max-width: 50%; /* Keep it at 50% for smaller screens too */
+        max-width: 70%; /* Keep it at 50% for smaller screens too */
         padding: 20px; /* Adjust padding if needed */
     }
 }
