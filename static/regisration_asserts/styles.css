@@ -10,6 +10,13 @@
     border-color: #204d74; /* Adjust border color accordingly */
 }
 
+.datepicker-dropdown {
+    z-index: 9999; /* Ensure datepicker appears on top of other elements */
+}
+
+.datepicker {
+    max-width: 100%; /* Ensure datepicker width is responsive */
+}
 body {
     font-family: Arial, sans-serif;
     background-color: gainsboro;
