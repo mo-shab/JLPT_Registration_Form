@@ -99,9 +99,7 @@ def registration():
         temp_data['n3_result'] = request.form.get('n3_result', ' ')
         temp_data['n4_result'] = request.form.get('n4_result', ' ')
         temp_data['n5_result'] = request.form.get('n5_result', ' ')
-        if request.form.get('needAssistance'):
-            temp_data['needAssistance'] = request.form['needAssistance']
-            temp_data['assistanceType'] = request.form['assistanceType']
+        temp_data['needAssistance'] = request.form['needAssistance']
 
         return render_template('confirm.html', form_data=temp_data)
 
@@ -160,7 +158,7 @@ def confirm():
             f.write(f"\"{jlpt_level.strip()}\",\"24B\",\"8210101\",\"{jlpt_level.strip()}\",\"{str(jlpt_counters[jlpt_level]).zfill(4)}\",\"{full_name.strip()}\",\"{gender.strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{pass_code.strip()}\",\"{native_language.strip()}\",\"{place_learn_jp.strip()}\",\"{reason_jlpt.strip()}\",\"{occupation.strip()}\",\"{occupation_details.strip()}\",\"{media}\",\"{teacher}\",\"{friends}\",\"{family}\",\"{supervisor}\",\"{colleagues}\",\"{customers}\",\"{jlpt_n1}\",\"{jlpt_n2}\",\"{jlpt_n3}\",\"{jlpt_n4}\",\"{jlpt_n5}\",\"{n1_result}\",\"{n2_result}\",\"{n3_result}\",\"{n4_result}\",\"{n5_result}\"\n")
 
         with open(f"files/need_assistance/registered_infos_N{jlpt_level}.csv", 'a') as f:
-            f.write(f"\"{jlpt_counters[jlpt_level]}\",\"{jlpt_level}\",\"{test_center}\",\"{full_name}\",\"{gender}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{pass_code}\",\"{native_language}\",\"{nationality}\",\"{adress}\",\"{country}\",\"{zip_code}\",\"{phone_number}\",\"{email}\",\"{temp_data['assistanceType']}\"\n")
+            f.write(f"\"{jlpt_counters[jlpt_level]}\",\"{jlpt_level}\",\"{test_center}\",\"{full_name}\",\"{gender}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{pass_code}\",\"{native_language}\",\"{nationality}\",\"{adress}\",\"{country}\",\"{zip_code}\",\"{phone_number}\",\"{email}\"\n")
     else:    
         jlpt_counters = get_jlpt_counter()
         jlpt_counters[jlpt_level] += 1
