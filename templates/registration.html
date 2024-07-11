@@ -14,11 +14,22 @@
     <link rel="stylesheet" href="/static/regisration_asserts/styles.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        /* Center the datepicker dropdown */
-        .datepicker-dropdown {
-            left: 50% !important; /* Move dropdown to center horizontally */
-            transform: translateX(-50%); /* Adjust position */
-        }
+    .datepicker-dropdown {
+        font-size: 14px; /* Example: Decrease font size */
+        width: 140px; /* Example: Set a specific width */
+        max-width: 50%; /* Ensure it adjusts responsively */
+    }
+
+    /* Adjust the size of the calendar table */
+    .datepicker-dropdown table {
+        width: 50%; /* Example: Ensure table takes full width */
+    }
+
+    /* Adjust size of table cells */
+    .datepicker-dropdown table td, .datepicker-dropdown table th {
+        padding: 8px; /* Example: Adjust padding */
+        text-align: center; /* Example: Center align text */
+    }
     </style>
 </head>
 <body>
