@@ -24,7 +24,7 @@
         <form id="jlptForm" action="registration" method="post">
                     <div class="col">
                         <div class="step">
-                            <div class="table-responsive">
+                            <div class="table">
                                 <table class="table table-bordered align-middle">
                                     <thead class="align-middle">
                                         <tr>
@@ -38,7 +38,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td rowspan="6" class="center">The person with whom you usually communicate in Japanese</td>
+                                        <td rowspan="6" class="center">The person with whom you usually communicate in Japanese</td>
                                             <td>with a teacher</td>
                                             <td>
                                                 <input type="checkbox" name="communicate_teacher" value="1" class="btn-check" id="btn-check-outlined-10" autocomplete="off">
@@ -61,27 +61,126 @@
                                                 <label class="btn btn-outline-primary w-100" for="btn-check-outlined-14">5</label>
                                             </td>
                                         </tr>
-                                        <td>with a teacher</td>
+                                        <tr>
+                                            <td><label for="communicate_friends">friends</label><br></td>
+                                            <div id="communicate_friends" class="btn-group-vertical w-100"></div>
                                             <td>
-                                                <input type="checkbox" name="communicate_teacher" value="1" class="btn-check" id="btn-check-outlined-10" autocomplete="off">
-                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-10">1</label>
+                                                <input type="checkbox" name="communicate_friends" value="1" class="btn-check" id="btn-check-outlined-15" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-15">1</label>
                                             </td>
                                             <td>
-                                                <input type="checkbox" name="communicate_teacher" value="2" class="btn-check" id="btn-check-outlined-11" autocomplete="off">
-                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-11">2</label>
+                                                <input type="checkbox" name="communicate_friends" value="2" class="btn-check" id="btn-check-outlined-16" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-16">2</label>
                                             </td>
                                             <td>
-                                                <input type="checkbox" name="communicate_teacher" value="3" class="btn-check" id="btn-check-outlined-12" autocomplete="off">
-                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-12">3</label>
+                                                <input type="checkbox" name="communicate_friends" value="3" class="btn-check"
+                                                    id="btn-check-outlined-17" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-17">3</label>
                                             </td>
                                             <td>
-                                                <input type="checkbox" name="communicate_teacher" value="4" class="btn-check" id="btn-check-outlined-13" autocomplete="off">
-                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-13">4</label>
+                                                <input type="checkbox" name="communicate_friends" value="4" class="btn-check"
+                                                    id="btn-check-outlined-18" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-18">4</label>
                                             </td>
                                             <td>
-                                                <input type="checkbox" name="communicate_teacher" value="5" class="btn-check" id="btn-check-outlined-14" autocomplete="off">
-                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-14">5</label>
+                                                <input type="checkbox" name="communicate_friends" value="5" class="btn-check" id="btn-check-outlined-19" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-19">5</label>
+                                           
                                             </td>
+                                            </div><br><br>
+                            
+                                            <label for="communicate_family">How do you usually communicate in Japanese with your family?</label><br>
+                                            <div id="communicate_family" class="btn-group-vertical w-100">
+                                                <input type="checkbox" name="communicate_family" value="1" class="btn-check"
+                                                    id="btn-check-outlined-18" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-18">Speaking</label>
+                            
+                                                <input type="checkbox" name="communicate_family" value="2" class="btn-check"
+                                                    id="btn-check-outlined-19" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-19">Listening</label>
+                            
+                                                <input type="checkbox" name="communicate_family" value="3" class="btn-check"
+                                                    id="btn-check-outlined-20" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-20">Reading</label>
+                            
+                                                <input type="checkbox" name="communicate_family" value="4" class="btn-check"
+                                                    id="btn-check-outlined-21" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-21">Writing</label>
+                                            </div><br><br>
+                            
+                            
+                                            <label for="communicate_supervisor">How do you usually communicate in Japanese with your
+                                                supervisor?</label><br>
+                                            <div id="communicate_supervisor" class="btn-group-vertical w-100">
+                                                <input type="checkbox" name="communicate_supervisor" value="1" class="btn-check"
+                                                    id="btn-check-outlined-22" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-22">Speaking</label>
+                            
+                                                <input type="checkbox" name="communicate_supervisor" value="2" class="btn-check"
+                                                    id="btn-check-outlined-23" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-23">Listening</label>
+                            
+                                                <input type="checkbox" name="communicate_supervisor" value="3" class="btn-check"
+                                                    id="btn-check-outlined-24" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-24">Reading</label>
+                            
+                                                <input type="checkbox" name="communicate_supervisor" value="4" class="btn-check"
+                                                    id="btn-check-outlined-25" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-25">Writing</label>
+                                            </div><br><br>
+                            
+                            
+                                            <label for="communicate_colleagues">How do you usually communicate in Japanese with your
+                                                COLLEAGUES?</label><br>
+                                            <div id="communicate_colleagues" class="btn-group-vertical w-100">
+                                                <input type="checkbox" name="communicate_colleagues" value="1" class="btn-check"
+                                                    id="btn-check-outlined-26" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-26">Speaking</label>
+                            
+                                                <input type="checkbox" name="communicate_colleagues" value="2" class="btn-check"
+                                                    id="btn-check-outlined-24" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-27">Listening</label>
+                            
+                                                <input type="checkbox" name="communicate_colleagues" value="3" class="btn-check"
+                                                    id="btn-check-outlined-28" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-28">Reading</label>
+                            
+                                                <input type="checkbox" name="communicate_colleagues" value="4" class="btn-check"
+                                                    id="btn-check-outlined-29" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-29">Writing</label>
+                                            </div><br><br>
+                            
+                                            <label for="communicate_CUSTOMERS">How do you usually communicate in Japanese with
+                                                CUSTOMERS?</label><br>
+                                            <div id="communicate_CUSTOMERS" class="btn-group-vertical w-100">
+                                                <input type="checkbox" name="communicate_CUSTOMERS" value="1" class="btn-check"
+                                                    id="btn-check-outlined-30" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-30">Speaking</label>
+                            
+                                                <input type="checkbox" name="communicate_CUSTOMERS" value="2" class="btn-check"
+                                                    id="btn-check-outlined-31" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-31">Listening</label>
+                            
+                                                <input type="checkbox" name="communicate_CUSTOMERS" value="3" class="btn-check"
+                                                    id="btn-check-outlined-32" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-32">Reading</label>
+                            
+                                                <input type="checkbox" name="communicate_CUSTOMERS" value="4" class="btn-check"
+                                                    id="btn-check-outlined-33" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-33">Writing</label>
+                                            </div><br><br>
+                                        
+                                        </tr>
+                                        <tr>
+                                        
+                                        </tr>
+                                        <tr>
+                                        
+                                        </tr>
+                                        <tr>
+                                        
+                                        </tr>
+
                                     </tbody>
                                 </table>
                         </div>
