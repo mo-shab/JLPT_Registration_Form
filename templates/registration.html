@@ -23,83 +23,54 @@
         <h2>JLPT Registration Form</h2><br>
         <form id="jlptForm" action="registration" method="post">
 
-            <div class="step">
-                <table class="table table-bordered align-middle">
-                    <thead class="align-middle">
-                        <th colspan="2"></th>
-                        <th scope="col">Speaking </th>
-                        <th scope="col">Listening </th>
-                        <th scope="col">Reading </th>
-                        <th scope="col">Writing</th>
-                        <th scope="col">None of the above</th>
-                    </thead>
-                    <tbody>
-                        <td rowspan="6" class="center">The person with whom you usually communicate in Japanese</td>
-                        <tr>
-                            <th>with a teacher</th>
-                            <th>
-                                <input type="checkbox" name="communicate_teacher" value="1" class="btn-check"
-                                    id="btn-check-outlined-10" autocomplete="off">
-                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-10">1</label>
-                            </th>
-                            <th>
-                                <input type="checkbox" name="communicate_teacher" value="2" class="btn-check"
-                                    id="btn-check-outlined-11" autocomplete="off">
-                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-11">2</label>
-                            </th>
+                <div class="row">
+                    <div class="col">
+                        <div class="step">
+                            <div class="table-responsive">
+                                <table class="table table-bordered align-middle">
+                                    <thead class="align-middle">
+                                        <tr>
+                                            <th colspan="2"></th>
+                                            <th scope="col">Speaking </th>
+                                            <th scope="col">Listening </th>
+                                            <th scope="col">Reading </th>
+                                            <th scope="col">Writing</th>
+                                            <th scope="col">None of the above</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td rowspan="6" class="center">The person with whom you usually communicate in Japanese</td>
+                                            <td>with a teacher</td>
+                                            <td>
+                                                <input type="checkbox" name="communicate_teacher" value="1" class="btn-check" id="btn-check-outlined-10" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-10">1</label>
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="communicate_teacher" value="2" class="btn-check" id="btn-check-outlined-11" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-11">2</label>
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="communicate_teacher" value="3" class="btn-check" id="btn-check-outlined-12" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-12">3</label>
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="communicate_teacher" value="4" class="btn-check" id="btn-check-outlined-13" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-13">4</label>
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="communicate_teacher" value="5" class="btn-check" id="btn-check-outlined-14" autocomplete="off">
+                                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-14">5</label>
+                                            </td>
+                                        </tr>
+                                        <!-- Additional rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                            <th>
-                                <input type="checkbox" name="communicate_teacher" value="3" class="btn-check"
-                                    id="btn-check-outlined-12" autocomplete="off">
-                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-12">3</label>
-                            </th>
-
-                            <th>
-                                <input type="checkbox" name="communicate_teacher" value="4" class="btn-check"
-                                    id="btn-check-outlined-13" autocomplete="off">
-                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-13">4</label>
-                            </th>
-                            <th>
-                                <input type="checkbox" name="communicate_teacher" value="5" class="btn-check"
-                                    id="btn-check-outlined-14" autocomplete="off">
-                                <label class="btn btn-outline-primary w-100" for="btn-check-outlined-14">5</label>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>with friends</th>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                        </tr>
-                        <tr>
-                            <th>with family</th>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                        </tr>
-                        <tr>
-                            <th>with a supervisor</th>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                        </tr>
-                        <tr>
-                            <th>with colleagues</th>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
             <!-- Step 1 (JLPT Level, Test Site)-->
             <div class="step active">
                 <label for="jlpt_level">JLPT Level:</label>
