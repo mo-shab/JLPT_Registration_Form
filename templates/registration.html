@@ -20,22 +20,28 @@
         <form id="jlptForm" action="registration" method="post">
 
             <div class="step">
-                <label>Date of Birth:</label><br>
                 <div class="row">
-                    <div class="col-md-6">
-                <input type="text" id="datepicker" name="dob"/><br><br>
-                <script type="text/javascript">
-                    $('#datepicker').datepicker({ 
-                        format: 'dd-mm-yyyy',
-                        autoclose: true,
-                        orientation: 'auto',
-                        container: '.container',
-                     });
-                    
-                </script>
+                    <label for="datepicker">Date of Birth:</label><br>
+                    <input type="text" id="datepicker" name="dob" class="form-control"><br>
                 </div>
-            </div>
-                <label for="pass_code">8-Digit Pass Code:</label><br>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                            $('#datepicker').datepicker({
+                                format: 'dd-mm-yyyy',
+                                autoclose: true,
+                                orientation: 'auto',
+                                container: '.container',
+                            });
+                        });
+                </script>
+                <style>
+                    .datepicker-dropdown {
+                        z-index: 9999; /* Ensure datepicker appears on top of other elements */
+                        max-width: 100%; /* Ensure datepicker width is responsive */
+                    }
+                </style>
+
+                <label for="pass_code"><br>8-Digit Pass Code:</label><br>
                 <input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"  type="text" id="pass_code" name="pass_code" pattern="\d{8}" title="Please enter 8 digits." required><br>
                 <label for="confim_code">Confirmation of your 8-Digit Pass Code:</label><br>
                 <input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"  type="text" id="confim_code" name="confim_code" pattern="\d{8}" title="Please Confirm YOur 8 Digit Passcode" required><br>
