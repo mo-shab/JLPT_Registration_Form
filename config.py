@@ -1,6 +1,8 @@
 import os, csv
 from app import app
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_mail import Mail, Message
+
 
 
 class User(UserMixin):
@@ -93,7 +95,3 @@ def write_csv(file_path, rows):
 def write_deleted_log(file_path, row):
     with open(file_path, 'a') as f:
         f.write(','.join(row) + '\n')
-
-
-def send_email():
-    pass

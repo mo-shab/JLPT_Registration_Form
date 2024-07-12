@@ -2,7 +2,10 @@ from flask import Flask, request, render_template, flash, url_for, redirect, sen
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from config import *
 import os
+from flask_mail import Mail, Message
 import csv
+import logging
+import smtplib
 
 
 app = Flask(__name__)
@@ -11,6 +14,11 @@ app.secret_key = 'This_Is_Not_My_Secret_Key'
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+@app.after_request
+def add_header(response):
+    response.cache_control.no_store = True
+    return response
 
 
 @login_manager.user_loader
@@ -170,7 +178,200 @@ def confirm():
             f.write(f"\"{jlpt_counters[jlpt_level]}\",\"{jlpt_level}\",\"{test_center}\",\"{full_name}\",\"{gender}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{pass_code}\",\"{native_language}\",\"{nationality}\",\"{adress}\",\"{country}\",\"{zip_code}\",\"{phone_number}\",\"{email}\"\n")
     
     # Function to send Email to the JLPT candidate
-    # send_email(full_name, email)
+    msg_body = f"""Chère {full_name},
+            Nous vous remercions de votre inscription au JLPT 2024 qui aura lieu le 1 décembre 2024 à Rabat. Vous avez 48h pour effectuer le paiement de votre inscription au Niveau N{jlpt_level} sinon elle sera supprimée et vous devrez recommencer.
+       
+      Le Passcode que vous avez choisi est : {pass_code} Garde le en lieu sure.
+      
+            Le paiement doit se faire sur le compte de l'Association Marocaine pour la Langue et la Culture Japonaise dont les coordonnées bancaires sont les suivantes :
+            AWB succursale FAR Casablanca
+            RIB : 007 780 0002 372 000 308 926 94
+            CODE SWIFT : BCMAMAMC
+       
+        
+            Nous vous prions de nous envoyer le reçu de paiement et une photo d'identité (voir spécificités plus bas) au maximum 48h après votre inscription sur l'adresse mail suivante : jlpt@amlcj.ma en indiquant vos nom et prénom et le Niveau JLPT que vous souhaitez passer.
+
+            Un email de confirmation vous sera envoyé. Vous recevrez votre convocation au plus tard 15 jours après la fin des inscriptions soit au plus tard le 10 septembre.
+ 
+            Si passé ce délai vous n'avez pas encore reçu votre convocation, nous vous prions de nous contacter sur l'adresse email : jlpt@amlcj.ma
+     Spécificité de la photo d'identité à scanner :
+           
+                3 ～ 4 cm de haut × 3 cm de large
+                Pris au cours des 6 derniers mois
+                Peut être en noir et blanc ou en couleur
+                Peut être pris avec un appareil photo numérique
+                Photos sans bordure
+           
+      
+            Vous devrez coller la même photo originale, imprimée sur papier photo, sur la convocation qui vous sera envoyée.
+      
+           Photos à éviter :
+                Photos plus grandes ou plus petites que 3～4cm × 3cm
+                Prise sur un fond non uni (fond sombre)
+                Photos floues (trop sombres)
+                Yeux fermés
+                Vous portez un chapeau
+                Vous portez des lunettes de soleil
+                Vos mains sont sur les photos
+                Snapshots, tels que ceux pris avec d'autres personnes
+               Visage trop petit ou trop grand par rapport à la taille de la photo
+                Photocopies couleur
+           
+        Gambatte kudasai!!
+         Dear {full_name},
+        Thank you for registering for the JLPT 2024 which will take place on December 1 in Rabat.
+       The passcode you have chosen is: {pass_code}, Please keep it safe.
+       
+            You have 48 hours to make payment for your Level N{jlpt_level} registration, otherwise it will be deleted and you will have to start over.
+      
+            Payment must be made to the account of the Moroccan Association for Japanese Language and Culture whose bank details are as follows:
+       
+            AWB branch FAR Casablanca
+            Bank details: 007 780 0002 372 000 308 926 94
+            SWIFT CODE: BCMAMAMC
+        
+            Please send us the payment receipt and a photo ID (see specifics below) no later than 48 hours after your registration to the following email address: <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a> indicating your first and last name and the JLPT Level that you want to pass.
+       
+            A confirmation email will be sent. You will receive your voucher no later than 15 days after the end of registration, i.e. no later than September 10.
+       
+            If after this period you have not yet received your voucher, please contact us on the email address: <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a>.
+       
+            Specificity of ID photo to be scanned:
+                3～4cm high × 3cm wide
+                Took within the last 6 months
+                Can be black and white or color
+                Can be taken with a digital camera
+                Borderless photos
+      
+            You will have to paste the same original photo, printed on photo paper, on the invitation that will be sent to you.
+        
+            ictures to avoid:
+                Photos larger or smaller than 3～4cm × 3cm
+                Taken against a non-plain background (dark background)
+                Blurry photos (too dark)
+                Eyes closed
+                You wear a hat
+                You wear sunglasses
+                Your hands are in the photos
+                Snapshots, such as those taken with other people
+                Face too small or too big for photo size
+                Color photocopies
+           
+        Gambatte kudasai!!
+"""
+    
+    html_body = f"""
+<html>
+    <head></head>
+    <body>
+        <p>Chère <strong>{full_name}</strong>,</p>
+        <p>
+            Nous vous remercions de votre inscription au <b>JLPT 2024</b> qui aura lieu le 1 décembre 2024 à Rabat. Vous avez 48h pour effectuer le paiement de votre inscription au Niveau <b>N{jlpt_level}</b> sinon elle sera supprimée et vous devrez recommencer.
+        </p>
+        <p> Le Passcode que vous avez choisi est : <b>{pass_code}</b> Garde le en lieu sure.</p>
+        <p>
+            Le paiement doit se faire sur le compte de l'Association Marocaine pour la Langue et la Culture Japonaise dont les coordonnées bancaires sont les suivantes :
+        </p>
+        <p>
+            <b>AWB succursale FAR Casablanca</b><br>
+            <b>RIB :</b> 007 780 0002 372 000 308 926 94<br>
+            <b>CODE SWIFT :</b> BCMAMAMC
+        </p>
+        <p>
+            Nous vous prions de nous envoyer le reçu de paiement et une photo d'identité (voir spécificités plus bas) au maximum 48h après votre inscription sur l'adresse mail suivante : <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a> en indiquant vos nom et prénom et le Niveau JLPT que vous souhaitez passer.
+        </p>
+        <p>
+            Un email de confirmation vous sera envoyé. Vous recevrez votre convocation au plus tard 15 jours après la fin des inscriptions soit au plus tard le 10 septembre.
+        </p>
+        <p>
+            Si passé ce délai vous n'avez pas encore reçu votre convocation, nous vous prions de nous contacter sur l'adresse email : <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a>.
+        </p>
+        <p>
+            <b>Spécificité de la photo d'identité à scanner :</b><br>
+            <ul>
+                <li>3 ～ 4 cm de haut × 3 cm de large</li>
+                <li>Pris au cours des 6 derniers mois</li>
+                <li>Peut être en noir et blanc ou en couleur</li>
+                <li>Peut être pris avec un appareil photo numérique</li>
+                <li>Photos sans bordure</li>
+            </ul>
+        </p>
+        <p>
+            Vous devrez coller la même photo originale, imprimée sur papier photo, sur la convocation qui vous sera envoyée.
+        </p>
+        <p>
+            <b>Photos à éviter :</b><br>
+            <ul>
+                <li>Photos plus grandes ou plus petites que 3～4cm × 3cm</li>
+                <li>Prise sur un fond non uni (fond sombre)</li>
+                <li>Photos floues (trop sombres)</li>
+                <li>Yeux fermés</li>
+                <li>Vous portez un chapeau</li>
+                <li>Vous portez des lunettes de soleil</li>
+                <li>Vos mains sont sur les photos</li>
+                <li>Snapshots, tels que ceux pris avec d'autres personnes</li>
+                <li>Visage trop petit ou trop grand par rapport à la taille de la photo</li>
+                <li>Photocopies couleur</li>
+            </ul>
+        </p>
+        <p>Gambatte kudasai!!</p>
+        <p> Dear <strong>{full_name}</strong>,</p>
+        <p>Thank you for registering for the JLPT 2024 which will take place on December 1 in Rabat.</p>
+        <p>The passcode you have chosen is: {pass_code}, Please keep it safe.</p>
+        <p>
+            You have 48 hours to make payment for your Level <b>N{jlpt_level}</b> registration, otherwise it will be deleted and you will have to start over.
+        </p>
+        <p>
+            Payment must be made to the account of the Moroccan Association for Japanese Language and Culture whose bank details are as follows:
+        </p>
+        <p>
+            <b>AWB branch FAR Casablanca</b><br>
+            <b>Bank details:</b> 007 780 0002 372 000 308 926 94<br>
+            <b>SWIFT CODE:</b> BCMAMAMC
+        </p>
+        <p>
+            Please send us the payment receipt and a photo ID (see specifics below) no later than 48 hours after your registration to the following email address: <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a> indicating your first and last name and the JLPT Level that you want to pass.
+        </p>
+        <p>
+            A confirmation email will be sent. You will receive your voucher no later than 15 days after the end of registration, i.e. no later than September 10.
+        </p>
+        <p>
+            If after this period you have not yet received your voucher, please contact us on the email address: <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a>.
+        </p>
+        <p>
+            <b>Specificity of ID photo to be scanned:</b><br>
+            <ul>
+                <li>3～4cm high × 3cm wide</li>
+                <li>Took within the last 6 months</li>
+                <li>Can be black and white or color</li>
+                <li>Can be taken with a digital camera</li>
+                <li>Borderless photos</li>
+            </ul>
+        </p>
+        <p>
+            You will have to paste the same original photo, printed on photo paper, on the invitation that will be sent to you.
+        </p>
+        <p>
+            <b>Pictures to avoid:</b><br>
+            <ul>
+                <li>Photos larger or smaller than 3～4cm × 3cm</li>
+                <li>Taken against a non-plain background (dark background)</li>
+                <li>Blurry photos (too dark)</li>
+                <li>Eyes closed</li>
+                <li>You wear a hat</li>
+                <li>You wear sunglasses</li>
+                <li>Your hands are in the photos</li>
+                <li>Snapshots, such as those taken with other people</li>
+                <li>Face too small or too big for photo size</li>
+                <li>Color photocopies</li>
+            </ul>
+        </p>
+        <p>Gambatte kudasai!!</p>
+    </body>
+</html>
+"""
+
+    send_email(email, msg_body, html_body)
     # Clear temporary data after processing
     temp_data.clear()
 
@@ -544,6 +745,48 @@ def download_special_need_csv(level):
 @login_required
 def download():
     return render_template('download.html')
+
+
+# Configuration settings
+app.config['MAIL_SERVER'] = 'mail.amlcj.ma'  # Replace with your mail server
+app.config['MAIL_PORT'] = 587  # Common port for SMTP
+app.config['MAIL_USE_TLS'] = True  # Use TLS
+app.config['MAIL_USE_SSL'] = False  # Do not use SSL if using TLS
+app.config['MAIL_USERNAME'] = 'jlpt@amlcj.ma'  # Your email username
+app.config['MAIL_PASSWORD'] = 'Loe7WdxabmbjNmt'  # Your email password
+
+# Initialize the Mail object
+mail = Mail(app)
+
+# Set up logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
+# Define the send_email function
+def send_email(email, msg_body, html_body):
+    sender = 'jlpt@amlcj.ma'
+    msg = Message('JLPT Inscription', sender=sender, recipients=[email])
+    msg.body = msg_body
+    msg.html = html_body
+    
+    for attempt in range(3):  # Try up to 3 times
+        try:
+            mail.send(msg)
+            logger.info("Email sent successfully.")
+            return
+        except smtplib.SMTPAuthenticationError as e:
+            logger.error(f"Authentication error: {e}")
+        except smtplib.SMTPConnectError as e:
+            logger.error(f"Connection error: {e}")
+        except smtplib.SMTPServerDisconnected as e:
+            logger.error(f"Server unexpectedly closed the connection: {e}")
+        except smtplib.SMTPException as e:
+            logger.error(f"SMTP error: {e}")
+        except Exception as e:
+            logger.error(f"An unexpected error occurred: {e}")
+    
+    logger.error("Failed to send email after 3 attempts.")
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
