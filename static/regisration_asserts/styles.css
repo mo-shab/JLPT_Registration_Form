@@ -22,7 +22,7 @@ body {
 
 .container {
     margin-top: 100px;
-    max-width: 50%; /* Set to 50% for all screen sizes */
+    max-width: 100dvh; /* Set to 50% for all screen sizes */
     padding: 40px;
     background-color: #ffffff;
     border-radius: 10px;
