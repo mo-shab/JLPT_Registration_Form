@@ -15,6 +15,16 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+
+class User(UserMixin):
+    def __init__(self, id):
+        self.id = id
+
+users = {
+    'shab': {'password': 'shab'}
+}
+
+
 @app.after_request
 def add_header(response):
     response.cache_control.no_store = True

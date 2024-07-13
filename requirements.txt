@@ -1,0 +1,10 @@
+# This file is used by pip to install required python packages
+# Usage: pip install -r requirements.txt
+
+# List of required python packages
+Flask>=3.0.3
+
+flask_mail>=0.9.1
+flask_login>=0.4.1
+
+# End of file

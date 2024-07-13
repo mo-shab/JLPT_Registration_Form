@@ -1,16 +1,4 @@
 import os, csv
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from flask_mail import Mail, Message
-
-
-
-class User(UserMixin):
-    def __init__(self, id):
-        self.id = id
-
-users = {
-    'shab': {'password': 'shab'}
-}
 
 temp_data = {}
 
