@@ -629,9 +629,9 @@ def table():
     return render_template('tables.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter(), data_3=get_jlpt_special_need_count(), data_4=get_jlpt_special_need_confirmed_count())
 
 
-@app.errorhandler(500)
-def exception_handler(e):
-    return render_template('500.html'), 500
+#@app.errorhandler(500)
+#def exception_handler(e):
+#    return render_template('500.html'), 500
 
 
 @app.errorhandler(404)
