@@ -244,6 +244,13 @@ def confirm():
             AWB branch FAR Casablanca
             Bank details: 007 780 0002 372 000 308 926 94
             SWIFT CODE: BCMAMAMC
+
+            Reminder of the registration fee:
+                N1: 450 DH.
+                N2: 400 DH.
+                N3: 350 DH.
+                N4: 300 DH.
+                N5: 250 DH.
         
             Please send us the payment receipt and a photo ID (see specifics below) no later than 48 hours after your registration to the following email address: <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a> indicating your first and last name and the JLPT Level that you want to pass.
        
@@ -352,6 +359,16 @@ def confirm():
             <b>AWB branch FAR Casablanca</b><br>
             <b>Bank details:</b> 007 780 0002 372 000 308 926 94<br>
             <b>SWIFT CODE:</b> BCMAMAMC
+        </p>
+        <p>Reminder of the registration fee:</p>
+        <p>
+            <ul>
+                <li>N1 : 450 DH.</li>
+                <li>N2 : 400 DH.</li>
+                <li>N3 : 350 DH.</li>
+                <li>N4 : 300 DH.</li>
+                <li>N5 : 250 DH.</li>
+            </ul>
         </p>
         <p>
             Please send us the payment receipt and a photo ID (see specifics below) no later than 48 hours after your registration to the following email address: <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a> indicating your first and last name and the JLPT Level that you want to pass.
