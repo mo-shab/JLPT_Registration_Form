@@ -191,7 +191,7 @@ def confirm():
     msg_body = f"""Chère {full_name},
             Nous vous remercions de votre inscription au JLPT 2024 qui aura lieu le 1 décembre 2024 à Rabat. Vous avez 48h pour effectuer le paiement de votre inscription au Niveau N{jlpt_level} sinon elle sera supprimée et vous devrez recommencer.
        
-      Le Passcode que vous avez choisi est : {pass_code} Garde le en lieu sure.
+      Le Passcode que vous avez choisi est : {pass_code} Gardez le en lieu sure.
       
             Le paiement doit se faire sur le compte de l'Association Marocaine pour la Langue et la Culture Japonaise dont les coordonnées bancaires sont les suivantes :
             AWB succursale FAR Casablanca
@@ -278,7 +278,7 @@ def confirm():
         <p>
             Nous vous remercions de votre inscription au <b>JLPT 2024</b> qui aura lieu le 1 décembre 2024 à Rabat. Vous avez 48h pour effectuer le paiement de votre inscription au Niveau <b>N{jlpt_level}</b> sinon elle sera supprimée et vous devrez recommencer.
         </p>
-        <p> Le Passcode que vous avez choisi est : <b>{pass_code}</b> Garde le en lieu sure.</p>
+        <p> Le Passcode que vous avez choisi est : <b>{pass_code}</b> Gardez le en lieu sure.</p>
         <p>
             Le paiement doit se faire sur le compte de l'Association Marocaine pour la Langue et la Culture Japonaise dont les coordonnées bancaires sont les suivantes :
         </p>
@@ -799,4 +799,4 @@ def send_email(email, msg_body, html_body):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(port=5000)
