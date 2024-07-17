@@ -25,7 +25,8 @@ class User(UserMixin):
         self.id = id
 
 users = {
-    'shab': {'password': 'shab'}
+    'shab': {'password': 'shab'},
+    'admin': {'password': 'Admin123456'}
 }
 
 
