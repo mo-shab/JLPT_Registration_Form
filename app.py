@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, flash, url_for, redirect, send_file
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from config import *
+from logging import FileHandler, WARNING
 import os
 from flask_mail import Mail, Message
 import csv
@@ -15,6 +16,9 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+file_hundler = FileHandler('errorlog.txt')
+file_hundler.setLevel(WARNING)
+app.logger.addHandler(file_hundler)
 
 class User(UserMixin):
     def __init__(self, id):
