@@ -24,7 +24,8 @@ This project also has a dashboard to help administrators to manage the candidat 
 ## Installation
 Instructions on how to install and set up your project. Include any prerequisites, libraries, or other dependencies.
 
-```bash
+```bash 
+
 # Clone the repository
 git clone https://github.com/mo-shab/JLPT_Registration_Form
 # Navigate to the project directory
@@ -33,3 +34,11 @@ cd JLPT_Registration_Form
 pip install -r requirements.txt
 # Run the server
 python ./app
+```
+## Credit
+
+Mohammed SHAB
+
+## Contact
+Email : mo.shab@outlook.fr
+
