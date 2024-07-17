@@ -312,7 +312,7 @@ def confirm():
             Nous vous prions de nous envoyer le reçu de paiement et une photo d'identité (voir spécificités plus bas) au maximum 48h après votre inscription sur l'adresse mail suivante : <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a> en indiquant vos nom et prénom et le Niveau JLPT que vous souhaitez passer.
         </p>
         <p>
-            Un email de confirmation vous sera envoyé. Vous recevrez votre convocation au plus tard 15 jours après la fin des inscriptions soit au plus tard le 10 septembre.
+            Un email de confirmation vous sera envoyé. Vous recevrez votre convocation au plus tard 15 jours après la fin des inscriptions soit au plus tard le 15 Aout.
         </p>
         <p>
             Si passé ce délai vous n'avez pas encore reçu votre convocation, nous vous prions de nous contacter sur l'adresse email : <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a>.
@@ -374,7 +374,7 @@ def confirm():
             Please send us the payment receipt and a photo ID (see specifics below) no later than 48 hours after your registration to the following email address: <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a> indicating your first and last name and the JLPT Level that you want to pass.
         </p>
         <p>
-            A confirmation email will be sent. You will receive your voucher no later than 15 days after the end of registration, i.e. no later than September 10.
+            A confirmation email will be sent. You will receive your voucher no later than 15 days after the end of registration, i.e. no later than August 15.
         </p>
         <p>
             If after this period you have not yet received your voucher, please contact us on the email address: <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a>.
