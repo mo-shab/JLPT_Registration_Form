@@ -153,7 +153,7 @@ def confirm():
         msg_body = f"""Chère {form_data['full_name']},
             Nous vous remercions de votre inscription au JLPT 2024 qui aura lieu le 1 décembre 2024 à Rabat. Vous avez 48h pour effectuer le paiement de votre inscription au Niveau N{form_data['jlpt_level']} sinon elle sera supprimée et vous devrez recommencer.
        
-      Le Passcode que vous avez choisi est : {form_data['pass_code']} Gardez le en lieu sure.
+      Le Passcode que vous avez choisi est : {form_data['pass_code']} Gardez le en lieu sûr.
       
             Le paiement doit se faire sur le compte de l'Association Marocaine pour la Langue et la Culture Japonaise dont les coordonnées bancaires sont les suivantes :
             AWB succursale FAR Casablanca
@@ -243,7 +243,7 @@ def confirm():
         <p>
             Nous vous remercions de votre inscription au <b>JLPT 2024</b> qui aura lieu le 1 décembre 2024 à Rabat. Vous avez 48h pour effectuer le paiement de votre inscription au Niveau <b>N{form_data['jlpt_level']}</b> sinon elle sera supprimée et vous devrez recommencer.
         </p>
-        <p> Le Passcode que vous avez choisi est : <b>{form_data['pass_code']}</b> Gardez le en lieu sure.</p>
+        <p> Le Passcode que vous avez choisi est : <b>{form_data['pass_code']}</b> Gardez le en lieu sûr.</p>
         <p>
             Le paiement doit se faire sur le compte de l'Association Marocaine pour la Langue et la Culture Japonaise dont les coordonnées bancaires sont les suivantes :
         </p>
