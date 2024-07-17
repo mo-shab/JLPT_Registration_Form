@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, flash, url_for, redirect, send_file
+from flask import Flask, request, render_template, flash, url_for, redirect, send_file, session
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from config import *
 from logging import FileHandler, WARNING
@@ -71,142 +71,95 @@ def logout():
 @app.route('/registration', methods=['GET', 'POST'], strict_slashes=False)
 def registration():
     if request.method == 'POST':
-        temp_data['jlpt_level'] = request.form.get('jlpt_level', '')
-        temp_data['test_center'] = request.form.get('test_center', '')
-        temp_data['full_name'] = request.form.get('full_name', '').upper()
-        temp_data['gender'] = request.form.get('gender', '')
-        dob = request.form.get('dob', '')
-        temp_data['dob_day'], temp_data['dob_month'], \
-            temp_data['dob_year'] = dob.split('-')
-        temp_data['pass_code'] = request.form.get('pass_code', '')
-        temp_data['native_language'] = request.form.get('native_language', '')
-        temp_data['nationality'] = request.form.get('nationality', '')
-        temp_data['adress'] = request.form.get('adress', '')
-        temp_data['country'] = request.form.get('country', '')
-        temp_data['zip_code'] = request.form.get('zip_code', '')
-        temp_data['phone_number'] = request.form.get('phone_number', '')
-        temp_data['email'] = request.form.get('email', '')
-        temp_data['institute'] = request.form.get('institute', '')
-        temp_data['place_learn_jp'] = request.form.get('place_learn_jp', '')
-        temp_data['reason_jlpt'] = request.form.get('reason_jlpt', '')
-        temp_data['occupation'] = request.form.get('occupation', '')
-        temp_data['occupation_details'] = request.form.get(
-            'occupation_details', '')
-        temp_data['media_jp'] = ''.join(choice if choice in request.form.getlist(
-            'media_jp') else ' ' for choice in ['1', '2', '3', '4', '5', '6', '7', '8', '9'])
-        temp_data['communicate_teacher'] = ''.join(choice if choice in request.form.getlist(
-            'communicate_teacher') else ' ' for choice in ['1', '2', '3', '4'])
-        temp_data['communicate_friends'] = ''.join(choice if choice in request.form.getlist(
-            'communicate_friends') else ' ' for choice in ['1', '2', '3', '4'])
-        temp_data['communicate_family'] = ''.join(choice if choice in request.form.getlist(
-            'communicate_family') else ' ' for choice in ['1', '2', '3', '4'])
-        temp_data['communicate_supervisor'] = ''.join(choice if choice in request.form.getlist(
-            'communicate_supervisor') else ' ' for choice in ['1', '2', '3', '4'])
-        temp_data['communicate_colleagues'] = ''.join(choice if choice in request.form.getlist(
-            'communicate_colleagues') else ' ' for choice in ['1', '2', '3', '4'])
-        temp_data['communicate_CUSTOMERS'] = ''.join(choice if choice in request.form.getlist(
-            'communicate_CUSTOMERS') else ' ' for choice in ['1', '2', '3', '4'])
-        temp_data['jlpt_n1'] = ' ' if request.form.get(
-            'jlpt_n1', '0') == '0' else request.form.get('jlpt_n1', ' ')
-        temp_data['jlpt_n2'] = ' ' if request.form.get(
-            'jlpt_n2', '0') == '0' else request.form.get('jlpt_n2', ' ')
-        temp_data['jlpt_n3'] = ' ' if request.form.get(
-            'jlpt_n3', '0') == '0' else request.form.get('jlpt_n3', ' ')
-        temp_data['jlpt_n4'] = ' ' if request.form.get(
-            'jlpt_n4', '0') == '0' else request.form.get('jlpt_n4', ' ')
-        temp_data['jlpt_n5'] = ' ' if request.form.get(
-            'jlpt_n5', '0') == '0' else request.form.get('jlpt_n5', ' ')
-        temp_data['n1_result'] = request.form.get('n1_result', ' ')
-        temp_data['n2_result'] = request.form.get('n2_result', ' ')
-        temp_data['n3_result'] = request.form.get('n3_result', ' ')
-        temp_data['n4_result'] = request.form.get('n4_result', ' ')
-        temp_data['n5_result'] = request.form.get('n5_result', ' ')
-        temp_data['needAssistance'] = request.form['needAssistance']
-
-        return render_template('confirm.html', form_data=temp_data)
+        # Populate session with form data
+        session['form_data'] = {
+            'jlpt_level': request.form.get('jlpt_level', ''),
+            'test_center': request.form.get('test_center', ''),
+            'full_name': request.form.get('full_name', '').upper(),
+            'gender': request.form.get('gender', ''),
+            'dob': request.form.get('dob', ''),
+            'pass_code': request.form.get('pass_code', ''),
+            'native_language': request.form.get('native_language', ''),
+            'nationality': request.form.get('nationality', ''),
+            'adress': request.form.get('adress', ''),
+            'country': request.form.get('country', ''),
+            'zip_code': request.form.get('zip_code', ''),
+            'phone_number': request.form.get('phone_number', ''),
+            'email': request.form.get('email', ''),
+            'institute': request.form.get('institute', ''),
+            'place_learn_jp': request.form.get('place_learn_jp', ''),
+            'reason_jlpt': request.form.get('reason_jlpt', ''),
+            'occupation': request.form.get('occupation', ''),
+            'occupation_details': request.form.get('occupation_details', ''),
+            'media_jp': ''.join(choice if choice in request.form.getlist('media_jp') else ' ' for choice in ['1', '2', '3', '4', '5', '6', '7', '8', '9']),
+            'communicate_teacher': ''.join(choice if choice in request.form.getlist('communicate_teacher') else ' ' for choice in ['1', '2', '3', '4', '5']),
+            'communicate_friends': ''.join(choice if choice in request.form.getlist('communicate_friends') else ' ' for choice in ['1', '2', '3', '4', '5']),
+            'communicate_family': ''.join(choice if choice in request.form.getlist('communicate_family') else ' ' for choice in ['1', '2', '3', '4', '5']),
+            'communicate_supervisor': ''.join(choice if choice in request.form.getlist('communicate_supervisor') else ' ' for choice in ['1', '2', '3', '4', '5']),
+            'communicate_colleagues': ''.join(choice if choice in request.form.getlist('communicate_colleagues') else ' ' for choice in ['1', '2', '3', '4', '5']),
+            'communicate_CUSTOMERS': ''.join(choice if choice in request.form.getlist('communicate_CUSTOMERS') else ' ' for choice in ['1', '2', '3', '4', '5']),
+            'jlpt_n1': ' ' if request.form.get('jlpt_n1', '0') == '0' else request.form.get('jlpt_n1', ' '),
+            'jlpt_n2': ' ' if request.form.get('jlpt_n2', '0') == '0' else request.form.get('jlpt_n2', ' '),
+            'jlpt_n3': ' ' if request.form.get('jlpt_n3', '0') == '0' else request.form.get('jlpt_n3', ' '),
+            'jlpt_n4': ' ' if request.form.get('jlpt_n4', '0') == '0' else request.form.get('jlpt_n4', ' '),
+            'jlpt_n5': ' ' if request.form.get('jlpt_n5', '0') == '0' else request.form.get('jlpt_n5', ' '),
+            'n1_result': request.form.get('n1_result', ' '),
+            'n2_result': request.form.get('n2_result', ' '),
+            'n3_result': request.form.get('n3_result', ' '),
+            'n4_result': request.form.get('n4_result', ' '),
+            'n5_result': request.form.get('n5_result', ' '),
+            'needAssistance': request.form.get('needAssistance', 'no')
+        }
+        # Redirect to confirmation page
+        return redirect(url_for('confirm'))
 
     return render_template('registration.html')
 
 
-@app.route('/confirm', methods=['POST'], strict_slashes=False)
+@app.route('/confirm', methods=['GET', 'POST'], strict_slashes=False)
 def confirm():
-    jlpt_level = temp_data.get('jlpt_level', '0')
-    test_center = temp_data['test_center']
-    full_name = temp_data['full_name']
-    gender = temp_data['gender']
-    dob_year = temp_data['dob_year']
-    dob_month = temp_data['dob_month']
-    dob_day = temp_data['dob_day']
-    pass_code = temp_data['pass_code']
-    native_language = temp_data['native_language']
-    nationality = temp_data['nationality']
-    adress = temp_data['adress']
-    country = temp_data['country']
-    zip_code = temp_data['zip_code']
-    phone_number = temp_data['phone_number']
-    email = temp_data['email']
-    institute = temp_data['institute']
-    place_learn_jp = temp_data['place_learn_jp']
-    reason_jlpt = temp_data['reason_jlpt']
-    occupation = temp_data['occupation']
-    occupation_details = temp_data['occupation_details']
-    media = temp_data['media_jp']
-    teacher = temp_data['communicate_teacher']
-    friends = temp_data['communicate_friends']
-    family = temp_data['communicate_family']
-    supervisor = temp_data['communicate_supervisor']
-    colleagues = temp_data['communicate_colleagues']
-    customers = temp_data['communicate_CUSTOMERS']
-    jlpt_n1 = temp_data['jlpt_n1']
-    jlpt_n2 = temp_data['jlpt_n2']
-    jlpt_n3 = temp_data['jlpt_n3']
-    jlpt_n4 = temp_data['jlpt_n4']
-    jlpt_n5 = temp_data['jlpt_n5']
-    n1_result = temp_data['n1_result']
-    n2_result = temp_data['n2_result']
-    n3_result = temp_data['n3_result']
-    n4_result = temp_data['n4_result']
-    n5_result = temp_data['n5_result']
+    form_data = session.get('form_data', None)
 
-    # Increment JLPT counter for the level
+    if not form_data:
+        # Redirect to registration if form_data is not found
+        return redirect(url_for('registration'))
 
-
-    # Process and store data as needed (e.g., write to files, send email)
-    # If Candidate need assistance, All the data will be stored in a different file
-    if temp_data['needAssistance'] == 'yes':
-        jlpt_counters = get_jlpt_special_need_count()
-        jlpt_counters[jlpt_level] += 1
-        with open(f"files/need_assistance/registered_data_N{jlpt_level}.csv", 'a') as f:
-            f.write(f"\"{jlpt_level.strip()}\",\"24B\",\"8210101\",\"{jlpt_level.strip()}\",\"{str(jlpt_counters[jlpt_level]).zfill(4)}\",\"{full_name.strip()}\",\"{gender.strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{pass_code.strip()}\",\"{native_language.strip()}\",\"{place_learn_jp.strip()}\",\"{reason_jlpt.strip()}\",\"{occupation.strip()}\",\"{occupation_details.strip()}\",\"{media}\",\"{teacher}\",\"{friends}\",\"{family}\",\"{supervisor}\",\"{colleagues}\",\"{customers}\",\"{jlpt_n1}\",\"{jlpt_n2}\",\"{jlpt_n3}\",\"{jlpt_n4}\",\"{jlpt_n5}\",\"{n1_result}\",\"{n2_result}\",\"{n3_result}\",\"{n4_result}\",\"{n5_result}\"\n")
-
-        with open(f"files/need_assistance/registered_infos_N{jlpt_level}.csv", 'a') as f:
-            f.write(f"\"{jlpt_counters[jlpt_level]}\",\"{jlpt_level}\",\"{test_center}\",\"{full_name}\",\"{gender}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{pass_code}\",\"{native_language}\",\"{nationality}\",\"{adress}\",\"{country}\",\"{zip_code}\",\"{phone_number}\",\"{email}\",\"{institute}\n")
-    else:    
-        jlpt_counters = get_jlpt_counter()
-        jlpt_counters[jlpt_level] += 1
-
-        with open(f"files/registered_data_N{jlpt_level}.csv", 'a') as f:
-            f.write(f"\"{jlpt_level.strip()}\",\"24B\",\"8210101\",\"{jlpt_level.strip()}\",\"{str(jlpt_counters[jlpt_level]).zfill(4)}\",\"{full_name.strip()}\",\"{gender.strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{pass_code.strip()}\",\"{native_language.strip()}\",\"{place_learn_jp.strip()}\",\"{reason_jlpt.strip()}\",\"{occupation.strip()}\",\"{occupation_details.strip()}\",\"{media}\",\"{teacher}\",\"{friends}\",\"{family}\",\"{supervisor}\",\"{colleagues}\",\"{customers}\",\"{jlpt_n1}\",\"{jlpt_n2}\",\"{jlpt_n3}\",\"{jlpt_n4}\",\"{jlpt_n5}\",\"{n1_result}\",\"{n2_result}\",\"{n3_result}\",\"{n4_result}\",\"{n5_result}\"\n")
-
-        with open(f"files/registered_infos_N{jlpt_level}.csv", 'a') as f:
-            f.write(f"\"{jlpt_counters[jlpt_level]}\",\"{jlpt_level}\",\"{test_center}\",\"{full_name}\",\"{gender}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{pass_code}\",\"{native_language}\",\"{nationality}\",\"{adress}\",\"{country}\",\"{zip_code}\",\"{phone_number}\",\"{email}\"\n")
-    
-    # Function to send Email to the JLPT candidate
-    msg_body = f"""Chère {full_name},
-            Nous vous remercions de votre inscription au JLPT 2024 qui aura lieu le 1 décembre 2024 à Rabat. Vous avez 48h pour effectuer le paiement de votre inscription au Niveau N{jlpt_level} sinon elle sera supprimée et vous devrez recommencer.
+    if request.method == 'POST':
+        # Process the form data (write to files)
+        if form_data['needAssistance'] == 'yes':
+            jlpt_counters = get_jlpt_special_need_count()
+            jlpt_counters[form_data['jlpt_level']] += 1
+            dob_day, dob_month, dob_year = form_data['dob'].split('-')
+            with open(f"files/need_assistance/registered_data_N{form_data['jlpt_level']}.csv", 'a') as f:
+                f.write(f"\"{form_data['jlpt_level'].strip()}\",\"24B\",\"8210101\",\"{form_data['jlpt_level'].strip()}\",\"{str(jlpt_counters[form_data['jlpt_level']]).zfill(4)}\",\"{form_data['full_name'].strip()}\",\"{form_data['gender'].strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{form_data['pass_code'].strip()}\",\"{form_data['native_language'].strip()}\",\"{form_data['place_learn_jp'].strip()}\",\"{form_data['reason_jlpt'].strip()}\",\"{form_data['occupation'].strip()}\",\"{form_data['occupation_details'].strip()}\",\"{form_data['media_jp']}\",\"{form_data['communicate_teacher']}\",\"{form_data['communicate_friends']}\",\"{form_data['communicate_family']}\",\"{form_data['communicate_supervisor']}\",\"{form_data['communicate_colleagues']}\",\"{form_data['communicate_CUSTOMERS']}\",\"{form_data['jlpt_n1']}\",\"{form_data['jlpt_n2']}\",\"{form_data['jlpt_n3']}\",\"{form_data['jlpt_n4']}\",\"{form_data['jlpt_n5']}\",\"{form_data['n1_result']}\",\"{form_data['n2_result']}\",\"{form_data['n3_result']}\",\"{form_data['n4_result']}\",\"{form_data['n5_result']}\"\n")
+            with open(f"files/need_assistance/registered_infos_N{form_data['jlpt_level']}.csv", 'a') as f:
+                f.write(f"\"{jlpt_counters[form_data['jlpt_level']]}\",\"{form_data['jlpt_level']}\",\"{form_data['test_center']}\",\"{form_data['full_name']}\",\"{form_data['gender']}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{form_data['pass_code']}\",\"{form_data['native_language']}\",\"{form_data['nationality']}\",\"{form_data['adress']}\",\"{form_data['country']}\",\"{form_data['zip_code']}\",\"{form_data['phone_number']}\",\"{form_data['email']}\",\"{form_data['institute']}\n")
+        else: 
+            dob_day, dob_month, dob_year = form_data['dob'].split('-')
+            jlpt_counters = get_jlpt_counter()
+            jlpt_counters[form_data['jlpt_level']] += 1
+            with open(f"files/registered_data_N{form_data['jlpt_level']}.csv", 'a') as f:
+                f.write(f"\"{form_data['jlpt_level'].strip()}\",\"24B\",\"8210101\",\"{form_data['jlpt_level'].strip()}\",\"{str(jlpt_counters[form_data['jlpt_level']]).zfill(4)}\",\"{form_data['full_name'].strip()}\",\"{form_data['gender'].strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{form_data['pass_code'].strip()}\",\"{form_data['native_language'].strip()}\",\"{form_data['place_learn_jp'].strip()}\",\"{form_data['reason_jlpt'].strip()}\",\"{form_data['occupation'].strip()}\",\"{form_data['occupation_details'].strip()}\",\"{form_data['media_jp']}\",\"{form_data['communicate_teacher']}\",\"{form_data['communicate_friends']}\",\"{form_data['communicate_family']}\",\"{form_data['communicate_supervisor']}\",\"{form_data['communicate_colleagues']}\",\"{form_data['communicate_CUSTOMERS']}\",\"{form_data['jlpt_n1']}\",\"{form_data['jlpt_n2']}\",\"{form_data['jlpt_n3']}\",\"{form_data['jlpt_n4']}\",\"{form_data['jlpt_n5']}\",\"{form_data['n1_result']}\",\"{form_data['n2_result']}\",\"{form_data['n3_result']}\",\"{form_data['n4_result']}\",\"{form_data['n5_result']}\"\n")
+            with open(f"files/registered_infos_N{form_data['jlpt_level']}.csv", 'a') as f:
+                f.write(f"\"{jlpt_counters[form_data['jlpt_level']]}\",\"{form_data['jlpt_level']}\",\"{form_data['test_center']}\",\"{form_data['full_name']}\",\"{form_data['gender']}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{form_data['pass_code']}\",\"{form_data['native_language']}\",\"{form_data['nationality']}\",\"{form_data['adress']}\",\"{form_data['country']}\",\"{form_data['zip_code']}\",\"{form_data['phone_number']}\",\"{form_data['email']}\",\"{form_data['institute']}\n")
+        
+        # Function to send Email to the JLPT candidate
+        jlpt_total_price = {'1': 450, '2': 400, '3': 350, '4': 300, '5': 250}
+        for key, value in jlpt_total_price.items():
+            if form_data['jlpt_level'] == key:
+                jlpt_price = value
+         
+        msg_body = f"""Chère {form_data['full_name']},
+            Nous vous remercions de votre inscription au JLPT 2024 qui aura lieu le 1 décembre 2024 à Rabat. Vous avez 48h pour effectuer le paiement de votre inscription au Niveau N{form_data['jlpt_level']} sinon elle sera supprimée et vous devrez recommencer.
        
-      Le Passcode que vous avez choisi est : {pass_code} Gardez le en lieu sure.
+      Le Passcode que vous avez choisi est : {form_data['pass_code']} Gardez le en lieu sure.
       
             Le paiement doit se faire sur le compte de l'Association Marocaine pour la Langue et la Culture Japonaise dont les coordonnées bancaires sont les suivantes :
             AWB succursale FAR Casablanca
             RIB : 007 780 0002 372 000 308 926 94
             CODE SWIFT : BCMAMAMC
             rappel du prix de l'inscription : 
-            N1 : 450 DH.
-            N2 : 400 DH.
-            N3 : 350 DH.
-            N4 : 300 DH.
-            N5 : 250 DH.
+                N{form_data['jlpt_level']}: {jlpt_price} DH.
        
             Nous vous prions de nous envoyer le reçu de paiement et une photo d'identité (voir spécificités plus bas) au maximum 48h après votre inscription sur l'adresse mail suivante : jlpt@amlcj.ma en indiquant vos nom et prénom et le Niveau JLPT que vous souhaitez passer.
 
@@ -237,24 +190,19 @@ def confirm():
                 Photocopies couleur
            
         Gambatte kudasai!!
-         Dear {full_name},
+         Dear {form_data['full_name']},
         Thank you for registering for the JLPT 2024 which will take place on December 1 in Rabat.
-       The passcode you have chosen is: {pass_code}, Please keep it safe.
+       The passcode you have chosen is: {form_data['pass_code']}, Please keep it safe.
        
-            You have 48 hours to make payment for your Level N{jlpt_level} registration, otherwise it will be deleted and you will have to start over.
+            You have 48 hours to make payment for your Level N{form_data['jlpt_level']} registration, otherwise it will be deleted and you will have to start over.
       
             Payment must be made to the account of the Moroccan Association for Japanese Language and Culture whose bank details are as follows:
        
             AWB branch FAR Casablanca
             Bank details: 007 780 0002 372 000 308 926 94
             SWIFT CODE: BCMAMAMC
-
             Reminder of the registration fee:
-                N1: 450 DH.
-                N2: 400 DH.
-                N3: 350 DH.
-                N4: 300 DH.
-                N5: 250 DH.
+                N{form_data['jlpt_level']}: {jlpt_price} DH.
         
             Please send us the payment receipt and a photo ID (see specifics below) no later than 48 hours after your registration to the following email address: <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a> indicating your first and last name and the JLPT Level that you want to pass.
        
@@ -285,16 +233,16 @@ def confirm():
            
         Gambatte kudasai!!
 """
-    
-    html_body = f"""
+        
+        html_body = f"""
 <html>
     <head></head>
     <body>
-        <p>Chère <strong>{full_name}</strong>,</p>
+        <p>Chère <strong>{form_data['full_name']}</strong>,</p>
         <p>
-            Nous vous remercions de votre inscription au <b>JLPT 2024</b> qui aura lieu le 1 décembre 2024 à Rabat. Vous avez 48h pour effectuer le paiement de votre inscription au Niveau <b>N{jlpt_level}</b> sinon elle sera supprimée et vous devrez recommencer.
+            Nous vous remercions de votre inscription au <b>JLPT 2024</b> qui aura lieu le 1 décembre 2024 à Rabat. Vous avez 48h pour effectuer le paiement de votre inscription au Niveau <b>N{form_data['jlpt_level']}</b> sinon elle sera supprimée et vous devrez recommencer.
         </p>
-        <p> Le Passcode que vous avez choisi est : <b>{pass_code}</b> Gardez le en lieu sure.</p>
+        <p> Le Passcode que vous avez choisi est : <b>{form_data['pass_code']}</b> Gardez le en lieu sure.</p>
         <p>
             Le paiement doit se faire sur le compte de l'Association Marocaine pour la Langue et la Culture Japonaise dont les coordonnées bancaires sont les suivantes :
         </p>
@@ -303,15 +251,10 @@ def confirm():
             <b>RIB :</b> 007 780 0002 372 000 308 926 94<br>
             <b>CODE SWIFT :</b> BCMAMAMC
         </p>
-        <p> rappel du prix de l'inscription : </p>
-        <p>
-            <ul>
-                <li>N1 : 450 DH.</li>
-                <li>N2 : 400 DH.</li>
-                <li>N3 : 350 DH.</li>
-                <li>N4 : 300 DH.</li>
-                <li>N5 : 250 DH.</li>
-            </ul>
+        <p> Rappel du prix de l'inscription : </p>
+        <ul>
+            <li><b>N{form_data['jlpt_level']}</b>: {jlpt_price} DH.</li>
+        </ul>
         <p>
             Nous vous prions de nous envoyer le reçu de paiement et une photo d'identité (voir spécificités plus bas) au maximum 48h après votre inscription sur l'adresse mail suivante : <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a> en indiquant vos nom et prénom et le Niveau JLPT que vous souhaitez passer.
         </p>
@@ -350,11 +293,11 @@ def confirm():
             </ul>
         </p>
         <p>Gambatte kudasai!!</p>
-        <p> Dear <strong>{full_name}</strong>,</p>
+        <p> Dear <strong>{form_data['full_name']}</strong>,</p>
         <p>Thank you for registering for the JLPT 2024 which will take place on December 1 in Rabat.</p>
-        <p>The passcode you have chosen is: {pass_code}, Please keep it safe.</p>
+        <p>The passcode you have chosen is: {form_data['pass_code']}, Please keep it safe.</p>
         <p>
-            You have 48 hours to make payment for your Level <b>N{jlpt_level}</b> registration, otherwise it will be deleted and you will have to start over.
+            You have 48 hours to make payment for your Level <b>N{form_data['jlpt_level']}</b> registration, otherwise it will be deleted and you will have to start over.
         </p>
         <p>
             Payment must be made to the account of the Moroccan Association for Japanese Language and Culture whose bank details are as follows:
@@ -365,15 +308,9 @@ def confirm():
             <b>SWIFT CODE:</b> BCMAMAMC
         </p>
         <p>Reminder of the registration fee:</p>
-        <p>
-            <ul>
-                <li>N1 : 450 DH.</li>
-                <li>N2 : 400 DH.</li>
-                <li>N3 : 350 DH.</li>
-                <li>N4 : 300 DH.</li>
-                <li>N5 : 250 DH.</li>
-            </ul>
-        </p>
+        <ul>
+            <li><b>N{form_data['jlpt_level']}</b>: {jlpt_price} DH.</li>
+        </ul>
         <p>
             Please send us the payment receipt and a photo ID (see specifics below) no later than 48 hours after your registration to the following email address: <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a> indicating your first and last name and the JLPT Level that you want to pass.
         </p>
@@ -415,12 +352,13 @@ def confirm():
     </body>
 </html>
 """
+        send_email(form_data['email'], msg_body, html_body)
+        # Clear session after processing
+        session.pop('form_data', None)
+        return render_template('success.html')
 
-    send_email(email, msg_body, html_body)
-    # Clear temporary data after processing
-    temp_data.clear()
-
-    return render_template('success.html')
+    # Render confirmation page with form data
+    return render_template('confirm.html', form_data=form_data)
 
 
 @app.route('/dashboard', methods=['GET'], strict_slashes=False)
