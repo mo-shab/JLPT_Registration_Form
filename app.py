@@ -197,8 +197,13 @@ def confirm():
             AWB succursale FAR Casablanca
             RIB : 007 780 0002 372 000 308 926 94
             CODE SWIFT : BCMAMAMC
+            rappel du prix de l'inscription : 
+            N1 : 450 DH.
+            N2 : 400 DH.
+            N3 : 350 DH.
+            N4 : 300 DH.
+            N5 : 250 DH.
        
-        
             Nous vous prions de nous envoyer le reçu de paiement et une photo d'identité (voir spécificités plus bas) au maximum 48h après votre inscription sur l'adresse mail suivante : jlpt@amlcj.ma en indiquant vos nom et prénom et le Niveau JLPT que vous souhaitez passer.
 
             Un email de confirmation vous sera envoyé. Vous recevrez votre convocation au plus tard 15 jours après la fin des inscriptions soit au plus tard le 10 septembre.
@@ -287,6 +292,15 @@ def confirm():
             <b>RIB :</b> 007 780 0002 372 000 308 926 94<br>
             <b>CODE SWIFT :</b> BCMAMAMC
         </p>
+        <p> rappel du prix de l'inscription : </p>
+        <p>
+            <ul>
+                <li>N1 : 450 DH.</li>
+                <li>N2 : 400 DH.</li>
+                <li>N3 : 350 DH.</li>
+                <li>N4 : 300 DH.</li>
+                <li>N5 : 250 DH.</li>
+            </ul>
         <p>
             Nous vous prions de nous envoyer le reçu de paiement et une photo d'identité (voir spécificités plus bas) au maximum 48h après votre inscription sur l'adresse mail suivante : <a href="mailto:jlpt@amlcj.ma">jlpt@amlcj.ma</a> en indiquant vos nom et prénom et le Niveau JLPT que vous souhaitez passer.
         </p>
