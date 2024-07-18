@@ -39,7 +39,6 @@ function selectJlptLevel(level) {
 }
 
 function validateCurrentStep(activeStep) {
-    console.log("Validating step " + currentStep);
     if (currentStep === 0) {
         const jlptLevel = document.getElementById("jlpt_level").value;
         if (jlptLevel < 1 || jlptLevel > 5) {
@@ -196,20 +195,53 @@ function validateCurrentStep(activeStep) {
     } else if (currentStep === 6) { // Step 6: Institute
         const instituteInput = activeStep.querySelector('#institute').value;
         if (!activeStep.querySelector("#institute").value || instituteInput.length < 3) {
-            window.alert("Please enter a valid institute.");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please enter a valid institute.'
+            });
             return;
+        }
+        const placelearnngjp = activeStep.querySelector('#place_learn_jp').value;
+        if (!placelearnngjp) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please select a valid Learning Place.'
+            })
         }
     } else if (currentStep === 7) { // Step 7: Reason for Taking the Exam
         if (!activeStep.querySelector('#reason_jlpt').value) {
-            window.alert("Please select a reason for taking the exam.");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please select a reason for taking the exam.'
+            });
             return;
         }
         if (!activeStep.querySelector('#occupation').value) {
-            window.alert("Please select an occupation.");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please select an occupation.'
+            });
             return;
         }
         if (!activeStep.querySelector('#occupation_details').value) {
-            window.alert("Please select occupation details.");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please select occupation details.'
+            });
+            return;
+        }
+    } else if( currentStep === 12) {
+        if (!activeStep.querySelector('#paymentmethod').value) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please choose a Valid Payment Methode.'
+            });
             return;
         }
     }

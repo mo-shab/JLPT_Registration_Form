@@ -109,7 +109,8 @@ def registration():
             'n3_result': request.form.get('n3_result', ' '),
             'n4_result': request.form.get('n4_result', ' '),
             'n5_result': request.form.get('n5_result', ' '),
-            'needAssistance': request.form.get('needAssistance', 'no')
+            'needAssistance': request.form.get('needAssistance', 'no'),
+            'paymentmethod': request.form.get('paymentmethod', 'banktransfer')
         }
         # Redirect to confirmation page
         return redirect(url_for('confirm'))
@@ -134,7 +135,7 @@ def confirm():
             with open(f"files/need_assistance/registered_data_N{form_data['jlpt_level']}.csv", 'a') as f:
                 f.write(f"\"{form_data['jlpt_level'].strip()}\",\"24B\",\"8210101\",\"{form_data['jlpt_level'].strip()}\",\"{str(jlpt_counters[form_data['jlpt_level']]).zfill(4)}\",\"{form_data['full_name'].strip()}\",\"{form_data['gender'].strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{form_data['pass_code'].strip()}\",\"{form_data['native_language'].strip()}\",\"{form_data['place_learn_jp'].strip()}\",\"{form_data['reason_jlpt'].strip()}\",\"{form_data['occupation'].strip()}\",\"{form_data['occupation_details'].strip()}\",\"{form_data['media_jp']}\",\"{form_data['communicate_teacher']}\",\"{form_data['communicate_friends']}\",\"{form_data['communicate_family']}\",\"{form_data['communicate_supervisor']}\",\"{form_data['communicate_colleagues']}\",\"{form_data['communicate_CUSTOMERS']}\",\"{form_data['jlpt_n1']}\",\"{form_data['jlpt_n2']}\",\"{form_data['jlpt_n3']}\",\"{form_data['jlpt_n4']}\",\"{form_data['jlpt_n5']}\",\"{form_data['n1_result']}\",\"{form_data['n2_result']}\",\"{form_data['n3_result']}\",\"{form_data['n4_result']}\",\"{form_data['n5_result']}\"\n")
             with open(f"files/need_assistance/registered_infos_N{form_data['jlpt_level']}.csv", 'a') as f:
-                f.write(f"\"{jlpt_counters[form_data['jlpt_level']]}\",\"{form_data['jlpt_level']}\",\"{form_data['test_center']}\",\"{form_data['full_name']}\",\"{form_data['gender']}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{form_data['pass_code']}\",\"{form_data['native_language']}\",\"{form_data['nationality']}\",\"{form_data['adress']}\",\"{form_data['country']}\",\"{form_data['zip_code']}\",\"{form_data['phone_number']}\",\"{form_data['email']}\",\"{form_data['institute']}\n")
+                f.write(f"\"{jlpt_counters[form_data['jlpt_level']]}\",\"{form_data['jlpt_level']}\",\"{form_data['test_center']}\",\"{form_data['full_name']}\",\"{form_data['gender']}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{form_data['pass_code']}\",\"{form_data['native_language']}\",\"{form_data['nationality']}\",\"{form_data['adress']}\",\"{form_data['country']}\",\"{form_data['zip_code']}\",\"{form_data['phone_number']}\",\"{form_data['email']}\",\"{form_data['institute']}\",\"{form_data['paymentmethod']}\"\n")
         else: 
             dob_day, dob_month, dob_year = form_data['dob'].split('-')
             jlpt_counters = get_jlpt_counter()
@@ -142,7 +143,7 @@ def confirm():
             with open(f"files/registered_data_N{form_data['jlpt_level']}.csv", 'a') as f:
                 f.write(f"\"{form_data['jlpt_level'].strip()}\",\"24B\",\"8210101\",\"{form_data['jlpt_level'].strip()}\",\"{str(jlpt_counters[form_data['jlpt_level']]).zfill(4)}\",\"{form_data['full_name'].strip()}\",\"{form_data['gender'].strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{form_data['pass_code'].strip()}\",\"{form_data['native_language'].strip()}\",\"{form_data['place_learn_jp'].strip()}\",\"{form_data['reason_jlpt'].strip()}\",\"{form_data['occupation'].strip()}\",\"{form_data['occupation_details'].strip()}\",\"{form_data['media_jp']}\",\"{form_data['communicate_teacher']}\",\"{form_data['communicate_friends']}\",\"{form_data['communicate_family']}\",\"{form_data['communicate_supervisor']}\",\"{form_data['communicate_colleagues']}\",\"{form_data['communicate_CUSTOMERS']}\",\"{form_data['jlpt_n1']}\",\"{form_data['jlpt_n2']}\",\"{form_data['jlpt_n3']}\",\"{form_data['jlpt_n4']}\",\"{form_data['jlpt_n5']}\",\"{form_data['n1_result']}\",\"{form_data['n2_result']}\",\"{form_data['n3_result']}\",\"{form_data['n4_result']}\",\"{form_data['n5_result']}\"\n")
             with open(f"files/registered_infos_N{form_data['jlpt_level']}.csv", 'a') as f:
-                f.write(f"\"{jlpt_counters[form_data['jlpt_level']]}\",\"{form_data['jlpt_level']}\",\"{form_data['test_center']}\",\"{form_data['full_name']}\",\"{form_data['gender']}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{form_data['pass_code']}\",\"{form_data['native_language']}\",\"{form_data['nationality']}\",\"{form_data['adress']}\",\"{form_data['country']}\",\"{form_data['zip_code']}\",\"{form_data['phone_number']}\",\"{form_data['email']}\",\"{form_data['institute']}\n")
+                f.write(f"\"{jlpt_counters[form_data['jlpt_level']]}\",\"{form_data['jlpt_level']}\",\"{form_data['test_center']}\",\"{form_data['full_name']}\",\"{form_data['gender']}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{form_data['pass_code']}\",\"{form_data['native_language']}\",\"{form_data['nationality']}\",\"{form_data['adress']}\",\"{form_data['country']}\",\"{form_data['zip_code']}\",\"{form_data['phone_number']}\",\"{form_data['email']}\",\"{form_data['institute']}\",\"{form_data['paymentmethod']}\"\n")
         
         # Function to send Email to the JLPT candidate
         jlpt_total_price = {'1': 450, '2': 400, '3': 350, '4': 300, '5': 250}
@@ -773,4 +774,4 @@ def send_email(email, msg_body, html_body):
 
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(debug=True, port=5000)
