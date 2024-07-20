@@ -433,9 +433,9 @@
             <option value="6">Other.</option>
         </select><br>
 
-        <label for="occupation_details">Occupation details:</label><br>
+        <label for="occupation_details">Occupation details: * If you choose 5 In the previous question.</label><br>
         <select id="occupation_details" name="occupation_details" required class="form-select">
-            <option value="">Choose Option from below.</option>
+            <option value="6">Choose Option from below.</option>
             <option value="1">Use Japanese to teach Japanese-language as a teacher</option>
             <option value="2">Use Japanese while working as a PUBLIC SERVANT</option>
             <option value="3">Use Japanese while working as a company employee in the manufacturing,
@@ -1004,7 +1004,7 @@
     <div class="step">
         <input type="checkbox" required> Please accepet our terms, You can find them at <a href="{{ url_for('static', filename='/jlpt_guide.pdf') }}"
             target="_blank"><span>Terms and services.</a><br><br>
-                <label>I, by submitting this form, understand and agree to all the conditions and contents of the Test Guide. <br>Signature</label>
+                <label>I, by submitting this form, understand and agree to all the conditions and contents of the Test Guide. <br>Signature</label><br><br>
         <input type="text" class="form-control" aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-lg"  pattern="[A-Za-z ]+" required><br>
     </div>
