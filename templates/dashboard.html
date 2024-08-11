@@ -9,7 +9,7 @@
     <div class="page-inner">
         <h4 class="page-title">Statistiques</h4>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Registred Condidats</div>
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Confirmed Condidats</div>
@@ -33,6 +33,18 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Registred vs Confirmed Condidats</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="myPieChart2" style ="width: 100%; height: 100%"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>            
         </div>
         <div class="row">
         <div class="col-md-6">
@@ -50,6 +62,7 @@
                                 <th scope="col">N3</th>
                                 <th scope="col">N4</th>
                                 <th scope="col">N5</th>
+                                <th scope="col">Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,6 +73,7 @@
                                 <td><a href="{{ '/jlpt_data/N3' }}">{{ data['3'] }}</a></td>
                                 <td><a href="{{ '/jlpt_data/N4' }}">{{ data['4'] }}</a></td>
                                 <td><a href="{{ '/jlpt_data/N5' }}">{{ data['5'] }}</a></td>
+                                <td>{{ data['1'] + data['2'] + data['3'] + data['4'] + data['5'] }}</td>
                             </tr>
                             <tr>
                                 <td>Confirmed Candidtae</td>
@@ -68,6 +82,7 @@
                                 <td><a href="{{ '/jlpt_confirmed_data/N3'}}">{{ data_2['3'] }}</a></td>
                                 <td><a href="{{ '/jlpt_confirmed_data/N4'}}">{{ data_2['4'] }}</a></td>
                                 <td><a href="{{ '/jlpt_confirmed_data/N5'}}">{{ data_2['5'] }}</a></td>
+                                <td>{{ data_2['1'] + data_2['2'] + data_2['3'] + data_2['4'] + data_2['5'] }}</td>
                             </tr>
                             <tr>
                                 <td>Special Need Candidtae</td>
@@ -76,6 +91,7 @@
                                 <td><a href="{{ '/jlpt_data_special_need/N3'}}">{{ data_4['3'] }}</a></td>
                                 <td><a href="{{ '/jlpt_data_special_need/N4'}}">{{ data_4['4'] }}</a></td>
                                 <td><a href="{{ '/jlpt_data_special_need/N5'}}">{{ data_4['5'] }}</a></td>
+                                <td>{{ data_4['1'] + data_4['2'] + data_4['3'] + data_4['4'] + data_4['5'] }}</td>
                             </tr>
                             <tr>
                                 <td>Special Need Confirmed Candidtae</td>
@@ -84,6 +100,8 @@
                                 <td><a href="{{ '/jlpt_confirmed_special_need_data/N3'}}">{{ data_3['3'] }}</a></td>
                                 <td><a href="{{ '/jlpt_confirmed_special_need_data/N4'}}">{{ data_3['4'] }}</a></td>
                                 <td><a href="{{ '/jlpt_confirmed_special_need_data/N5'}}">{{ data_3['5'] }}</a></td>
+                                <td>{{ data_3['1'] + data_3['2'] + data_3['3'] + data_3['4'] + data_3['5'] }}</td>
+
                             </tr>
                         </tbody>
                     </table>
@@ -123,6 +141,11 @@
             console.log('Parsed data:', data);
             console.log('Parsed confirmed data:', confirmedData);
             console.log('All data', all_data)
+
+            const sumRegistred = data['1'] + data['2'] + data['3'] + data['4'] + data['5'];
+            const sumConfirmed = confirmedData['1'] + confirmedData['2'] + confirmedData['3'] + confirmedData['4'] + confirmedData['5'];
+            console.log('Sum Registred:', sumRegistred);
+            console.log('Sum Confirmed:', sumConfirmed);
 
             // Render the first pie chart for Registered Candidates
             const ctx = document.getElementById('myPieChart').getContext('2d');
@@ -219,6 +242,55 @@
                     },
                     pieceLabel: {
                         render: 'percentage',
+                        fontColor: 'white',
+                        fontSize: 14
+                    },
+                    tooltips: false,
+                    layout: {
+                        padding: {
+                            left: 20,
+                            right: 20,
+                            top: 20,
+                            bottom: 20
+                        }
+                    }
+                }
+            });
+
+            // Render the third pie chart for Confirmed Candidates
+            const ctx2 = document.getElementById('myPieChart2').getContext('2d');
+            const myPieChart2 = new Chart(ctx2, {
+                type: 'pie',
+                data: {
+                    labels: ['Registred Candidates', 'Confirmed Candidates'],
+                    datasets: [{
+                        label: 'Confirmed Candidates',
+                        data: [sumRegistred, sumConfirmed],
+                        backgroundColor: [
+                            '#1d7af3',
+                            '#f3545d'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'rgb(154, 154, 154)',
+                            fontSize: 11,
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    },
+                    pieceLabel: {
+                        render: 'value',
                         fontColor: 'white',
                         fontSize: 14
                     },

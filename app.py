@@ -78,7 +78,7 @@ def registration():
             'test_center': request.form.get('test_center', ''),
             'full_name': request.form.get('full_name', '').upper(),
             'gender': request.form.get('gender', ''),
-            'dob': request.form.get('dob', ''),
+            'dob': request.form.get('dob', '01-01-1990'),
             'pass_code': request.form.get('pass_code', ''),
             'native_language': request.form.get('native_language', ''),
             'nationality': request.form.get('nationality', ''),
@@ -132,53 +132,54 @@ def confirm():
             jlpt_counters = get_jlpt_special_need_count()
             jlpt_counters[form_data['jlpt_level']] += 1
             dob_day, dob_month, dob_year = form_data['dob'].split('-')
+
             with open(f"files/need_assistance/registered_data_N{form_data['jlpt_level']}.csv", 'a') as f:
                 f.write(f"\"{form_data['jlpt_level'].strip()}\",\"24B\",\"8210101\",\"{form_data['jlpt_level'].strip()}\",\"{str(jlpt_counters[form_data['jlpt_level']]).zfill(4)}\",\"{form_data['full_name'].strip()}\",\"{form_data['gender'].strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{form_data['pass_code'].strip()}\",\"{form_data['native_language'].strip()}\",\"{form_data['place_learn_jp'].strip()}\",\"{form_data['reason_jlpt'].strip()}\",\"{form_data['occupation'].strip()}\",\"{form_data['occupation_details'].strip()}\",\"{form_data['media_jp']}\",\"{form_data['communicate_teacher']}\",\"{form_data['communicate_friends']}\",\"{form_data['communicate_family']}\",\"{form_data['communicate_supervisor']}\",\"{form_data['communicate_colleagues']}\",\"{form_data['communicate_CUSTOMERS']}\",\"{form_data['jlpt_n1']}\",\"{form_data['jlpt_n2']}\",\"{form_data['jlpt_n3']}\",\"{form_data['jlpt_n4']}\",\"{form_data['jlpt_n5']}\",\"{form_data['n1_result']}\",\"{form_data['n2_result']}\",\"{form_data['n3_result']}\",\"{form_data['n4_result']}\",\"{form_data['n5_result']}\"\n")
             with open(f"files/need_assistance/registered_infos_N{form_data['jlpt_level']}.csv", 'a') as f:
-                f.write(f"\"{jlpt_counters[form_data['jlpt_level']]}\",\"{form_data['jlpt_level']}\",\"{form_data['test_center']}\",\"{form_data['full_name']}\",\"{form_data['gender']}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{form_data['pass_code']}\",\"{form_data['native_language']}\",\"{form_data['nationality']}\",\"{form_data['adress']}\",\"{form_data['country']}\",\"{form_data['zip_code']}\",\"{form_data['phone_number']}\",\"{form_data['email']}\",\"{form_data['institute']}\",\"{form_data['paymentmethod']}\"\n")
-        else: 
+                f.write(f"\"{jlpt_counters[form_data['jlpt_level']]}\",\"{form_data['jlpt_level']}\",\"{form_data['test_center']}\",\"{form_data['full_name'].strip()}\",\"{form_data['gender']}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{form_data['pass_code']}\",\"{form_data['native_language']}\",\"{form_data['nationality']}\",\"{form_data['adress']}\",\"{form_data['country']}\",\"{form_data['zip_code']}\",\"{form_data['phone_number']}\",\"{form_data['email']}\",\"{form_data['institute']}\",\"{form_data['paymentmethod']}\"\n")
+        else:
             dob_day, dob_month, dob_year = form_data['dob'].split('-')
             jlpt_counters = get_jlpt_counter()
             jlpt_counters[form_data['jlpt_level']] += 1
             with open(f"files/registered_data_N{form_data['jlpt_level']}.csv", 'a') as f:
                 f.write(f"\"{form_data['jlpt_level'].strip()}\",\"24B\",\"8210101\",\"{form_data['jlpt_level'].strip()}\",\"{str(jlpt_counters[form_data['jlpt_level']]).zfill(4)}\",\"{form_data['full_name'].strip()}\",\"{form_data['gender'].strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{form_data['pass_code'].strip()}\",\"{form_data['native_language'].strip()}\",\"{form_data['place_learn_jp'].strip()}\",\"{form_data['reason_jlpt'].strip()}\",\"{form_data['occupation'].strip()}\",\"{form_data['occupation_details'].strip()}\",\"{form_data['media_jp']}\",\"{form_data['communicate_teacher']}\",\"{form_data['communicate_friends']}\",\"{form_data['communicate_family']}\",\"{form_data['communicate_supervisor']}\",\"{form_data['communicate_colleagues']}\",\"{form_data['communicate_CUSTOMERS']}\",\"{form_data['jlpt_n1']}\",\"{form_data['jlpt_n2']}\",\"{form_data['jlpt_n3']}\",\"{form_data['jlpt_n4']}\",\"{form_data['jlpt_n5']}\",\"{form_data['n1_result']}\",\"{form_data['n2_result']}\",\"{form_data['n3_result']}\",\"{form_data['n4_result']}\",\"{form_data['n5_result']}\"\n")
             with open(f"files/registered_infos_N{form_data['jlpt_level']}.csv", 'a') as f:
-                f.write(f"\"{jlpt_counters[form_data['jlpt_level']]}\",\"{form_data['jlpt_level']}\",\"{form_data['test_center']}\",\"{form_data['full_name']}\",\"{form_data['gender']}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{form_data['pass_code']}\",\"{form_data['native_language']}\",\"{form_data['nationality']}\",\"{form_data['adress']}\",\"{form_data['country']}\",\"{form_data['zip_code']}\",\"{form_data['phone_number']}\",\"{form_data['email']}\",\"{form_data['institute']}\",\"{form_data['paymentmethod']}\"\n")
-        
+                f.write(f"\"{jlpt_counters[form_data['jlpt_level']]}\",\"{form_data['jlpt_level']}\",\"{form_data['test_center']}\",\"{form_data['full_name'].strip()}\",\"{form_data['gender']}\",\"{dob_year}\",\"{dob_month}\",\"{dob_day}\",\"{form_data['pass_code']}\",\"{form_data['native_language']}\",\"{form_data['nationality']}\",\"{form_data['adress']}\",\"{form_data['country']}\",\"{form_data['zip_code']}\",\"{form_data['phone_number']}\",\"{form_data['email']}\",\"{form_data['institute']}\",\"{form_data['paymentmethod']}\"\n")
+
         # Function to send Email to the JLPT candidate
         jlpt_total_price = {'1': 450, '2': 400, '3': 350, '4': 300, '5': 250}
         for key, value in jlpt_total_price.items():
             if form_data['jlpt_level'] == key:
                 jlpt_price = value
-         
-        msg_body = f"""Chère {form_data['full_name']},
+
+        msg_body = f"""Chère/Cher {form_data['full_name']},
             Nous vous remercions de votre inscription au JLPT 2024 qui aura lieu le 1 décembre 2024 à Rabat. Vous avez 48h pour effectuer le paiement de votre inscription au Niveau N{form_data['jlpt_level']} sinon elle sera supprimée et vous devrez recommencer.
-       
+
       Le Passcode que vous avez choisi est : {form_data['pass_code']} Gardez le en lieu sûr.
-      
+
             Le paiement doit se faire sur le compte de l'Association Marocaine pour la Langue et la Culture Japonaise dont les coordonnées bancaires sont les suivantes :
             AWB succursale FAR Casablanca
             RIB : 007 780 0002 372 000 308 926 94
             CODE SWIFT : BCMAMAMC
-            rappel du prix de l'inscription : 
+            rappel du prix de l'inscription :
                 N{form_data['jlpt_level']}: {jlpt_price} DH.
-       
+
             Nous vous prions de nous envoyer le reçu de paiement et une photo d'identité (voir spécificités plus bas) au maximum 48h après votre inscription sur l'adresse mail suivante : jlpt@amlcj.ma en indiquant vos nom et prénom et le Niveau JLPT que vous souhaitez passer.
 
             Un email de confirmation vous sera envoyé. Vous recevrez votre convocation au plus tard 15 jours après la fin des inscriptions soit au plus tard le 10 septembre.
- 
+
             Si passé ce délai vous n'avez pas encore reçu votre convocation, nous vous prions de nous contacter sur l'adresse email : jlpt@amlcj.ma
      Spécificité de la photo d'identité à scanner :
-           
+
                 3 ～ 4 cm de haut × 3 cm de large
                 Pris au cours des 6 derniers mois
                 Peut être en noir et blanc ou en couleur
                 Peut être pris avec un appareil photo numérique
                 Photos sans bordure
-           
-      
+
+
             Vous devrez coller la même photo originale, imprimée sur papier photo, sur la convocation qui vous sera envoyée.
-      
+
            Photos à éviter :
                 Photos plus grandes ou plus petites que 3～4cm × 3cm
                 Prise sur un fond non uni (fond sombre)
@@ -190,7 +191,7 @@ def confirm():
                 Snapshots, tels que ceux pris avec d'autres personnes
                Visage trop petit ou trop grand par rapport à la taille de la photo
                 Photocopies couleur
-           
+
         Gambatte kudasai!!
          Dear {form_data['full_name']},
         Thank you for registering for the JLPT 2024 which will take place on December 1 in Rabat.
@@ -240,7 +241,7 @@ def confirm():
 <html>
     <head></head>
     <body>
-        <p>Chère <strong>{form_data['full_name']}</strong>,</p>
+        <p>Chère/Cher <strong>{form_data['full_name']}</strong>,</p>
         <p>
             Nous vous remercions de votre inscription au <b>JLPT 2024</b> qui aura lieu le 1 décembre 2024 à Rabat. Vous avez 48h pour effectuer le paiement de votre inscription au Niveau <b>N{form_data['jlpt_level']}</b> sinon elle sera supprimée et vous devrez recommencer.
         </p>
@@ -366,7 +367,7 @@ def confirm():
 @app.route('/dashboard', methods=['GET'], strict_slashes=False)
 @login_required
 def dashboard():
-    return render_template('dashboard.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter(), data_3=get_jlpt_special_need_confirmed_count(), data_4=get_jlpt_special_need_count())
+    return render_template('dashboard.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter(), data_3=get_jlpt_special_need_confirmed_count(), data_4=get_jlpt_special_need_count(), jlptCountAllRegistred=get_jlpt_counter(), jlptCountAllConfirmed=get_jlpt_confirmed_counter(), jlptCountAllSpecialNeed=get_jlpt_special_need_count(), jlptCountAllSpecialNeedConfirmed=get_jlpt_special_need_confirmed_count())
 
 
 @app.route('/jlpt_data/N<level>', methods=['GET'], strict_slashes=False)

@@ -14,7 +14,6 @@ function showStep(stepIndex) {
 function nextStep() {
     if (currentStep < steps.length - 1) {
         const activeStep = steps[currentStep];
-        // Run validations for the current step
         if (!validateCurrentStep(activeStep)) {
             return; // Stop execution if validation fails
             }
@@ -61,11 +60,11 @@ function validateCurrentStep(activeStep) {
         const fullNameInput = activeStep.querySelector('#full_name');
         const fullName = fullNameInput.value;
         const pattern = /^[A-Za-z\s]+$/;
-        if (!pattern.test(fullNameInput.value) || fullName.length < 3) {
+        if (!pattern.test(fullNameInput.value) || fullName.length < 3 || fullName.length >= 40) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Please enter a valid Given Name (letters and spaces only).'
+                text: 'Please enter a valid Given Name (letters and spaces only) And must not exceed 40 caractere.'
             });
             return;
         }
@@ -73,10 +72,10 @@ function validateCurrentStep(activeStep) {
 
     } else if (currentStep === 2) { // Assuming this is within a conditional block for step 2
 
-
             var dateString = $("#datepicker").val(); // Get the date as a string
+            var regexPattern = /^\d{2}-\d{2}-\d{4}$/;
 
-            if (!dateString) {
+            if (!dateString || !regexPattern.test(dateString)) {
                 // If date is not selected or pass code validation fails, stop the form from proceeding
                 Swal.fire({
                     icon: 'error',
@@ -84,11 +83,11 @@ function validateCurrentStep(activeStep) {
                     text: 'Please select a valid birthday date.'
                 });
                 return false;
-            } 
-            
+            }
+
             const pass_code = document.getElementById("pass_code").value;
             const regex = /^\d{8}$/;
-    
+
             if (!regex.test(pass_code)) {
                 Swal.fire({
                     icon: 'error',
@@ -235,6 +234,44 @@ function validateCurrentStep(activeStep) {
             });
             return;
         }
+    } else if (currentStep === 8) {
+        const groups = [
+            'communicate_teacher',
+            'communicate_friends',
+            'communicate_family',
+            'communicate_supervisor',
+            'communicate_colleagues',
+            'communicate_CUSTOMERS'
+        ];
+    
+        groups.forEach(groupName => {
+            const checkboxes = document.querySelectorAll(`input[name="${groupName}"]`);
+            const defaultCheckbox = document.querySelector(`input[name="${groupName}"][value="5"]`);
+    
+            if (!defaultCheckbox) {
+                console.warn(`Default checkbox for group ${groupName} not found!`);
+                return;
+            }
+    
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (checkbox !== defaultCheckbox && checkbox.checked) {
+                        defaultCheckbox.checked = false;
+                    }
+                });
+            });
+    
+            defaultCheckbox.addEventListener('change', function() {
+                if (defaultCheckbox.checked) {
+                    checkboxes.forEach(checkbox => {
+                        if (checkbox !== defaultCheckbox) {
+                            checkbox.checked = false;
+                        }
+                    });
+                }
+            });
+        });
+    
     } else if( currentStep === 12) {
         if (!activeStep.querySelector('#paymentmethod').value) {
             Swal.fire({

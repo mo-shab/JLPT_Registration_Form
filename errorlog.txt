@@ -1,184 +1,1291 @@
+Exception on /delete/3/2 [GET]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 532, in delete_row
+    write_deleted_log(deleted_info, deleted_row)
+  File "/home/debian/JLPT_Registration_Form/config.py", line 83, in write_deleted_log
+    with open(file_path, 'a') as f:
+PermissionError: [Errno 13] Permission denied: 'files/deleted_info_N3.csv'
 Exception on /confirm [POST]
 Traceback (most recent call last):
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 1473, in wsgi_app
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 882, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\Desktop\github\JLPT_Registration_Form\app.py", line 128, in confirm
-    if form_data['needAssistance'] == 'yes':
-       ~~~~~~~~~^^^^^^^^^^^^^^^^^^
-KeyError: 'needAssistance'
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 143, in confirm
+    with open(f"files/registered_data_N{form_data['jlpt_level']}.csv", 'a') as f:
+PermissionError: [Errno 13] Permission denied: 'files/registered_data_N2.csv'
+Exception on /confirm/2/1 [GET]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 584, in confirm_candidate
+    with open(confirmed_data_file, 'a', newline='') as f:
+PermissionError: [Errno 13] Permission denied: 'files/Confirmed/confirmed_data_N2.csv'
+Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 369, in dashboard
+    return render_template('dashboard.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter(), data_3=get_jlpt_special_need_confirmed_count(), data_4=get_jlpt_special_need_count())
+  File "/home/debian/JLPT_Registration_Form/config.py", line 16, in get_jlpt_confirmed_counter
+    jlpt_confirmed_counter[level] = int(last_row[4])
+IndexError: list index out of range
+Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 369, in dashboard
+    return render_template('dashboard.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter(), data_3=get_jlpt_special_need_confirmed_count(), data_4=get_jlpt_special_need_count())
+  File "/home/debian/JLPT_Registration_Form/config.py", line 16, in get_jlpt_confirmed_counter
+    jlpt_confirmed_counter[level] = int(last_row[4])
+IndexError: list index out of range
+Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 369, in dashboard
+    return render_template('dashboard.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter(), data_3=get_jlpt_special_need_confirmed_count(), data_4=get_jlpt_special_need_count())
+  File "/home/debian/JLPT_Registration_Form/config.py", line 16, in get_jlpt_confirmed_counter
+    jlpt_confirmed_counter[level] = int(last_row[4])
+IndexError: list index out of range
+Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 369, in dashboard
+    return render_template('dashboard.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter(), data_3=get_jlpt_special_need_confirmed_count(), data_4=get_jlpt_special_need_count())
+  File "/home/debian/JLPT_Registration_Form/config.py", line 16, in get_jlpt_confirmed_counter
+    jlpt_confirmed_counter[level] = int(last_row[4])
+IndexError: list index out of range
+Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 369, in dashboard
+    return render_template('dashboard.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter(), data_3=get_jlpt_special_need_confirmed_count(), data_4=get_jlpt_special_need_count())
+  File "/home/debian/JLPT_Registration_Form/config.py", line 16, in get_jlpt_confirmed_counter
+    jlpt_confirmed_counter[level] = int(last_row[4])
+IndexError: list index out of range
+Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 369, in dashboard
+    return render_template('dashboard.html', data=get_jlpt_counter(), data_2=get_jlpt_confirmed_counter(), data_3=get_jlpt_special_need_confirmed_count(), data_4=get_jlpt_special_need_count())
+  File "/home/debian/JLPT_Registration_Form/config.py", line 16, in get_jlpt_confirmed_counter
+    jlpt_confirmed_counter[level] = int(last_row[4])
+IndexError: list index out of range
 Exception on /confirm [POST]
 Traceback (most recent call last):
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 1473, in wsgi_app
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 882, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\Desktop\github\JLPT_Registration_Form\app.py", line 128, in confirm
-    # Process the form data (write to files)
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-KeyError: 'needAssistance'
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
 Exception on /confirm [POST]
 Traceback (most recent call last):
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 1473, in wsgi_app
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 882, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\Desktop\github\JLPT_Registration_Form\app.py", line 129, in confirm
-    if form_data['needAssistance'] == 'yes':
-       ~~~~~~~~~^^^^^^^^^^^^^^^^^^
-KeyError: 'needAssistance'
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
 Exception on /confirm [POST]
 Traceback (most recent call last):
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 1473, in wsgi_app
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 882, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\Desktop\github\JLPT_Registration_Form\app.py", line 129, in confirm
-    if form_data['needAssistance'] == 'yes':
-       ~~~~~~~~~^^^^^^^^^^^^^^^^^^
-KeyError: 'needAssistance'
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
 Exception on /confirm [POST]
 Traceback (most recent call last):
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 1473, in wsgi_app
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 882, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\Desktop\github\JLPT_Registration_Form\app.py", line 142, in confirm
-    f.write(f"\"{form_data['jlpt_level'].strip()}\",\"24B\",\"8210101\",\"{form_data['jlpt_level'].strip()}\",\"{str(jlpt_counters[form_data['jlpt_level']]).zfill(4)}\",\"{form_data['full_name'].strip()}\",\"{form_data['gender'].strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{form_data['pass_code'].strip()}\",\"{form_data['native_language'].strip()}\",\"{form_data['place_learn_jp'].strip()}\",\"{form_data['reason_jlpt'].strip()}\",\"{form_data['occupation'].strip()}\",\"{form_data['occupation_details'].strip()}\",\"{form_data['media']}\",\"{form_data['teacher']}\",\"{form_data['friends']}\",\"{form_data['family']}\",\"{form_data['supervisor']}\",\"{form_data['colleagues']}\",\"{form_data['customers']}\",\"{form_data['jlpt_n1']}\",\"{form_data['jlpt_n2']}\",\"{form_data['jlpt_n3']}\",\"{form_data['jlpt_n4']}\",\"{form_data['jlpt_n5']}\",\"{form_data['n1_result']}\",\"{form_data['n2_result']}\",\"{form_data['n3_result']}\",\"{form_data['n4_result']}\",\"{form_data['n5_result']}\"\n")
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ~~~~~~~~~^^^^^^^^^
-KeyError: 'media'
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
 Exception on /confirm [POST]
 Traceback (most recent call last):
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 1473, in wsgi_app
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 882, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\Desktop\github\JLPT_Registration_Form\app.py", line 142, in confirm
-    f.write(f"\"{form_data['jlpt_level'].strip()}\",\"24B\",\"8210101\",\"{form_data['jlpt_level'].strip()}\",\"{str(jlpt_counters[form_data['jlpt_level']]).zfill(4)}\",\"{form_data['full_name'].strip()}\",\"{form_data['gender'].strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{form_data['pass_code'].strip()}\",\"{form_data['native_language'].strip()}\",\"{form_data['place_learn_jp'].strip()}\",\"{form_data['reason_jlpt'].strip()}\",\"{form_data['occupation'].strip()}\",\"{form_data['occupation_details'].strip()}\",\"{form_data['media_jp']}\",\"{form_data['teacher']}\",\"{form_data['friends']}\",\"{form_data['family']}\",\"{form_data['supervisor']}\",\"{form_data['colleagues']}\",\"{form_data['customers']}\",\"{form_data['jlpt_n1']}\",\"{form_data['jlpt_n2']}\",\"{form_data['jlpt_n3']}\",\"{form_data['jlpt_n4']}\",\"{form_data['jlpt_n5']}\",\"{form_data['n1_result']}\",\"{form_data['n2_result']}\",\"{form_data['n3_result']}\",\"{form_data['n4_result']}\",\"{form_data['n5_result']}\"\n")
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ~~~~~~~~~^^^^^^^^^^^
-KeyError: 'teacher'
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
 Exception on /confirm [POST]
 Traceback (most recent call last):
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 1473, in wsgi_app
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 882, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\Desktop\github\JLPT_Registration_Form\app.py", line 142, in confirm
-    f.write(f"\"{form_data['jlpt_level'].strip()}\",\"24B\",\"8210101\",\"{form_data['jlpt_level'].strip()}\",\"{str(jlpt_counters[form_data['jlpt_level']]).zfill(4)}\",\"{form_data['full_name'].strip()}\",\"{form_data['gender'].strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{form_data['pass_code'].strip()}\",\"{form_data['native_language'].strip()}\",\"{form_data['place_learn_jp'].strip()}\",\"{form_data['reason_jlpt'].strip()}\",\"{form_data['occupation'].strip()}\",\"{form_data['occupation_details'].strip()}\",\"{form_data['media_jp']}\",\"{form_data['communicate_teacher']}\",\"{form_data['communicate_friends']}\",\"{form_data['communicate_family']}\",\"{form_data['communicate_supervisor']}\",\"{form_data['communicate_colleagues']}\",\"{form_data['communicate_customers']}\",\"{form_data['jlpt_n1']}\",\"{form_data['jlpt_n2']}\",\"{form_data['jlpt_n3']}\",\"{form_data['jlpt_n4']}\",\"{form_data['jlpt_n5']}\",\"{form_data['n1_result']}\",\"{form_data['n2_result']}\",\"{form_data['n3_result']}\",\"{form_data['n4_result']}\",\"{form_data['n5_result']}\"\n")
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ^^^^^^^^^^^^^^^^^^^^
-KeyError: 'teacher'
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
 Exception on /confirm [POST]
 Traceback (most recent call last):
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 1473, in wsgi_app
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 882, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\Desktop\github\JLPT_Registration_Form\app.py", line 142, in confirm
-    f.write(f"\"{form_data['jlpt_level'].strip()}\",\"24B\",\"8210101\",\"{form_data['jlpt_level'].strip()}\",\"{str(jlpt_counters[form_data['jlpt_level']]).zfill(4)}\",\"{form_data['full_name'].strip()}\",\"{form_data['gender'].strip()}\",\"{dob_year.strip()}\",\"{dob_month.strip()}\",\"{dob_day.strip()}\",\"{form_data['pass_code'].strip()}\",\"{form_data['native_language'].strip()}\",\"{form_data['place_learn_jp'].strip()}\",\"{form_data['reason_jlpt'].strip()}\",\"{form_data['occupation'].strip()}\",\"{form_data['occupation_details'].strip()}\",\"{form_data['media_jp']}\",\"{form_data['communicate_teacher']}\",\"{form_data['communicate_friends']}\",\"{form_data['communicate_family']}\",\"{form_data['communicate_supervisor']}\",\"{form_data['communicate_colleagues']}\",\"{form_data['communicate_customers']}\",\"{form_data['jlpt_n1']}\",\"{form_data['jlpt_n2']}\",\"{form_data['jlpt_n3']}\",\"{form_data['jlpt_n4']}\",\"{form_data['jlpt_n5']}\",\"{form_data['n1_result']}\",\"{form_data['n2_result']}\",\"{form_data['n3_result']}\",\"{form_data['n4_result']}\",\"{form_data['n5_result']}\"\n")
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
-KeyError: 'communicate_customers'
-Exception on /confirm [GET]
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
 Traceback (most recent call last):
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 1473, in wsgi_app
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 882, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
     rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\Desktop\github\JLPT_Registration_Form\app.py", line 357, in confirm
-    return render_template('confirm.html', form_data=form_data)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\flask\templating.py", line 149, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\jinja2\environment.py", line 1084, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\jinja2\environment.py", line 1013, in get_template
-    return self._load_template(name, globals)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\jinja2\environment.py", line 972, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\jinja2\loaders.py", line 138, in load
-    code = environment.compile(source, name, filename)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\jinja2\environment.py", line 768, in compile
-    self.handle_exception(source=source_hint)
-  File "C:\Users\MrCloud\AppData\Roaming\Python\Python312\site-packages\jinja2\environment.py", line 939, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "C:\Users\MrCloud\Desktop\github\JLPT_Registration_Form\templates\confirm.html", line 70, in template
-    <td>{{ form_data['dob'}}</td>
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-jinja2.exceptions.TemplateSyntaxError: unexpected '}', expected ']'
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 140, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /registration [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 115, in registration
+    print(f"dob is : {dob}")
+NameError: name 'dob' is not defined
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
+Exception on /confirm [POST]
+Traceback (most recent call last):
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/debian/JLPT_Registration_Form/.venv/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/debian/JLPT_Registration_Form/app.py", line 141, in confirm
+    dob_day, dob_month, dob_year = form_data['dob'].split('-')
+ValueError: not enough values to unpack (expected 3, got 1)
