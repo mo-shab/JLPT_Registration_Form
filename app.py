@@ -734,12 +734,12 @@ def download():
 
 
 # Configuration settings
-app.config['MAIL_SERVER'] = 'mail.amlcj.ma'  # Replace with your mail server
+app.config['MAIL_SERVER'] = ''  # Replace with your mail server
 app.config['MAIL_PORT'] = 587  # Common port for SMTP
 app.config['MAIL_USE_TLS'] = True  # Use TLS
 app.config['MAIL_USE_SSL'] = False  # Do not use SSL if using TLS
-app.config['MAIL_USERNAME'] = 'jlpt@amlcj.ma'  # Your email username
-app.config['MAIL_PASSWORD'] = 'Loe7WdxabmbjNmt'  # Your email password
+app.config['MAIL_USERNAME'] = ''  # Your email username
+app.config['MAIL_PASSWORD'] = ''  # Your email password
 
 # Initialize the Mail object
 mail = Mail(app)
@@ -750,7 +750,7 @@ logger = logging.getLogger(__name__)
 
 # Define the send_email function
 def send_email(email, msg_body, html_body):
-    sender = 'jlpt@amlcj.ma'
+    sender = ''
     msg = Message('JLPT Inscription', sender=sender, recipients=[email])
     msg.body = msg_body
     msg.html = html_body
